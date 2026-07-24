@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>House Rules — The Olive Tree House</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+<style>
+  :root{
+    --warm-white:#FAF8F3;
+    --off-black:#292A27;
+    --charcoal:#292A27;
+    --olive:#949A63;
+    --deep-olive:#626842;
+    --pale-olive:#E9EAD9;
+    --soft-stone:#E8E4DA;
+    --muted:#6e6c62;
+  }
+  html,body{ color-scheme: light; min-height: 100dvh; }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background:var(--warm-white); color:var(--off-black);
+    font-family:'Inter', sans-serif; -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{ font-family:'Cormorant Garamond', serif; font-weight:500; color:var(--off-black); margin:0; }
+  p{ margin:0 0 14px; font-size:15px; line-height:1.65; color:var(--charcoal); }
+  a{ color:inherit; }
+
+  header{
+    position:sticky; top:0; z-index:10;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:16px 22px; background:rgba(248,245,238,0.94);
+    backdrop-filter:blur(6px); border-bottom:1px solid var(--soft-stone);
+  }
+  .logo-small{ height:34px; width:auto; display:block; }
+  .close-x{ font-size:24px; line-height:1; color:var(--off-black); text-decoration:none; padding:4px 8px; }
+
+  main{ max-width:520px; margin:0 auto; padding:28px 22px 10px; }
+  h1{ font-size:38px; margin-bottom:8px; }
+  .subtitle{ font-size:15.5px; color:var(--charcoal); margin-bottom:26px; }
+
+  .divider{ display:flex; justify-content:center; margin:30px 0; }
+  .branch-img{
+    width:190px; aspect-ratio:732/259;
+    background-image:url('assets/branch.png');
+    background-size:contain; background-repeat:no-repeat; background-position:center;
+    margin:0 auto;
+  }
+  footer .branch-img{ margin-bottom:12px; }
+
+
+  .section{ scroll-margin-top:70px; margin-bottom:6px; }
+  .section-head{ display:flex; align-items:center; gap:12px; margin-bottom:14px; }
+  .badge{
+    flex:0 0 auto; width:42px; height:42px; border-radius:50%;
+    background:var(--pale-olive); display:flex; align-items:center; justify-content:center;
+  }
+  .badge svg{ width:20px; height:20px; fill:none; stroke:var(--deep-olive); stroke-width:1.4; stroke-linecap:round; stroke-linejoin:round; }
+  .section-head h2{ font-size:22px; }
+
+  .rules-list{ list-style:none; margin:0 0 4px; padding:0; }
+  .rules-list li{
+    position:relative; padding-left:18px; margin-bottom:10px;
+    font-size:14.5px; line-height:1.6; color:var(--charcoal);
+  }
+  .rules-list li::before{
+    content:""; position:absolute; left:0; top:9px;
+    width:5px; height:5px; border-radius:50%; background:var(--olive);
+  }
+
+  .closing-note{
+    margin-top:32px; padding:16px 18px; border-radius:4px;
+    background:var(--pale-olive); border:1px solid var(--soft-stone);
+  }
+  .closing-note p{ font-size:13.5px; margin-bottom:8px; color:var(--deep-olive); }
+  .closing-note p:last-child{ margin-bottom:0; font-style:italic; }
+
+  footer{ margin-top:44px; padding:28px 22px 40px; text-align:center; }
+  footer p{ font-size:12px; color:var(--deep-olive); margin:0; }
+
+  @media (prefers-reduced-motion: no-preference){
+    .section{ animation:fadeIn 0.6s ease both; }
+    @keyframes fadeIn{ from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:none;} }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <img class="logo-small" src="assets/logo.png" alt="The Olive Tree House — Liapades, Corfu">
+  <a class="close-x" href="index.html" aria-label="Close">×</a>
+</header>
+
+<main>
+  <h1>House Rules</h1>
+  <p class="subtitle">To help ensure a safe and comfortable stay for everyone, please observe the following house rules.</p>
+
+  <div class="section" id="checkinout">
+    <div class="section-head">
+      <div class="badge"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7 V12 L15.5 14"/></svg></div>
+      <h2>Check-in and Check-out</h2>
+    </div>
+    <ul class="rules-list">
+      <li>Check-in is from 15:00. Self check-in is available any time after 15:00.</li>
+      <li>Check-out is by 10:00.</li>
+      <li>Early check-in or late check-out is only permitted with prior written agreement.</li>
+    </ul>
+  </div>
+
+  <div class="divider"><div class="branch-img" role="img" aria-label="Olive branch ornament"></div></div>
+
+  <div class="section" id="guests">
+    <div class="section-head">
+      <div class="badge"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.2"/><path d="M5 20 C5 15.5 8 13 12 13 C16 13 19 15.5 19 20"/></svg></div>
+      <h2>Guests and Visitors</h2>
+    </div>
+    <ul class="rules-list">
+      <li>The maximum occupancy is five guests.</li>
+      <li>Only guests included in the reservation are permitted to stay at or enter the property.</li>
+      <li>Visitors are not permitted without prior written approval.</li>
+      <li>The house is not suitable for children under five years of age.</li>
+    </ul>
+  </div>
+
+  <div class="divider"><div class="branch-img" role="img" aria-label="Olive branch ornament"></div></div>
+
+  <div class="section" id="noise">
+    <div class="section-head">
+      <div class="badge"><svg viewBox="0 0 24 24"><path d="M15 4 A8 8 0 1 0 15 20 A6.5 6.5 0 0 1 15 4 Z"/></svg></div>
+      <h2>Noise and Neighbours</h2>
+    </div>
+    <ul class="rules-list">
+      <li>The house is located in a residential area; quiet hours are from 23:00 to 07:00.</li>
+      <li>Excessive noise, loud music or disruptive behaviour is not permitted at any time.</li>
+    </ul>
+  </div>
+
+  <div class="divider"><div class="branch-img" role="img" aria-label="Olive branch ornament"></div></div>
+
+  <div class="section" id="parties">
+    <div class="section-head">
+      <div class="badge"><svg viewBox="0 0 24 24"><circle cx="8" cy="8" r="3"/><circle cx="16" cy="8" r="3"/><path d="M8 11 V16 M16 11 V16 M6 20 H10 M14 20 H18"/></svg></div>
+      <h2>Parties and Events</h2>
+    </div>
+    <ul class="rules-list">
+      <li>Parties, events and gatherings are not permitted.</li>
+      <li>The property must not be used for commercial activities, meetings or organised gatherings without prior written agreement.</li>
+    </ul>
+  </div>
+
+  <div class="divider"><div class="branch-img" role="img" aria-label="Olive branch ornament"></div></div>
+
+  <div class="section" id="smoking">
+    <div class="section-head">
+      <div class="badge"><svg viewBox="0 0 24 24"><path d="M3 15 H15 V18 H3 Z M15 15 V18 M18 13 C18 11 20 11 20 9" /><path d="M4 4 L20 20"/></svg></div>
+      <h2>Smoking</h2>
+    </div>
+    <ul class="rules-list">
+      <li>Smoking, vaping and the use of e-cigarettes are strictly prohibited anywhere inside the house.</li>
+      <li>Cigarette ends must not be discarded from the balconies or anywhere around the property.</li>
+    </ul>
+  </div>
+
+  <div class="divider"><div class="branch-img" role="img" aria-label="Olive branch ornament"></div></div>
+
+  <div class="section" id="pets">
+    <div class="section-head">
+      <div class="badge"><svg viewBox="0 0 24 24"><circle cx="8" cy="8" r="1.5"/><circle cx="13" cy="6.5" r="1.5"/><circle cx="17.5" cy="9.5" r="1.5"/><path d="M13 12 C17 12 18 16 15.5 18.5 C13.5 20.5 10.5 20.5 8.5 18.5 C6.5 16.5 7.5 12.5 10 12 Z"/></svg></div>
+      <h2>Pets and Service Animals</h2>
+    </div>
+    <ul class="rules-list">
+      <li>Pets are not permitted.</li>
+      <li>Service animals are accommodated in accordance with applicable requirements. Please inform us before arrival so that we can make the appropriate arrangements.</li>
+    </ul>
+  </div>
+
+  <div class="divider"><div class="branch-img" role="img" aria-label="Olive branch ornament"></div></div>
+
+  <div class="section" id="photography">
+    <div class="section-head">
+      <div class="badge"><svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="12" rx="1.5"/><path d="M8 7 L9.5 4.5 H14.5 L16 7"/><circle cx="12" cy="13" r="3.6"/></svg></div>
+      <h2>Photography and Filming</h2>
+    </div>
+    <ul class="rules-list">
+      <li>Commercial photography, filming, advertising or content production is only permitted with prior written agreement.</li>
+      <li>Personal holiday photographs and videos are, of course, permitted.</li>
+    </ul>
+  </div>
+
+  <div class="divider"><div class="branch-img" role="img" aria-label="Olive branch ornament"></div></div>
+
+  <div class="section" id="care">
+    <div class="section-head">
+      <div class="badge"><svg viewBox="0 0 24 24"><path d="M4 11 L12 4 L20 11 V20 H4 Z" /><path d="M9 20 V14 H15 V20"/></svg></div>
+      <h2>Care of the Property</h2>
+    </div>
+    <ul class="rules-list">
+      <li>Please treat the house, its furniture and equipment with care.</li>
+      <li>Furniture and household items must not be moved between rooms or removed from the property.</li>
+      <li>Any damage, breakage or maintenance issue must be reported promptly.</li>
+      <li>Guests may be responsible for the cost of damage, missing items or additional cleaning caused during their stay.</li>
+    </ul>
+  </div>
+
+  <div class="divider"><div class="branch-img" role="img" aria-label="Olive branch ornament"></div></div>
+
+  <div class="section" id="safety">
+    <div class="section-head">
+      <div class="badge"><svg viewBox="0 0 24 24"><path d="M12 3 L19 6 V11 C19 16 16 19.5 12 21 C8 19.5 5 16 5 11 V6 Z"/></svg></div>
+      <h2>Safety and Security</h2>
+    </div>
+    <ul class="rules-list">
+      <li>Please close and secure all doors and windows whenever leaving the house and before check-out.</li>
+      <li>Candles, incense, fireworks and any other open flames are not permitted.</li>
+      <li>Illegal substances or unlawful activities are strictly prohibited.</li>
+      <li>Please do not tamper with smoke detectors, electrical equipment or safety devices.</li>
+    </ul>
+  </div>
+
+  <div class="divider"><div class="branch-img" role="img" aria-label="Olive branch ornament"></div></div>
+
+  <div class="section" id="acelectricity">
+    <div class="section-head">
+      <div class="badge"><svg viewBox="0 0 24 24"><path d="M13 2 L4 14 H11 L9 22 L20 9 H13 Z"/></svg></div>
+      <h2>Air Conditioning and Electricity</h2>
+    </div>
+    <ul class="rules-list">
+      <li>Doors and windows should remain closed while the air conditioning is operating.</li>
+      <li>The magnetic electricity card must remain inside the property and must not be removed from its holder or taken away.</li>
+    </ul>
+  </div>
+
+  <div class="divider"><div class="branch-img" role="img" aria-label="Olive branch ornament"></div></div>
+
+  <div class="section" id="keys">
+    <div class="section-head">
+      <div class="badge"><svg viewBox="0 0 24 24"><circle cx="8" cy="8" r="4"/><path d="M11 11 L20 20 M16 16 L18.2 13.8 M18.3 18.3 L20.3 16.3"/></svg></div>
+      <h2>Keys</h2>
+    </div>
+    <ul class="rules-list">
+      <li>Keys and the magnetic electricity card must be returned to the key safe at check-out.</li>
+      <li>Please ensure that the key safe is properly closed and that the code is scrambled.</li>
+      <li>A €50 locksmith charge may apply if the keys are lost or locked inside the property.</li>
+    </ul>
+  </div>
+
+  <div class="divider"><div class="branch-img" role="img" aria-label="Olive branch ornament"></div></div>
+
+  <div class="section" id="cleanliness">
+    <div class="section-head">
+      <div class="badge"><svg viewBox="0 0 24 24"><path d="M5 7 H19 M9 7 V5 H15 V7 M7 7 L8 20 H16 L17 7"/></svg></div>
+      <h2>Cleanliness and Waste</h2>
+    </div>
+    <ul class="rules-list">
+      <li>Do not leave food or rubbish outside, as this may attract insects or animals.</li>
+      <li>The property should be left in a reasonably clean and tidy condition.</li>
+    </ul>
+  </div>
+
+  <div class="divider"><div class="branch-img" role="img" aria-label="Olive branch ornament"></div></div>
+
+  <div class="closing-note">
+    <p>Failure to comply with these rules may result in additional charges or the termination of the stay without a refund.</p>
+    <p>Thank you for your understanding.</p>
+  </div>
+
+  <footer>
+    <div class="branch-img" role="img" aria-label="Olive branch ornament"></div>
+    <p>© 2026 The Olive Tree House</p>
+  </footer>
+</main>
+
+</body>
+</html>

@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Village — The Olive Tree House</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+<style>
+  :root{
+    --warm-white:#FAF8F3;
+    --off-black:#292A27;
+    --charcoal:#292A27;
+    --olive:#949A63;
+    --deep-olive:#626842;
+    --pale-olive:#E9EAD9;
+    --soft-stone:#E8E4DA;
+    --muted:#6e6c62;
+  }
+  html,body{
+    color-scheme: light;
+    min-height: 100dvh;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--warm-white);
+    color:var(--off-black);
+    font-family:'Inter', sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{
+    font-family:'Cormorant Garamond', serif;
+    font-weight:500;
+    color:var(--off-black);
+    margin:0;
+  }
+  p{ margin:0 0 16px; font-size:15px; line-height:1.65; color:var(--charcoal); }
+  a{ color:inherit; }
+
+  header{
+    position:sticky; top:0; z-index:10;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:16px 22px;
+    background:rgba(248,245,238,0.94);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--soft-stone);
+  }
+  header img.logo-small { height: 44px; width: auto; display: block; }
+  .close-x{
+    font-size:24px; line-height:1; color:var(--off-black);
+    text-decoration:none; padding:4px 8px;
+  }
+
+  main{ max-width:520px; margin:0 auto; padding:28px 22px 10px; }
+
+  h1{ font-size:38px; margin-bottom:18px; }
+
+  .chips{
+    display:flex; flex-wrap:wrap; gap:8px;
+    margin-bottom:24px;
+  }
+  .chips a{
+    font-family:'Inter',sans-serif; font-size:12.5px; font-weight:500;
+    padding:8px 14px; border-radius:999px;
+    background:var(--pale-olive); color:var(--deep-olive);
+    text-decoration:none; white-space:nowrap;
+  }
+
+  .intro p{ font-size:15.5px; }
+  .inline-link{
+    color:var(--deep-olive); font-weight:500; text-decoration:none;
+    border-bottom:1px solid var(--olive);
+  }
+
+  .divider{ display:flex; justify-content:center; margin:34px 0; }
+  .branch-img{
+    width:190px; aspect-ratio:732/259;
+    background-image:url('assets/branch.png');
+    background-size:contain; background-repeat:no-repeat; background-position:center;
+    margin:0 auto;
+  }
+  footer .branch-img{ margin-bottom:12px; }
+
+
+  .section{ scroll-margin-top:70px; margin-bottom:6px; }
+  .section-head{ display:flex; align-items:center; gap:12px; margin-bottom:16px; }
+  .badge{
+    flex:0 0 auto; width:42px; height:42px; border-radius:50%;
+    background:var(--pale-olive); display:flex; align-items:center; justify-content:center;
+  }
+  .badge svg{ width:20px; height:20px; fill:none; stroke:var(--deep-olive); stroke-width:1.4; stroke-linecap:round; stroke-linejoin:round; }
+  .section-head h2{ font-size:24px; }
+
+  .photo-slot{
+    margin:18px 0 20px; min-height:190px; border-radius:2px;
+    background:repeating-linear-gradient(135deg, var(--soft-stone), var(--soft-stone) 10px, var(--pale-olive) 10px, var(--pale-olive) 20px);
+    display:flex; align-items:center; justify-content:center;
+    border:1px solid var(--soft-stone);
+  }
+  .photo-slot span{
+    font-size:12px; color:var(--deep-olive); background:var(--warm-white);
+    padding:5px 10px; border-radius:3px; letter-spacing:0.02em;
+  }
+
+  .dest-card{
+    border:1px solid var(--soft-stone); border-radius:4px; overflow:hidden;
+    margin-bottom:18px; background:#fff;
+  }
+  .dest-card .photo-slot{ margin:0; border-radius:0; border:none; min-height:150px; }
+  .dest-card .dest-body{ padding:16px 18px 18px; }
+  .dest-card h3{ font-size:21px; font-weight:500; margin-bottom:8px; }
+  .dest-card p{ margin-bottom:0; font-size:14px; }
+
+  .dist-table{ margin-bottom:26px; }
+  .dist-table h3{
+    font-family:'Inter',sans-serif; font-size:12.5px; font-weight:600;
+    letter-spacing:0.05em; text-transform:uppercase; color:var(--olive);
+    margin-bottom:6px;
+  }
+  .dist-table .row{
+    display:flex; justify-content:space-between; gap:10px; padding:10px 0;
+    border-top:1px solid var(--soft-stone); font-size:14px;
+  }
+  .dist-table .row .val{ color:var(--deep-olive); font-weight:500; white-space:nowrap; text-align:right; }
+  .dist-note{ font-size:12.5px; color:var(--charcoal); opacity:0.7; margin-top:6px; font-style:italic; }
+
+  footer{ margin-top:44px; padding:28px 22px 40px; text-align:center; }
+  footer p{ font-size:12px; color:var(--deep-olive); margin:0; }
+
+  @media (prefers-reduced-motion: no-preference){
+    .section{ animation:fadeIn 0.6s ease both; }
+    @keyframes fadeIn{ from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:none;} }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <img class="logo-small" src="assets/logo.png" alt="The Olive Tree House — Liapades, Corfu">
+  <a class="close-x" href="index.html" aria-label="Close">×</a>
+</header>
+
+<main>
+  <h1>The Village</h1>
+
+  <div class="chips">
+    <a href="#village">The village</a>
+    <a href="#table">At the table</a>
+    <a href="#paths">The paths</a>
+    <a href="#further">A little further</a>
+    <a href="#distances">Distances</a>
+  </div>
+
+  <div class="section" id="village">
+    <div class="section-head">
+      <div class="badge"><svg viewBox="0 0 24 24"><path d="M3 21 V11 L8 6 L13 11 V21 M6 21 V15 H10 V21 M13 21 V9 L17 5 L21 9 V21 M15 21 V16 H19 V21"/></svg></div>
+      <h2>The village</h2>
+    </div>
+    <p>Liapades is one of Corfu's oldest villages, set on the island's north-west coast and surrounded by one of its richest and most varied stretches of coastline.</p>
+    <p>The village dates back to at least the 16th century, with roots reaching further into the Byzantine era. Narrow cobbled lanes wind between old stone houses and Venetian-influenced architecture, and Liapades has largely retained the character of an old Corfiot village rather than being reshaped around mass tourism. Some traditional houses still retain oval doorways and family crests.</p>
+    <p>Just a seven-minute walk from the house, the peaceful village square lies beneath the shade of a magnificent plane tree. Here you will find traditional kafeneia, charming local shops and the Church of Agia Anastasia, offering an authentic glimpse into everyday life in Liapades.</p>
+    <div class="photo-slot"><span>Photography — the square beneath the plane tree</span></div>
+    <p>The historic 16th-century Church of Agia Anastasia is part of the village's long religious and cultural history and contains old icons and religious paintings. Nearby, a tiny grill house has no indoor dining room. The tables belong outside.</p>
+    <p>The nearest beach is approximately fifteen minutes' walk away, while the wider Liapades coastline is made up of fourteen beaches and four sea caves. Liapades Bay lies directly beside Paleokastritsa Bay, forming part of the same dramatic stretch of north-west Corfu coastline. <a class="inline-link" href="coastline.html">Explore our coastline →</a></p>
+  </div>
+
+  <div class="divider"><div class="branch-img" role="img" aria-label="Olive branch ornament"></div></div>
+
+  <div class="section" id="table">
+    <div class="section-head">
+      <div class="badge"><svg viewBox="0 0 24 24"><path d="M7 2.5 V10.5 M5.5 2.5 V7.5 A1.5 1.5 0 0 0 7 9 V21.5 M8.5 2.5 V7.5 A1.5 1.5 0 0 1 7 9 M16.5 2.5 C13.5 2.5 13.5 8.5 16.5 10.5 V21.5"/></svg></div>
+      <h2>At the table</h2>
+    </div>
+    <p>Corfu has its own flavours and its own pace of eating.</p>
+    <p>You may find rooster pastitsada, sofrito, cod bianco or bourdetto, alongside moussaka and pastitsio.</p>
+    <p>Local fish such as gavros, marida, gopa, barbouni and sardines are often best eaten simply and shared.</p>
+    <p>Noumboulo, kumquat in many forms, Kakotrygis wine and Corfiot beers all belong to the island's table.</p>
+    <p>Dinner is late. Plates are shared. Nobody seems particularly worried about the time.</p>
+    <div class="photo-slot"><span>Photography — Corfiot dishes, local wine</span></div>
+  </div>
+
+  <div class="divider"><div class="branch-img" role="img" aria-label="Olive branch ornament"></div></div>
+
+  <div class="section" id="paths">
+    <div class="section-head">
+      <div class="badge"><svg viewBox="0 0 24 24"><path d="M4 20 Q7 14 5 9 Q3.5 5 7 3.5 Q11 2 10 7 Q9 12 13 13 Q18 14 17 19 Q16.5 21.5 20 21"/></svg></div>
+      <h2>Follow the paths</h2>
+    </div>
+    <p>Old pathways and walking routes cross Liapades and the surrounding landscape.</p>
+    <p>Some are everyday village shortcuts. Others lead through olive trees, between houses, towards beaches and viewpoints.</p>
+    <p>Our favourite walks are included in the guest guide.</p>
+    <div class="photo-slot"><span>Photography — path through olive trees</span></div>
+  </div>
+
+  <div class="divider"><div class="branch-img" role="img" aria-label="Olive branch ornament"></div></div>
+
+  <div class="section" id="further">
+    <div class="section-head">
+      <div class="badge"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15 9 L13 13 L9 15 L11 11 Z"/></svg></div>
+      <h2>A little further</h2>
+    </div>
+
+    <div class="dest-card">
+      <div class="photo-slot"><span>Photography — Corfu Town</span></div>
+      <div class="dest-body">
+        <h3>Corfu Town</h3>
+        <p>Corfu Town is a place to wander slowly. Venetian façades, narrow lanes and shaded arcades lead towards the Liston and the broad Spianada, while the Old and New Fortresses frame the town's long relationship with the sea. Small churches, hidden squares, flower-filled balconies and cafés spilling onto the pavements give the historic centre a lived-in character. It is equally rewarding in the morning, when the streets are quiet, and in the evening, when the arcades fill and the town settles into the gentle rhythm of dinner and a late walk.</p>
+      </div>
+    </div>
+
+    <div class="dest-card">
+      <div class="photo-slot"><span>Photography — Paleokastritsa</span></div>
+      <div class="dest-body">
+        <h3>Paleokastritsa</h3>
+        <p>Paleokastritsa is known for its monastery, steep green hills and a coastline shaped by small bays, rocky coves and clear water. It is a beautiful place to combine a swim with a walk, a boat trip or a quiet visit to the monastery above the sea.</p>
+      </div>
+    </div>
+
+    <div class="dest-card">
+      <div class="photo-slot"><span>Photography — Angelokastro</span></div>
+      <div class="dest-body">
+        <h3>Angelokastro</h3>
+        <p>Angelokastro, meaning "the Castle of the Angels", is a Byzantine fortress set high above Corfu's north-west coast. The climb is rewarded with wide views over the sea, the surrounding hills and the villages below, making it one of the most memorable historic sites in the area.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"><div class="branch-img" role="img" aria-label="Olive branch ornament"></div></div>
+
+  <div class="section" id="distances">
+    <div class="section-head">
+      <div class="badge"><svg viewBox="0 0 24 24"><path d="M12 21 C12 21 5 14.5 5 9.5 C5 5.9 8.1 3 12 3 C15.9 3 19 5.9 19 9.5 C19 14.5 12 21 12 21 Z"/><circle cx="12" cy="9.5" r="2.4"/></svg></div>
+      <h2>Distances from the house</h2>
+    </div>
+
+    <div class="dist-table">
+      <h3>Eating, swimming and leisure</h3>
+      <div class="row"><span>Traditional tavern</span><span class="val">350 m · 6 min on foot</span></div>
+      <div class="row"><span>Public swimming pools</span><span class="val">600 m · 7 min on foot</span></div>
+      <div class="row"><span>Bars and cafés</span><span class="val">700 m · 8 min on foot</span></div>
+      <div class="row"><span>Beach, water sports and boat hire</span><span class="val">1.3 km · 15 min on foot</span></div>
+      <div class="row"><span>Scuba diving</span><span class="val">3.7 km · 7 min by car</span></div>
+    </div>
+
+    <div class="dist-table">
+      <h3>Shops and everyday essentials</h3>
+      <div class="row"><span>Traditional bakery</span><span class="val">80 m · 1 min on foot</span></div>
+      <div class="row"><span>Mini-markets</span><span class="val">250 m · 5 min on foot</span></div>
+      <div class="row"><span>Local traditional shops</span><span class="val">300 m · 5 min on foot</span></div>
+      <div class="row"><span>Village centre</span><span class="val">350 m · 6 min on foot</span></div>
+      <div class="row"><span>Supermarket</span><span class="val">550 m · 6 min on foot</span></div>
+      <div class="row"><span>Pharmacy</span><span class="val">550 m · 6 min on foot</span></div>
+      <div class="row"><span>ATM</span><span class="val">300 m · 5 min on foot</span></div>
+      <div class="row"><span>Petrol station</span><span class="val">700 m · 2 min by car</span></div>
+    </div>
+
+    <div class="dist-table">
+      <h3>Transport and wider Corfu</h3>
+      <div class="row"><span>Bus stop</span><span class="val">50 m · &lt;1 min on foot</span></div>
+      <div class="row"><span>Motorbike rental</span><span class="val">800 m · 9 min on foot</span></div>
+      <div class="row"><span>Car rental</span><span class="val">4 km · 8 min by car</span></div>
+      <div class="row"><span>Bicycle rental</span><span class="val">4 km · 8 min by car</span></div>
+      <div class="row"><span>Corfu Town</span><span class="val">18 km · 20 min by car</span></div>
+      <div class="row"><span>Corfu International Airport</span><span class="val">20 km · 25 min by car</span></div>
+      <div class="row"><span>Hospital</span><span class="val">13 km · 17 min by car</span></div>
+    </div>
+
+    <p class="dist-note">Distances and journey times are approximate and may vary according to the route, season and traffic conditions.</p>
+  </div>
+
+  <footer>
+    <div class="branch-img" role="img" aria-label="Olive branch ornament"></div>
+    <p>© 2026 The Olive Tree House</p>
+  </footer>
+</main>
+
+</body>
+</html>
