@@ -1,0 +1,41 @@
+yaml
+name: Sync availability calendar
+
+"on":
+  schedule:
+    - cron: '0 */3 * * *'   # every 3 hours, UTC
+  workflow_dispatch: {}       # lets you trigger it manually from the Actions tab, for testing
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Run availability sync
+        env:
+          AIRBNB_ICAL_URL: ${{ secrets.AIRBNB_ICAL_URL }}
+          BOOKING_ICAL_URL: ${{ secrets.BOOKING_ICAL_URL }}
+          AVAILABILITY_JSON_PATH: dist/assets/availability.json
+        run: python3 sync/sync_availability.py
+
+      - name: Commit and push if the file changed
+        run: |
+          git config user.name "availability-sync-bot"
+          git config user.email "actions@github.com"
+          git add dist/assets/availability.json
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "Auto-sync availability calendar"
+            git push
+          fi
