@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FAQ — The Olive Tree House</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+<style>
+  :root {
+    --warm-white: #FAF8F3; --olive: #949A63; --deep-olive: #626842;
+    --charcoal: #292A27; --soft-stone: #E8E4DA; --pale-olive: #E9EAD9;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--warm-white); color: var(--charcoal);
+    font-family: 'Inter', sans-serif; font-size: 15px; line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  header {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(250,248,243,0.94); backdrop-filter: blur(6px);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px 20px;
+  }
+  header img.logo-small { height: 44px; width: auto; display: block; }
+  .close-x {
+    width: 38px; height: 38px; border-radius: 50%;
+    background: var(--warm-white); border: 1px solid var(--soft-stone);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; color: var(--charcoal); text-decoration: none; line-height: 1;
+  }
+  main { padding: 8px 22px 50px; max-width: 560px; margin: 0 auto; }
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 34px; font-weight: 500; margin: 12px 0 22px; line-height: 1.15;
+  }
+
+  .faq-item { border-bottom: 1px solid var(--soft-stone); padding: 19px 0; }
+  .faq-item:first-of-type { border-top: 1px solid var(--soft-stone); }
+  .faq-item summary {
+    display: flex; align-items: center; justify-content: space-between; gap: 14px;
+    cursor: pointer; list-style: none;
+    font-size: 15.5px; font-weight: 500; color: var(--charcoal);
+  }
+  .faq-item summary::-webkit-details-marker { display: none; }
+  .faq-item[open] summary { color: var(--deep-olive); }
+  .faq-item summary .chev {
+    flex: 0 0 18px; width: 18px; height: 18px;
+    stroke: var(--olive); fill: none; stroke-width: 1.8;
+    stroke-linecap: round; stroke-linejoin: round;
+    transition: transform 0.25s ease;
+  }
+  .faq-item[open] summary .chev { transform: rotate(180deg); }
+  .faq-item .answer { margin-top: 14px; font-size: 14.5px; line-height: 1.65; color: var(--charcoal); }
+  .faq-item .answer p { margin-bottom: 12px; }
+  .faq-item .answer p:last-child { margin-bottom: 0; }
+  .faq-item .answer ul { margin: 4px 0 12px 18px; }
+  .faq-item .answer li { margin-bottom: 6px; }
+  .faq-item .answer a { color: var(--deep-olive); text-decoration: underline; }
+
+  footer {
+    margin-top: 40px; padding-top: 8px;
+    text-align: center;
+  }
+  footer .ornament { width: 190px; height: auto; display: block; margin: 0 auto 10px; }
+  footer p { font-size: 12px; color: var(--deep-olive); }
+  @media (prefers-reduced-motion: no-preference) {
+    .fade { opacity: 0; transform: translateY(12px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .fade.in { opacity: 1; transform: none; }
+  }
+
+  .branch-img{
+    width:190px; aspect-ratio:732/259;
+    background-image:url('assets/branch.png');
+    background-size:contain; background-repeat:no-repeat; background-position:center;
+    margin:0 auto 10px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <img class="logo-small" src="assets/logo.png" alt="The Olive Tree House — Liapades, Corfu">
+  <a class="close-x" href="index.html" aria-label="Close">×</a>
+</header>
+
+<main>
+  <h1 class="fade in">Frequently asked questions</h1>
+
+  <details class="faq-item fade in" open>
+    <summary>How do I make a booking?<svg class="chev" viewBox="0 0 24 24"><path d="M6 9 L12 15 L18 9"/></svg></summary>
+    <div class="answer">
+      <p>Please select your preferred dates on our availability page and send us an enquiry. We will review your request and reply as soon as possible.</p>
+      <p>Your booking will be confirmed and your dates secured once the 30% deposit has been received by bank transfer.</p>
+    </div>
+  </details>
+
+  <details class="faq-item fade in">
+    <summary>What is the minimum stay?<svg class="chev" viewBox="0 0 24 24"><path d="M6 9 L12 15 L18 9"/></svg></summary>
+    <div class="answer">
+      <p>The minimum stay is four nights. Shorter stays may occasionally be considered on a case-by-case basis, subject to availability and confirmation.</p>
+    </div>
+  </details>
+
+  <details class="faq-item fade in">
+    <summary>How many guests can the house accommodate?<svg class="chev" viewBox="0 0 24 24"><path d="M6 9 L12 15 L18 9"/></svg></summary>
+    <div class="answer">
+      <p>The house comfortably accommodates four guests. A fifth guest may occasionally be accommodated on request, although the house is best suited to four.</p>
+    </div>
+  </details>
+
+  <details class="faq-item fade in">
+    <summary>Is the house suitable for children?<svg class="chev" viewBox="0 0 24 24"><path d="M6 9 L12 15 L18 9"/></svg></summary>
+    <div class="answer">
+      <p>For safety reasons, the property is not suitable for children under eight years of age.</p>
+    </div>
+  </details>
+
+  <details class="faq-item fade in">
+    <summary>What time are check-in and checkout?<svg class="chev" viewBox="0 0 24 24"><path d="M6 9 L12 15 L18 9"/></svg></summary>
+    <div class="answer">
+      <p>Check-in is available from 15:00, and checkout is by 10:00.</p>
+      <p>Guests check in independently using the lockbox, so arrival is possible at any time after 15:00. Detailed directions and lockbox instructions will be sent before arrival.</p>
+      <p>Early check-in or late checkout may occasionally be possible on request, subject to availability and confirmation.</p>
+    </div>
+  </details>
+
+  <details class="faq-item fade in">
+    <summary>How is payment made?<svg class="chev" viewBox="0 0 24 24"><path d="M6 9 L12 15 L18 9"/></svg></summary>
+    <div class="answer">
+      <p>A 30% deposit is required by bank transfer to confirm the booking.</p>
+      <p>The remaining accommodation balance and the climate tax are payable upon arrival.</p>
+    </div>
+  </details>
+
+  <details class="faq-item fade in">
+    <summary>Is the climate tax included in the accommodation price?<svg class="chev" viewBox="0 0 24 24"><path d="M6 9 L12 15 L18 9"/></svg></summary>
+    <div class="answer">
+      <p>No. The climate tax is charged separately at €15 per night and is payable upon arrival.</p>
+    </div>
+  </details>
+
+  <details class="faq-item fade in">
+    <summary>What is the cancellation policy?<svg class="chev" viewBox="0 0 24 24"><path d="M6 9 L12 15 L18 9"/></svg></summary>
+    <div class="answer">
+      <ul>
+        <li>Cancellations made 60 days or more before arrival receive a full refund of the deposit.</li>
+        <li>Cancellations made 30 to 59 days before arrival receive a refund of 50% of the deposit.</li>
+        <li>Cancellations made less than 30 days before arrival are non-refundable.</li>
+      </ul>
+      <p>We recommend that guests arrange suitable travel insurance to cover unexpected changes, illness or travel disruption.</p>
+          </div>
+  </details>
+
+  <details class="faq-item fade in">
+    <summary>Is parking available?<svg class="chev" viewBox="0 0 24 24"><path d="M6 9 L12 15 L18 9"/></svg></summary>
+    <div class="answer">
+      <p>Yes. Free on-street parking is available near the house.</p>
+    </div>
+  </details>
+
+  <details class="faq-item fade in">
+    <summary>How far is the house from the village square and the beach?<svg class="chev" viewBox="0 0 24 24"><path d="M6 9 L12 15 L18 9"/></svg></summary>
+    <div class="answer">
+      <p>Liapades village square is approximately seven minutes away on foot.</p>
+      <p>The nearest beach is around fifteen minutes' walk from the house.</p>
+    </div>
+  </details>
+
+  <details class="faq-item fade in">
+    <summary>Is public transport available?<svg class="chev" viewBox="0 0 24 24"><path d="M6 9 L12 15 L18 9"/></svg></summary>
+    <div class="answer">
+      <p>Yes. Liapades is served by the A10 Green Bus route, which connects the village with Corfu Town.</p>
+      <p>Timetables and service frequency may vary according to the season and day of the week, so we recommend checking the official timetable shortly before travelling.</p>
+      <p>Corfu City Bus operates local routes within Corfu Town and the surrounding urban area.</p>
+      <p><a href="https://ktelkerkyras.gr/wp-content/uploads/2025/12/TimeTables-02-01-2026-EN.pdf" target="_blank" rel="noopener">View the A10 Liapades bus timetable →</a><br><a href="https://astikoktelkerkyras.gr/en/" target="_blank" rel="noopener">View Corfu City Bus information →</a></p>
+    </div>
+  </details>
+
+  <details class="faq-item fade in">
+    <summary>Do I need a car?<svg class="chev" viewBox="0 0 24 24"><path d="M6 9 L12 15 L18 9"/></svg></summary>
+    <div class="answer">
+      <p>A car is not essential for enjoying Liapades village and the nearest beach.</p>
+      <p>However, it may be useful if you wish to explore Corfu Town, more distant beaches and the traditional villages of the surrounding area.</p>
+    </div>
+  </details>
+
+  <details class="faq-item fade in">
+    <summary>Is Wi-Fi available?<svg class="chev" viewBox="0 0 24 24"><path d="M6 9 L12 15 L18 9"/></svg></summary>
+    <div class="answer">
+      <p>Yes. Wi-Fi is available throughout the house.</p>
+    </div>
+  </details>
+
+  <details class="faq-item fade in">
+    <summary>Is the house air-conditioned?<svg class="chev" viewBox="0 0 24 24"><path d="M6 9 L12 15 L18 9"/></svg></summary>
+    <div class="answer">
+      <p>Yes. Both bedrooms have air conditioning. Heating is also available.</p>
+    </div>
+  </details>
+
+  <details class="faq-item fade in">
+    <summary>Is the kitchen equipped for everyday cooking?<svg class="chev" viewBox="0 0 24 24"><path d="M6 9 L12 15 L18 9"/></svg></summary>
+    <div class="answer">
+      <p>Yes. The kitchen includes an oven, electric cooker, fridge, freezer, microwave, kettle, toaster, espresso machine, filter coffee maker, cooking basics and a selection of glassware.</p>
+    </div>
+  </details>
+
+  <details class="faq-item fade in">
+    <summary>Is a washing machine available?<svg class="chev" viewBox="0 0 24 24"><path d="M6 9 L12 15 L18 9"/></svg></summary>
+    <div class="answer">
+      <p>Yes. A washing machine, clothes-drying rack, iron and ironing board are provided.</p>
+    </div>
+  </details>
+
+  <details class="faq-item fade in">
+    <summary>Are pets permitted?<svg class="chev" viewBox="0 0 24 24"><path d="M6 9 L12 15 L18 9"/></svg></summary>
+    <div class="answer">
+      <p>Pets are not permitted, except for registered assistance dogs.</p>
+    </div>
+  </details>
+
+  <details class="faq-item fade in">
+    <summary>Is smoking permitted?<svg class="chev" viewBox="0 0 24 24"><path d="M6 9 L12 15 L18 9"/></svg></summary>
+    <div class="answer">
+      <p>Smoking is not permitted inside the house.</p>
+      <p>Smoking is allowed on the balconies. Guests are kindly asked to use the ashtrays provided and ensure that cigarettes are fully extinguished.</p>
+    </div>
+  </details>
+
+  <details class="faq-item fade in">
+    <summary>Is additional cleaning available during the stay?<svg class="chev" viewBox="0 0 24 24"><path d="M6 9 L12 15 L18 9"/></svg></summary>
+    <div class="answer">
+      <p>Yes. Additional cleaning may be arranged on request, subject to availability.</p>
+    </div>
+  </details>
+
+  <details class="faq-item fade in">
+    <summary>Is the house accessible?<svg class="chev" viewBox="0 0 24 24"><path d="M6 9 L12 15 L18 9"/></svg></summary>
+    <div class="answer">
+      <p>The house is located on the first floor and is reached by stairs.</p>
+      <p>There is also one internal step between the open-plan living area and the bedroom wing.</p>
+      <p>Guests with specific accessibility requirements are welcome to contact us before booking so that we can provide further information.</p>
+    </div>
+  </details>
+
+  <details class="faq-item fade in">
+    <summary>Are longer stays available?<svg class="chev" viewBox="0 0 24 24"><path d="M6 9 L12 15 L18 9"/></svg></summary>
+    <div class="answer">
+      <p>Yes. Longer stays may be considered, subject to availability and the time of year. A reduced accommodation rate may be available for extended bookings.</p>
+      <p>Please contact us with your preferred dates, the number of guests and any particular requirements, and we will be pleased to provide a tailored quotation.</p>
+    </div>
+  </details>
+
+  <details class="faq-item fade in">
+    <summary>When is the best time to visit Corfu?<svg class="chev" viewBox="0 0 24 24"><path d="M6 9 L12 15 L18 9"/></svg></summary>
+    <div class="answer">
+      <p>Corfu offers a different experience throughout the year.</p>
+      <p>For warm weather, swimming and long days by the sea, late May to September is generally the most suitable period. May, June and September are particularly appealing for guests who prefer warm weather and a quieter atmosphere than the peak weeks of July and August.</p>
+      <p>Spring brings green landscapes and flowering countryside, while Easter is one of the island's most distinctive cultural celebrations.</p>
+      <p>Autumn is well suited to walking, village life and exploring the island at a slower pace.</p>
+      <p>Winter is peaceful and exceptionally green, although rainfall is more frequent and some seasonal businesses may be closed.</p>
+    </div>
+  </details>
+
+  <details class="faq-item fade in">
+    <summary>What travel documents do I need to visit Corfu?<svg class="chev" viewBox="0 0 24 24"><path d="M6 9 L12 15 L18 9"/></svg></summary>
+    <div class="answer">
+      <p>Entry requirements depend on your nationality and personal circumstances.</p>
+      <p>Citizens of the European Union may generally travel to Greece with a valid passport or national identity card. Visitors from outside the European Union require a valid passport and may also require a visa, depending on their nationality and the length and purpose of their stay.</p>
+      <p>As requirements may change, guests should consult the relevant official authorities before travelling.</p>
+      <p><a href="https://www.mfa.gr/en/service-category/visas/" target="_blank" rel="noopener">Greek Ministry of Foreign Affairs — Visa information →</a><br><a href="https://www.mfa.gr/en/contact/greek-missions-abroad/" target="_blank" rel="noopener">Find the Greek Embassy or Consulate in your country →</a><br><a href="https://www.iatatravelcentre.com/" target="_blank" rel="noopener">IATA Travel Centre — Passport, visa and health requirements →</a></p>
+    </div>
+  </details>
+
+  <details class="faq-item fade in">
+    <summary>How will I find the house?<svg class="chev" viewBox="0 0 24 24"><path d="M6 9 L12 15 L18 9"/></svg></summary>
+    <div class="answer">
+      <p>The Olive Tree House is located in Liapades, 49083, Corfu, on the island's north-west coast.</p>
+      <p>You may view our exact location through the official Google Maps listing. Detailed arrival directions and lockbox instructions will be sent to confirmed guests before check-in.</p>
+      <p><a href="https://www.google.com/maps/search/?api=1&query=Liapades+49083+Corfu+Greece" target="_blank" rel="noopener">View The Olive Tree House on Google Maps →</a></p>
+    </div>
+  </details>
+
+  <details class="faq-item fade in">
+    <summary>How can I contact you?<svg class="chev" viewBox="0 0 24 24"><path d="M6 9 L12 15 L18 9"/></svg></summary>
+    <div class="answer">
+      <p>We would be pleased to help with any questions about The Olive Tree House, availability, direct bookings or your stay in Liapades.</p>
+      <p>Please contact us using the contact form, by email or by telephone, and we will reply as soon as possible.</p>
+      <p><a href="contact.html">Contact us →</a></p>
+    </div>
+  </details>
+
+  <footer class="fade in">
+    <div class="branch-img" role="img" aria-label="Olive branch ornament"></div>
+    <p>© 2026 The Olive Tree House</p>
+  </footer>
+</main>
+
+<script>
+  const fades = document.querySelectorAll('.fade');
+  const obs = new IntersectionObserver((es) => {
+    es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  fades.forEach(el => obs.observe(el));
+</script>
+
+</body>
+</html>
