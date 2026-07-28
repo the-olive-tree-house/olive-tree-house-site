@@ -50,8 +50,7 @@
     text-align: center; padding: 18px;
   }
   .photo-slot span { font-size: 11.5px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--deep-olive); }
-  .hero-photo { min-height: 220px; margin: 4px 0 22px; }
-
+   .hero-photo { display: block; width: 100%; height: 220px; object-fit: cover; border-radius: 12px; margin: 4px 0 22px; }
   .beach-carousel { overflow: hidden; margin-top: 18px; }
   .beach-track {
     display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory;
@@ -60,6 +59,7 @@
   .beach-track::-webkit-scrollbar { display: none; }
   .beach-card { flex: 0 0 78%; scroll-snap-align: center; }
   .beach-card .photo-slot { min-height: 170px; }
+  .beach-card img { display: block; width: 100%; height: 170px; object-fit: cover; border-radius: 12px; margin: 0; }
   .beach-card .name { font-size: 13.5px; font-weight: 500; margin-top: 10px; text-align: center; }
   .carousel-dots { display: flex; justify-content: center; gap: 7px; margin-top: 14px; }
   .carousel-dots .dot {
@@ -119,7 +119,7 @@
 <main>
   <h1>The Coastline</h1>
 
-  <div class="photo-slot hero-photo"><span>Photography — aerial view of the Liapades coastline</span></div>
+  <img class="hero-photo" src="assets/coastline-hero.jpg" alt="Aerial view of the Liapades coastline">
 
   <p class="lead">Fourteen beaches, four sea caves and one of Corfu's richest coastlines.</p>
   <p>The coast around Liapades folds into small bays, hidden coves, sea caves and steep green cliffs.</p>
@@ -136,12 +136,28 @@
         <p class="name">Liapades Beach</p>
       </div>
       <div class="beach-card">
-        <div class="photo-slot"><span>Rovinia Beach</span></div>
+        <img src="assets/coastline-rovinia.jpg" alt="Rovinia Beach">
         <p class="name">Rovinia Beach</p>
       </div>
       <div class="beach-card">
         <div class="photo-slot"><span>Glyko Beach</span></div>
         <p class="name">Glyko Beach</p>
+      </div>
+      <div class="beach-card">
+        <img src="assets/coastline-chomi.jpg" alt="Chomi Beach">
+        <p class="name">Chomi Beach</p>
+      </div>
+      <div class="beach-card">
+        <img src="assets/coastline-limni.jpg" alt="Limni Beach">
+        <p class="name">Limni Beach</p>
+      </div>
+      <div class="beach-card">
+        <img src="assets/coastline-sea-caves.jpg" alt="One of the sea caves along the Liapades coastline">
+        <p class="name">Sea Caves</p>
+      </div>
+      <div class="beach-card">
+        <img src="assets/coastline-fish-cave.jpg" alt="The fish cave, where fish gather year-round">
+        <p class="name">Fish Cave</p>
       </div>
     </div>
     <div class="carousel-dots" id="beachDots"></div>
