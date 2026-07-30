@@ -52,7 +52,7 @@
   }
   .photo-slot span { font-size: 11.5px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--deep-olive); }
 
-  .photo-carousel { overflow: hidden; margin: 0 0 22px; }
+  .photo-carousel { position: relative; overflow: hidden; margin: 0 0 22px; }
   .photo-carousel .photo-track {
     display: flex; overflow-x: auto; scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch; scrollbar-width: none;
@@ -64,6 +64,12 @@
     display: block; width: auto; height: 190px;
     border-radius: 12px; margin: 0;
   }
+  /* A room with only one photo (e.g. West Balcony) has nothing to scroll to,
+     so let that photo fill the row width instead of sitting narrow with
+     empty space beside it — matches the 190px height of every other card. */
+  .photo-carousel .photo-track img:only-child {
+    flex: 0 0 100%; width: 100%; height: 190px; object-fit: cover;
+  }
   .photo-carousel .carousel-dots { display: flex; justify-content: center; gap: 7px; margin-top: 10px; }
   .photo-carousel .carousel-dots:empty { margin-top: 0; }
   .photo-carousel .carousel-dots .dot {
@@ -71,6 +77,20 @@
     transition: background 0.2s, transform 0.2s;
   }
   .photo-carousel .carousel-dots .dot.active { background: var(--olive); transform: scale(1.25); }
+  .carousel-arrow {
+    position: absolute; top: 0; height: 190px; width: 34px;
+    display: flex; align-items: center; justify-content: center;
+    border: none; background: none; padding: 0; margin: 0; cursor: pointer; z-index: 2;
+  }
+  .carousel-arrow span {
+    width: 30px; height: 30px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(41, 42, 39, 0.55); color: var(--warm-white);
+    font-size: 17px; line-height: 1; transition: background 0.15s;
+  }
+  .carousel-arrow:hover span { background: rgba(41, 42, 39, 0.8); }
+  .carousel-arrow.prev { left: 6px; }
+  .carousel-arrow.next { right: 6px; }
 
   .facts-row {
     text-align: center; font-size: 13.5px; color: var(--deep-olive); font-weight: 500;
@@ -319,16 +339,33 @@
     original.forEach(slide => track.appendChild(slide.cloneNode(true)));
     original.slice().reverse().forEach(slide => track.insertBefore(slide.cloneNode(true), track.firstChild));
 
+    function goTo(i) {
+      const wrapped = ((i % count) + count) % count;
+      const target = track.children[count + wrapped];
+      track.scrollTo({ left: target.offsetLeft - (track.offsetWidth - target.offsetWidth) / 2, behavior: 'smooth' });
+    }
+
     for (let i = 0; i < count; i++) {
       const dot = document.createElement('div');
       dot.className = 'dot' + (i === 0 ? ' active' : '');
-      dot.addEventListener('click', () => {
-        const target = track.children[count + i];
-        track.scrollTo({ left: target.offsetLeft - (track.offsetWidth - target.offsetWidth) / 2, behavior: 'smooth' });
-      });
+      dot.addEventListener('click', () => goTo(i));
       dotsWrap.appendChild(dot);
     }
     const dots = Array.from(dotsWrap.children);
+
+    let currentIndex = 0;
+    const prevBtn = document.createElement('button');
+    prevBtn.className = 'carousel-arrow prev';
+    prevBtn.setAttribute('aria-label', 'Previous photo');
+    prevBtn.innerHTML = '<span>&#8249;</span>';
+    prevBtn.addEventListener('click', () => goTo(currentIndex - 1));
+    const nextBtn = document.createElement('button');
+    nextBtn.className = 'carousel-arrow next';
+    nextBtn.setAttribute('aria-label', 'Next photo');
+    nextBtn.innerHTML = '<span>&#8250;</span>';
+    nextBtn.addEventListener('click', () => goTo(currentIndex + 1));
+    carousel.appendChild(prevBtn);
+    carousel.appendChild(nextBtn);
 
     function setWidth() {
       const first = track.children[0];
@@ -360,6 +397,7 @@
           const dist = Math.abs(cardCentre - centre);
           if (dist < closestDist) { closestDist = dist; closest = i; }
         });
+        currentIndex = closest;
         dots.forEach((d, i) => d.classList.toggle('active', i === closest));
         ticking = false;
       });
