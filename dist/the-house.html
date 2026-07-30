@@ -54,7 +54,7 @@
 
   .photo-carousel { position: relative; overflow: hidden; margin: 0 0 22px; }
   .photo-carousel .photo-track {
-    display: flex; overflow-x: auto; scroll-snap-type: x mandatory;
+    display: flex; gap: 10px; overflow-x: auto; scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch; scrollbar-width: none;
   }
   .photo-carousel .photo-track::-webkit-scrollbar { display: none; }
@@ -70,6 +70,7 @@
   .photo-carousel .photo-track img:only-child {
     flex: 0 0 100%; width: 100%; height: 190px; object-fit: cover;
   }
+  .photo-carousel .photo-track img.crop-top { object-position: 50% 20%; }
   .photo-carousel .carousel-dots { display: flex; justify-content: center; gap: 7px; margin-top: 10px; }
   .photo-carousel .carousel-dots:empty { margin-top: 0; }
   .photo-carousel .carousel-dots .dot {
@@ -292,7 +293,7 @@
       <h2 class="card-title">West Balcony · Park View</h2>
       <div class="photo-carousel">
         <div class="photo-track">
-          <img src="assets/house-balcony-west-1.jpg" alt="West balcony with park view at The Olive Tree House">
+          <img class="crop-top" src="assets/house-balcony-west-1.jpg" alt="West balcony with park view at The Olive Tree House">
         </div>
         <div class="carousel-dots"></div>
       </div>
@@ -339,10 +340,24 @@
     original.forEach(slide => track.appendChild(slide.cloneNode(true)));
     original.slice().reverse().forEach(slide => track.insertBefore(slide.cloneNode(true), track.firstChild));
 
+    let currentIndex = 0;
+
     function goTo(i) {
       const wrapped = ((i % count) + count) % count;
-      const target = track.children[count + wrapped];
-      track.scrollTo({ left: target.offsetLeft - (track.offsetWidth - target.offsetWidth) / 2, behavior: 'smooth' });
+      currentIndex = wrapped;
+      const setW = setWidth();
+      const base = track.children[count + wrapped];
+      const baseTarget = base.offsetLeft - (track.offsetWidth - base.offsetWidth) / 2;
+      const current = track.scrollLeft;
+      // Scroll to whichever copy of this card (previous set, this set, or next
+      // set) is physically closest to where we already are, so the animation
+      // always travels a short distance in the natural direction — never a
+      // big jump back across the whole row.
+      let best = baseTarget;
+      [baseTarget - setW, baseTarget, baseTarget + setW].forEach(c => {
+        if (Math.abs(c - current) < Math.abs(best - current)) best = c;
+      });
+      track.scrollTo({ left: best, behavior: 'smooth' });
     }
 
     for (let i = 0; i < count; i++) {
@@ -353,14 +368,15 @@
     }
     const dots = Array.from(dotsWrap.children);
 
-    let currentIndex = 0;
     const prevBtn = document.createElement('button');
     prevBtn.className = 'carousel-arrow prev';
+    prevBtn.type = 'button';
     prevBtn.setAttribute('aria-label', 'Previous photo');
     prevBtn.innerHTML = '<span>&#8249;</span>';
     prevBtn.addEventListener('click', () => goTo(currentIndex - 1));
     const nextBtn = document.createElement('button');
     nextBtn.className = 'carousel-arrow next';
+    nextBtn.type = 'button';
     nextBtn.setAttribute('aria-label', 'Next photo');
     nextBtn.innerHTML = '<span>&#8250;</span>';
     nextBtn.addEventListener('click', () => goTo(currentIndex + 1));
