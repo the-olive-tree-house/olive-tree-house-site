@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light only">
+<title>The Coastline — The Olive Tree House</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+<style>
+  :root {
+    --warm-white: #FAF8F3; --olive: #949A63; --deep-olive: #626842;
+    --charcoal: #292A27; --soft-stone: #E8E4DA; --pale-olive: #E9EAD9;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { background: var(--warm-white); color-scheme: light; }
+  body {
+    background: var(--warm-white); color: var(--charcoal); color-scheme: light;
+    min-height: 100vh; min-height: 100dvh;
+    font-family: 'Inter', sans-serif; font-size: 15px; line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  header {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(250,248,243,0.94); backdrop-filter: blur(6px);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px 20px;
+  }
+  header img.logo-small { height: 44px; width: auto; display: block; }
+  .close-x {
+    width: 38px; height: 38px; border-radius: 50%;
+    background: var(--warm-white); border: 1px solid var(--soft-stone);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; color: var(--charcoal); text-decoration: none; line-height: 1;
+  }
+  main { padding: 8px 22px 50px; max-width: 560px; margin: 0 auto; }
+  h1 { font-family: 'Cormorant Garamond', serif; font-size: 36px; font-weight: 500; margin: 12px 0 20px; }
+  h2.section { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 500; margin: 38px 0 16px; }
+  p.lead {
+    font-family: 'Cormorant Garamond', serif; font-size: 25px; font-weight: 500;
+    line-height: 1.35; margin: 0 0 18px;
+  }
+  p { margin-bottom: 16px; }
+
+  .photo-slot {
+    background: var(--pale-olive); border: 1px solid var(--olive); border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    text-align: center; padding: 18px;
+  }
+  .photo-slot span { font-size: 11.5px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--deep-olive); }
+   .hero-photo { display: block; width: 100%; height: auto; border-radius: 12px; margin: 4px 0 22px; }
+  .beach-carousel { position: relative; overflow: hidden; margin-top: 18px; }
+  .carousel-arrow {
+    position: absolute; top: 0; height: 170px; width: 34px;
+    display: flex; align-items: center; justify-content: center;
+    border: none; background: none; padding: 0; margin: 0; cursor: pointer; z-index: 2;
+  }
+  .carousel-arrow span {
+    width: 30px; height: 30px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(41, 42, 39, 0.55); color: var(--warm-white);
+    font-size: 17px; line-height: 1; transition: background 0.15s;
+  }
+  .carousel-arrow:hover span { background: rgba(41, 42, 39, 0.8); }
+  .carousel-arrow.prev { left: 6px; }
+  .carousel-arrow.next { right: 6px; }
+  .beach-track {
+    display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none; padding-bottom: 2px;
+  }
+  .beach-track::-webkit-scrollbar { display: none; }
+  .beach-card { flex: 0 0 auto; scroll-snap-align: center; }
+  .beach-card .photo-slot { min-height: 170px; }
+  .beach-card img { display: block; width: auto; height: 170px; border-radius: 12px; margin: 0; }
+  .beach-card .name { font-size: 13.5px; font-weight: 500; margin-top: 10px; text-align: center; }
+  .carousel-dots { display: flex; justify-content: center; gap: 7px; margin-top: 14px; }
+  .carousel-dots .dot {
+    width: 6px; height: 6px; border-radius: 50%; background: var(--soft-stone);
+    transition: background 0.2s, transform 0.2s;
+  }
+  .carousel-dots .dot.active { background: var(--olive); transform: scale(1.25); }
+
+  .map-slot { min-height: 240px; margin-top: 18px; }
+  .map-note { font-size: 13px; color: var(--deep-olive); margin-top: 10px; text-align: center; }
+  .earth-card {
+    margin-top: 18px; text-align: center;
+  }
+  .earth-card p.desc { margin: 0 0 14px; font-size: 14px; color: var(--charcoal); }
+  .earth-link-card {
+    display: block; text-decoration: none; overflow: hidden;
+    background: var(--pale-olive); border: 1px solid var(--olive); border-radius: 12px;
+  }
+  .earth-link-card .photo-slot {
+    border-radius: 0; border: none; margin: 0; min-height: 200px;
+  }
+    .earth-link-card .earth-photo {
+    display: block; width: 100%; height: auto; border: none; margin: 0;
+  }
+  .earth-link-card .caption {
+    display: flex; align-items: center; justify-content: center; gap: 6px;
+    padding: 13px 22px; font-size: 13.5px; font-weight: 500;
+    color: var(--warm-white); background: var(--olive);
+  }
+
+  .closing { text-align: center; margin-top: 44px; }
+  .btn-primary {
+    display: inline-block; background: var(--olive); color: var(--warm-white);
+    text-decoration: none; border-radius: 10px; padding: 15px 34px;
+    font-size: 15px; font-weight: 500;
+  }
+
+  footer { margin-top: 44px; padding-top: 8px; text-align: center; }
+  footer .ornament { width: 190px; height: auto; display: block; margin: 0 auto 10px; }
+  footer p { font-size: 12px; color: var(--deep-olive); }
+
+  .branch-img{
+    width:190px; aspect-ratio:732/259;
+    background-image:url('assets/branch.png');
+    background-size:contain; background-repeat:no-repeat; background-position:center;
+    margin:0 auto 10px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <img class="logo-small" src="assets/logo.png" alt="The Olive Tree House — Liapades, Corfu">
+  <a class="close-x" href="index.html" aria-label="Close">×</a>
+</header>
+
+<main>
+  <h1>The Coastline</h1>
+
+  <img class="hero-photo" src="assets/coastline-hero.jpg" alt="Aerial view of the Liapades coastline">
+
+  <p class="lead">Fourteen beaches, four sea caves and one of Corfu's richest coastlines.</p>
+  <p>The coast around Liapades folds into small bays, hidden coves, sea caves and steep green cliffs.</p>
+  <p>Some beaches are reached on foot. Others reveal themselves from the water.</p>
+  <p>Rovinia has its own cave accessible from land, while other caves are found along the coast and by the sea.</p>
+  <p>The beaches are remarkably different from one another. One may be pebbly with deep turquoise water, another sandy with a pale blue sea. Some are edged by large rocks, some surrounded by dense greenery, while others sit beneath sheer rock faces that look almost vertically.</p>
+  <p>The coastline changes character from one beach to the next.</p>
+
+  <h2 class="section">Our Beaches</h2>
+ <div class="beach-carousel">
+    <div class="beach-track" id="beachTrack">
+    <div class="beach-card">
+      <img src="assets/coastline-rovinia.jpg" alt="Rovinia Beach">
+        <p class="name">Rovinia Beach</p>
+      </div>
+      <div class="beach-card">
+        <img src="assets/coastline-gefyra.jpg" alt="Gefyra Beach">
+        <p class="name">Gefyra Beach</p>
+      </div>
+      <div class="beach-card">
+        <img src="assets/coastline-chomi.jpg" alt="Chomi Beach">
+        <p class="name">Chomi Beach</p>
+      </div>
+      <div class="beach-card">
+        <img src="assets/coastline-limni.jpg" alt="Limni Beach">
+        <p class="name">Limni Beach</p>
+      </div>
+      <div class="beach-card">
+        <img src="assets/coastline-sea-cave.jpg" alt="The sea cave along the Liapades coastline">
+        <p class="name">Sea Cave</p>
+      </div>
+      <div class="beach-card">
+        <img src="assets/coastline-fish-cave.jpg" alt="Blue Eye Cave, where fish gather year-round">
+        <p class="name">Blue Eye Cave</p>
+      </div>
+    </div>
+    <div class="carousel-dots" id="beachDots"></div>
+  </div>
+
+  <h2 class="section">Explore the coastline</h2>
+<div class="earth-card">
+    <p class="desc">Take a tilted, rotatable 3D flyover of the Liapades coastline in Google Earth.</p>
+    <a class="earth-link-card" href="https://earth.google.com/web/search/%CE%9B%CE%B9%CE%B1%CF%80%CE%AC%CE%B4%CE%B5%CF%82,+Greece/@39.66110533,19.72175209,-0.41907731a,2966.49630654d,35y,77.97679624h,41.48230685t,0r/data=CiwiJgokCRcrQi9r10NAEXRflU4t0UNAGSZ7c5u2vzNAIflX6juytTNAQgIIAToDCgEwQgIIAEoNCP___________wEQAA" target="_blank" rel="noopener" aria-label="Open the interactive 3D coastline view in Google Earth">
+      <img class="earth-photo" src="assets/coastline-earth-view.jpg" alt="A tilted 3D aerial view of the Liapades coastline in Google Earth, looking east toward Kamari Beach">
+      <div class="caption">Open in Google Earth →</div>
+    </a>
+  </div>
+
+  <div class="closing">
+    <a class="btn-primary" href="availability.html">Check availability</a>
+  </div>
+
+  <footer>
+    <div class="branch-img" role="img" aria-label="Olive branch ornament"></div>
+    <p>© 2026 The Olive Tree House</p>
+  </footer>
+</main>
+
+<script>
+(function () {
+  const track = document.getElementById('beachTrack');
+  const dotsWrap = document.getElementById('beachDots');
+  const original = Array.from(track.children);
+  const count = original.length;
+  if (count < 2) return;
+
+  // Clone the full set before and after, so scrolling in either
+  // direction always has more cards to reveal — the "infinite" loop.
+  original.forEach(card => track.appendChild(card.cloneNode(true)));
+  original.slice().reverse().forEach(card => track.insertBefore(card.cloneNode(true), track.firstChild));
+
+  let currentIndex = 0;
+
+  function goTo(i) {
+    const wrapped = ((i % count) + count) % count;
+    currentIndex = wrapped;
+    const setW = setWidth();
+    const base = track.children[count + wrapped];
+    const baseTarget = base.offsetLeft - (track.offsetWidth - base.offsetWidth) / 2;
+    const current = track.scrollLeft;
+    let best = baseTarget;
+    [baseTarget - setW, baseTarget, baseTarget + setW].forEach(c => {
+      if (Math.abs(c - current) < Math.abs(best - current)) best = c;
+    });
+    track.scrollTo({ left: best, behavior: 'smooth' });
+  }
+
+  // Build one dot per real card (not per clone).
+  for (let i = 0; i < count; i++) {
+    const dot = document.createElement('div');
+    dot.className = 'dot' + (i === 0 ? ' active' : '');
+    dot.addEventListener('click', () => goTo(i));
+    dotsWrap.appendChild(dot);
+  }
+  const dots = Array.from(dotsWrap.children);
+
+  const prevBtn = document.createElement('button');
+  prevBtn.className = 'carousel-arrow prev';
+  prevBtn.type = 'button';
+  prevBtn.setAttribute('aria-label', 'Previous beach');
+  prevBtn.innerHTML = '<span>&#8249;</span>';
+  prevBtn.addEventListener('click', () => goTo(currentIndex - 1));
+  const nextBtn = document.createElement('button');
+  nextBtn.className = 'carousel-arrow next';
+  nextBtn.type = 'button';
+  nextBtn.setAttribute('aria-label', 'Next beach');
+  nextBtn.innerHTML = '<span>&#8250;</span>';
+  nextBtn.addEventListener('click', () => goTo(currentIndex + 1));
+  track.parentElement.appendChild(prevBtn);
+  track.parentElement.appendChild(nextBtn);
+
+  function setWidth() {
+    // Width of one full set (original count of cards, incl. gaps).
+    const first = track.children[0];
+    const afterSet = track.children[count];
+    return afterSet.offsetLeft - first.offsetLeft;
+  }
+
+  // Start scrolled into the middle (real) set.
+  requestAnimationFrame(() => {
+    const mid = track.children[count];
+    track.scrollLeft = mid.offsetLeft - (track.offsetWidth - mid.offsetWidth) / 2;
+  });
+
+  let ticking = false;
+  track.addEventListener('scroll', () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      const setW = setWidth();
+      // Silently wrap when scrolled into a cloned set, so it feels endless.
+      if (track.scrollLeft < setW * 0.5) {
+        track.scrollLeft += setW;
+      } else if (track.scrollLeft > setW * 1.5) {
+        track.scrollLeft -= setW;
+      }
+      // Work out which real card is centred, to light up its dot.
+      const centre = track.scrollLeft + track.offsetWidth / 2;
+      let closest = 0, closestDist = Infinity;
+      original.forEach((_, i) => {
+        const card = track.children[count + i];
+        const cardCentre = card.offsetLeft + card.offsetWidth / 2;
+        const dist = Math.abs(cardCentre - centre);
+        if (dist < closestDist) { closestDist = dist; closest = i; }
+      });
+      currentIndex = closest;
+      dots.forEach((d, i) => d.classList.toggle('active', i === closest));
+      ticking = false;
+    });
+  }, { passive: true });
+})();
+</script>
+
+</body>
+</html>
