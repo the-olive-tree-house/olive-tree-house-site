@@ -51,6 +51,10 @@
   .hero-photo-slot span {
     font-size: 11px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--deep-olive);
   }
+  .hero-photo {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    object-fit: cover; object-position: 50% 28%;
+  }
   .hero-overlay {
     position: absolute; inset: 0;
     background: linear-gradient(180deg, rgba(30,26,18,0.05) 0%, rgba(30,26,18,0.68) 100%);
@@ -95,11 +99,16 @@
   .beach-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
   .beach-grid .photo-slot { min-height: 100px; padding: 8px; border-radius: 6px; }
   .beach-grid .photo-slot span { font-size: 9px; }
+  .beach-grid img { display: block; width: 100%; height: 100px; object-fit: cover; border-radius: 6px; }
   .beach-grid .name { font-size: 12px; font-weight: 500; margin-top: 8px; }
   .beach-grid .time { font-size: 11px; color: var(--deep-olive); margin-top: 2px; }
 
   /* House card (single photo) */
   .house-card .photo-slot { min-height: 210px; margin-bottom: 18px; }
+  .house-card .house-photo {
+    display: block; width: 100%; height: 210px; object-fit: cover;
+    border-radius: 8px; margin-bottom: 18px;
+  }
   .discover-link {
     display: inline-block; margin-top: 4px; font-size: 13.5px; font-weight: 500;
     color: var(--deep-olive); text-decoration: none; border-bottom: 1px solid var(--olive);
@@ -195,7 +204,7 @@
 <main>
 
   <section class="hero">
-    <div class="hero-photo-slot"><span>Photography — hero</span></div>
+    <img class="hero-photo" src="assets/house-bedroom1-1.jpg" alt="Bedroom at The Olive Tree House, Liapades, Corfu">
     <div class="hero-overlay"></div>
     <div class="hero-content">
       <p class="hero-eyebrow">Your Holiday Home in Corfu</p>
@@ -228,13 +237,13 @@
     <p class="sub">Crystal-clear waters and quiet coastal escapes.</p>
     <div class="beach-grid">
       <div>
-        <div class="photo-slot"><span>Liapades Beach</span></div>
+        <img src="assets/coastline-rovinia.jpg" alt="Rovinia Beach">
       </div>
       <div>
-        <div class="photo-slot"><span>Rovinia Beach</span></div>
+        <img src="assets/coastline-sea-cave.jpg" alt="The sea cave along the Liapades coastline">
       </div>
       <div>
-        <div class="photo-slot"><span>Glyko Beach</span></div>
+        <img src="assets/coastline-chomi.jpg" alt="Chomi Beach">
       </div>
     </div>
     <a class="discover-link" href="coastline.html">Explore Our Coastline →</a>
@@ -243,7 +252,7 @@
   <section class="block house-card">
     <h2>The House</h2>
     <p class="sub">Immerse yourself in countryside living.</p>
-    <div class="photo-slot"><span>Photography — the house</span></div>
+    <img class="house-photo" src="assets/home-exterior.jpg" alt="The exterior of The Olive Tree House, Liapades, Corfu">
     <a class="discover-link" href="the-house.html">Discover The House →</a>
   </section>
 
@@ -299,15 +308,15 @@
 
   <section class="story-block">
     <div class="story-text">
-      <h2>Our Story, Your Story</h2>
+      <h2>Our Story, Your Stories</h2>
       <p class="sub" style="margin-bottom:10px;">A house with memories to make</p>
       <p style="font-size:14px;">The Olive Tree House has been part of our family for years. Its story continues through the guests who spend time here, return to familiar places and create memories of their own.</p>
       <a class="discover-link" href="our-story.html">Read Our Story →</a>
     </div>
     <div class="quote-card">
       <div class="quote-mark">&ldquo;</div>
-      <blockquote>We felt instantly at home. The views, the peace, the little details — everything was perfect.</blockquote>
-      <p class="attrib">— Anna, UK</p>
+      <blockquote>We felt instantly at ease. The views, the peace, the little details, everything was perfect.</blockquote>
+      <p class="attrib">— Anna W., UK, 2026 (Couple)</p>
       <p class="stars">★★★★★</p>
     </div>
   </section>
