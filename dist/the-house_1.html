@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light only">
+<title>The House — The Olive Tree House</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+<style>
+  :root {
+    --warm-white: #FAF8F3; --olive: #949A63; --deep-olive: #626842;
+    --charcoal: #292A27; --soft-stone: #E8E4DA; --pale-olive: #E9EAD9;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { background: var(--warm-white); color-scheme: light; }
+  body {
+    background: var(--warm-white); color: var(--charcoal); color-scheme: light; min-height: 100vh; min-height: 100dvh;
+    font-family: 'Inter', sans-serif; font-size: 15px; line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  header {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(250,248,243,0.94); backdrop-filter: blur(6px);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px 20px; gap: 12px;
+  }
+  header img.logo-small { height: 44px; width: auto; display: block; }
+  .header-right { display: flex; align-items: center; gap: 10px; }
+  .book-btn {
+    background: var(--olive); color: var(--warm-white); text-decoration: none;
+    font-size: 13.5px; font-weight: 500; padding: 10px 18px; border-radius: 8px;
+  }
+  .close-x {
+    width: 38px; height: 38px; border-radius: 50%; flex: 0 0 38px;
+    background: var(--warm-white); border: 1px solid var(--soft-stone);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; color: var(--charcoal); text-decoration: none; line-height: 1;
+  }
+  main { padding: 8px 22px 0; max-width: 560px; margin: 0 auto; }
+
+  h1 { font-family: 'Cormorant Garamond', serif; font-size: 36px; font-weight: 500; margin: 12px 0 20px; }
+  h2.card-title { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 500; margin-bottom: 12px; }
+  p { margin-bottom: 14px; }
+
+  .photo-slot {
+    background: var(--pale-olive); border: 1px solid var(--olive); border-radius: 12px;
+    min-height: 190px; display: flex; align-items: center; justify-content: center;
+    text-align: center; padding: 18px; margin: 0;
+  }
+  .photo-slot span { font-size: 11.5px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--deep-olive); }
+
+  .photo-carousel { position: relative; overflow: hidden; margin: 0 0 22px; }
+  .photo-carousel .photo-track {
+    display: flex; gap: 10px; overflow-x: auto; scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+  }
+  .photo-carousel .photo-track::-webkit-scrollbar { display: none; }
+  .photo-carousel .photo-track .photo-slot { flex: 0 0 100%; scroll-snap-align: center; }
+  .photo-carousel .photo-track img {
+    flex: 0 0 auto; scroll-snap-align: center;
+    display: block; width: auto; height: 190px;
+    border-radius: 12px; margin: 0;
+  }
+  /* A room with only one photo (e.g. West Balcony) has nothing to scroll to,
+     so let that photo fill the row width instead of sitting narrow with
+     empty space beside it — matches the 190px height of every other card. */
+  .photo-carousel .photo-track img:only-child {
+    flex: 0 0 100%; width: 100%; height: 190px; object-fit: cover;
+  }
+  .photo-carousel .photo-track img.crop-top { object-position: 50% 20%; }
+  .photo-carousel .carousel-dots { display: flex; justify-content: center; gap: 7px; margin-top: 10px; }
+  .photo-carousel .carousel-dots:empty { margin-top: 0; }
+  .photo-carousel .carousel-dots .dot {
+    width: 6px; height: 6px; border-radius: 50%; background: var(--soft-stone);
+    transition: background 0.2s, transform 0.2s;
+  }
+  .photo-carousel .carousel-dots .dot.active { background: var(--olive); transform: scale(1.25); }
+  .carousel-arrow {
+    position: absolute; top: 0; height: 190px; width: 34px;
+    display: flex; align-items: center; justify-content: center;
+    border: none; background: none; padding: 0; margin: 0; cursor: pointer; z-index: 2;
+  }
+  .carousel-arrow span {
+    width: 30px; height: 30px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(41, 42, 39, 0.55); color: var(--warm-white);
+    font-size: 17px; line-height: 1; transition: background 0.15s;
+  }
+  .carousel-arrow:hover span { background: rgba(41, 42, 39, 0.8); }
+  .carousel-arrow.prev { left: 6px; }
+  .carousel-arrow.next { right: 6px; }
+
+  .facts-row {
+    text-align: center; font-size: 13.5px; color: var(--deep-olive); font-weight: 500;
+    padding: 16px 0; border-top: 1px solid var(--soft-stone); border-bottom: 1px solid var(--soft-stone);
+    margin: 22px 0 18px;
+  }
+  .floor-plan-link { display: block; text-align: center; font-size: 14px; color: var(--deep-olive); text-decoration: underline; margin-bottom: 40px; }
+
+  .card { padding: 30px 0; border-top: 1px solid var(--soft-stone); }
+  .card:first-of-type { border-top: none; }
+  .grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    column-gap: 10px; row-gap: 20px; margin-top: 20px;
+  }
+  .item {
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    font-size: 12px; color: var(--charcoal);
+    text-align: center; line-height: 1.4;
+  }
+  .item svg {
+    width: 26px; height: 26px;
+    stroke: var(--deep-olive); fill: none; stroke-width: 1.4;
+    stroke-linecap: round; stroke-linejoin: round;
+  }
+
+  .balconies { background: var(--pale-olive); margin: 10px -22px 0; padding: 34px 22px; }
+  .balconies .balcony + .balcony { margin-top: 34px; }
+  .balconies h2.card-title { color: var(--deep-olive); }
+  .balconies .photo-slot { background: var(--warm-white); }
+
+  .also { padding: 40px 0 34px; text-align: center; }
+  .also h2.card-title { margin-bottom: 16px; }
+  .also-chips { display: grid; grid-template-columns: repeat(3, 1fr); column-gap: 10px; row-gap: 20px; max-width: 380px; margin: 0 auto 26px; }
+  .also-chips .item svg {
+    width: 26px; height: 26px;
+    stroke: var(--deep-olive); fill: none; stroke-width: 1.4;
+    stroke-linecap: round; stroke-linejoin: round;
+  }
+  .btn-outline {
+    display: inline-block; border: 1px solid var(--charcoal); color: var(--charcoal);
+    text-decoration: none; border-radius: 8px; padding: 12px 24px; font-size: 14px; font-weight: 500;
+  }
+
+  .book-bar {
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+    background: var(--olive); color: var(--warm-white); text-decoration: none;
+    padding: 17px; margin: 0 -22px; font-size: 15.5px; font-weight: 500;
+  }
+  .book-bar svg { width: 20px; height: 20px; stroke: var(--warm-white); fill: none; stroke-width: 1.6; }
+
+  footer { padding: 40px 22px 50px; text-align: center; }
+  footer .ornament { width: 190px; height: auto; display: block; margin: 0 auto 10px; }
+  footer p { font-size: 12px; color: var(--deep-olive); }
+
+  .branch-img{
+    width:190px; aspect-ratio:732/259;
+    background-image:url('assets/branch.png');
+    background-size:contain; background-repeat:no-repeat; background-position:center;
+    margin:0 auto 10px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <img class="logo-small" src="assets/logo.png" alt="The Olive Tree House — Liapades, Corfu">
+  <div class="header-right">
+    <a class="book-btn" href="availability.html">Availability</a>
+    <a class="close-x" href="index.html" aria-label="Close">×</a>
+  </div>
+</header>
+
+<main>
+  <h1>The House</h1>
+
+  <p>The Olive Tree House is an authentic countryside home in Liapades, set on the first floor and opening towards views on both sides.</p>
+  <p>Natural light moves through the house throughout the day, reflecting off the wooden ceilings and connecting the interior with the balconies.</p>
+  <p>The house has two bedrooms, one bathroom, an open-plan living, dining and kitchen area, and two balconies.</p>
+  <p>It comfortably accommodates four guests. A fifth guest may occasionally be accommodated on request, although the house is best suited to four.</p>
+
+  <div class="facts-row">84 m² · 2 bedrooms · 1 bathroom · Open-plan living area · 2 balconies</div>
+  <a class="floor-plan-link" href="floor-plan.html">View floor plan →</a>
+
+  <div class="card">
+    <h2 class="card-title">Bedroom 1</h2>
+    <div class="photo-carousel">
+      <div class="photo-track">
+      <img src="assets/house-bedroom1-1.jpg" alt="Bedroom 1 at The Olive Tree House">
+        <img src="assets/house-bedroom1-2.jpg" alt="Bedroom 1 at The Olive Tree House">
+        <img src="assets/house-bedroom1-3.jpg" alt="Bedroom 1 at The Olive Tree House">
+      </div>
+      <div class="carousel-dots"></div>
+    </div>
+    <p>A calm double bedroom with a king-size bed, a wooden ceiling and generous storage.</p>
+    <p>French doors open towards the meadow to the east, while a west-facing window brings in light from the opposite side of the house.</p>
+    <div class="grid">
+      <div class="item"><svg viewBox="0 0 24 24"><path d="M3 19 V12.5 Q3 11 4.5 11 H19.5 Q21 11 21 12.5 V19 M3 16 H21 M5 11 V7.5 Q5 6.5 6 6.5 H9.5 Q10.5 6.5 10.5 7.5 V11 M13.5 11 V7.5 Q13.5 6.5 14.5 6.5 H18 Q19 6.5 19 7.5 V11"/></svg><span>King size bed</span></div>
+      <div class="item"><svg viewBox="0 0 24 24"><path d="M12 3 V21 M5 6.5 L19 17.5 M19 6.5 L5 17.5 M12 3 L10 5 M12 3 L14 5 M12 21 L10 19 M12 21 L14 19"/></svg><span>Air conditioning</span></div>
+      <div class="item"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="1.5"/><path d="M4 8 H20 M4 12 H20 M4 16 H20"/><circle cx="12" cy="19" r="0.8"/></svg><span>Room darkening blinds</span></div>
+      <div class="item"><svg viewBox="0 0 24 24"><path d="M4 8 Q8 6 12 8 Q16 10 20 8 V12 Q16 14 12 12 Q8 10 4 12 Z M4 15 H20 M4 18.5 H20"/></svg><span>Extra pillows and blankets</span></div>
+      <div class="item"><svg viewBox="0 0 24 24"><rect x="5" y="3.5" width="14" height="17" rx="1.5"/><path d="M12 3.5 V20.5 M9.5 11 V13 M14.5 11 V13"/></svg><span>Wardrobe</span></div>
+      <div class="item"><svg viewBox="0 0 24 24"><path d="M5 12 V9.5 Q5 8 6.5 8 H17.5 Q19 8 19 9.5 V12 M4 12 H20 V17.5 Q20 19 18.5 19 H5.5 Q4 19 4 17.5 Z M4 14.5 H20 M6 19 V21 M18 19 V21"/></svg><span>Seating</span></div>
+      <div class="item"><svg viewBox="0 0 24 24"><path d="M4 9 H20 M6 9 L5 20 M18 9 L19 20 M8 9 V6 H16 V9"/></svg><span>Suitcase rack</span></div>
+      <div class="item"><svg viewBox="0 0 24 24"><path d="M5 5 V19 M9 5 V19 M13 5 V19 M17 5 V19 M3.5 8.5 H18.5 M3.5 15.5 H18.5"/></svg><span>Heating</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2 class="card-title">Bedroom 2</h2>
+    <div class="photo-carousel">
+      <div class="photo-track">
+        <img src="assets/house-bedroom2-1.jpg" alt="Bedroom 2 at The Olive Tree House">
+        <img src="assets/house-bedroom2-2.jpg" alt="Bedroom 2 at The Olive Tree House">
+      </div>
+      <div class="carousel-dots"></div>
+    </div>
+    <p>A flexible second bedroom that may be arranged with one double bed or two single beds.</p>
+    <p>The room looks towards the meadow and is designed to work equally well for adults or children.</p>
+    <div class="grid">
+      <div class="item"><svg viewBox="0 0 24 24"><path d="M3 18 V13.5 Q3 12 4.5 12 H10.5 Q12 12 12 13.5 V18 M3 15.5 H12 M5 12 V9 Q5 8 6 8 H9.5 Q10.5 8 10.5 9 V12 M15.5 9.5 H19.5 M19.5 9.5 L17.3 7.3 M19.5 9.5 L17.3 11.7 M15.5 16 H19.5 M15.5 16 L17.7 13.8 M15.5 16 L17.7 18.2"/></svg><span>Flexible bed arrangement</span></div>
+      <div class="item"><svg viewBox="0 0 24 24"><path d="M12 3 V21 M5 6.5 L19 17.5 M19 6.5 L5 17.5 M12 3 L10 5 M12 3 L14 5 M12 21 L10 19 M12 21 L14 19"/></svg><span>Air conditioning</span></div>
+      <div class="item"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="1.5"/><path d="M4 8 H20 M4 12 H20 M4 16 H20"/><circle cx="12" cy="19" r="0.8"/></svg><span>Room darkening blinds</span></div>
+      <div class="item"><svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="12" rx="1.5"/><path d="M9 20 H15"/></svg><span>TV</span></div>
+      <div class="item"><svg viewBox="0 0 24 24"><path d="M4 8 Q8 6 12 8 Q16 10 20 8 V12 Q16 14 12 12 Q8 10 4 12 Z M4 15 H20 M4 18.5 H20"/></svg><span>Extra pillows and blankets</span></div>
+      <div class="item"><svg viewBox="0 0 24 24"><rect x="5" y="3.5" width="14" height="17" rx="1.5"/><path d="M12 3.5 V20.5 M9.5 11 V13 M14.5 11 V13"/></svg><span>Wardrobe</span></div>
+      <div class="item"><svg viewBox="0 0 24 24"><path d="M4 9 H20 M6 9 L5 20 M18 9 L19 20 M8 9 V6 H16 V9"/></svg><span>Suitcase rack</span></div>
+      <div class="item"><svg viewBox="0 0 24 24"><path d="M5 5 V19 M9 5 V19 M13 5 V19 M17 5 V19 M3.5 8.5 H18.5 M3.5 15.5 H18.5"/></svg><span>Heating</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2 class="card-title">Living, dining and kitchen</h2>
+    <div class="photo-carousel">
+      <div class="photo-track">
+       <img src="assets/house-living-1.jpg" alt="Living, dining and kitchen area at The Olive Tree House">
+        <img src="assets/house-living-2.jpg" alt="Living, dining and kitchen area at The Olive Tree House">
+        <img src="assets/house-living-3.jpg" alt="Living, dining and kitchen area at The Olive Tree House">
+        <img src="assets/house-living-4.jpg" alt="The living room sofa opened as a double bed for a 5th guest">
+      </div>
+      <div class="carousel-dots"></div>
+    </div>
+    <p>The kitchen, dining area and sitting room share one continuous open-plan space.</p>
+    <p>The kitchen is fully equipped for everyday cooking, while the living area connects naturally with both balconies.</p>
+    <p>For a fifth guest, the living-room sofa may occasionally be prepared as an additional double bed on request.</p>
+    <div class="grid">
+      <div class="item"><svg viewBox="0 0 24 24"><rect x="3.5" y="6" width="17" height="12" rx="1.5"/><rect x="6" y="8.5" width="8.5" height="7" rx="0.8"/><path d="M17.5 9 V10.5 M17.5 13 V14.5"/></svg><span>Microwave</span></div>
+      <div class="item"><svg viewBox="0 0 24 24"><path d="M7 9 H16 L15 18.5 H8 Z M16 10 H18.5 A1.8 1.8 0 0 1 18.5 14 H15.6 M9 9 Q9 5.5 11.5 5.5 Q14 5.5 14 9"/></svg><span>Kettle</span></div>
+      <div class="item"><svg viewBox="0 0 24 24"><path d="M4 11 Q4 8 7 8 H17 Q20 8 20 11 V17 H4 Z M8 8 V5.5 M12 8 V5.5 M20 12.5 H21.8"/></svg><span>Toaster</span></div>
+      <div class="item"><svg viewBox="0 0 24 24"><path d="M5.5 8 H16 V15 A3.5 3.5 0 0 1 12.5 18.5 H9 A3.5 3.5 0 0 1 5.5 15 Z M16 9.5 H18 A2 2 0 0 1 18 14 H16 M8 5.5 Q8 4 9 3.5 M12 5.5 Q12 4 13 3.5"/></svg><span>Espresso machine</span></div>
+      <div class="item"><svg viewBox="0 0 24 24"><path d="M6 3.5 H18 M7.5 3.5 V7 L12 10 L16.5 7 V3.5 M12 10 V13 M8 13 H16 L15 20.5 H9 Z"/></svg><span>Filter coffee maker</span></div>
+      <div class="item"><svg viewBox="0 0 24 24"><rect x="6" y="3" width="12" height="18" rx="1.5"/><path d="M6 10 H18 M15.5 6 V8 M15.5 13 V16"/></svg><span>Fridge / Freezer</span></div>
+      <div class="item"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="1.5"/><circle cx="9" cy="9" r="1.9"/><circle cx="15" cy="9" r="1.9"/><circle cx="9" cy="15" r="1.9"/><circle cx="15" cy="15" r="1.9"/></svg><span>Electric cooker with four hobs</span></div>
+      <div class="item"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="1.5"/><rect x="7" y="10" width="10" height="7" rx="0.8"/><circle cx="8" cy="7" r="0.9"/><circle cx="12" cy="7" r="0.9"/><circle cx="16" cy="7" r="0.9"/></svg><span>Oven</span></div>
+      <div class="item"><svg viewBox="0 0 24 24"><path d="M5 11 H19 V16 A3.5 3.5 0 0 1 15.5 19.5 H8.5 A3.5 3.5 0 0 1 5 16 Z M19 12.5 H21.5 M5 12.5 H2.5 M7 11 Q7 8.7 12 8.7 Q17 8.7 17 11 M12 8.7 V7"/><circle cx="12" cy="6.2" r="0.9"/></svg><span>Cooking basics</span></div>
+      <div class="item"><svg viewBox="0 0 24 24"><path d="M5 4 H11 Q11 10 8 10.5 V19 M6 19 H10 M8 10.5 Q5 10 5 4 M15 6 H20 L19.2 19 H15.8 Z"/></svg><span>Selection of glassware</span></div>
+      <div class="item"><svg viewBox="0 0 24 24"><path d="M5 12 V9.5 Q5 8 6.5 8 H17.5 Q19 8 19 9.5 V12 M4 12 H20 V17.5 Q20 19 18.5 19 H5.5 Q4 19 4 17.5 Z M4 14.5 H20 M6 19 V21 M18 19 V21"/></svg><span>Seating</span></div>
+      <div class="item"><svg viewBox="0 0 24 24"><path d="M12 3 V20 M12 6 L5 9 M12 6 L19 9 M12 11 L7 13.5 M12 11 L17 13.5 M9 20 H15"/></svg><span>Coat rack</span></div>
+      <div class="item"><svg viewBox="0 0 24 24"><path d="M5 5 V19 M9 5 V19 M13 5 V19 M17 5 V19 M3.5 8.5 H18.5 M3.5 15.5 H18.5"/></svg><span>Heating</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2 class="card-title">Bathroom</h2>
+    <div class="photo-carousel">
+      <div class="photo-track">
+        <img src="assets/house-bathroom-1.jpg" alt="Bathroom at The Olive Tree House">
+        <img src="assets/house-bathroom-2.jpg" alt="Bathroom at The Olive Tree House">
+      </div>
+      <div class="carousel-dots"></div>
+    </div>
+    <p>A bright, practical bathroom with a bathtub and shower, washing machine and illuminated mirror.</p>
+    <p>Bathroom essentials, including body soap, shampoo and shower gel, are provided for guests.</p>
+    <div class="grid">
+      <div class="item"><svg viewBox="0 0 24 24"><path d="M4 12.5 H20 V15 A4 4 0 0 1 16 19 H8 A4 4 0 0 1 4 15 Z M6 12.5 V6 Q6 4 8 4 Q9.6 4 9.9 5.5 M6.5 19.5 L5.5 21 M17.5 19.5 L18.5 21"/></svg><span>Bathtub with shower</span></div>
+      <div class="item"><svg viewBox="0 0 24 24"><rect x="4.5" y="3.5" width="15" height="17" rx="1.5"/><circle cx="12" cy="13" r="4.4"/><circle cx="7.5" cy="6" r="0.8"/><circle cx="10.5" cy="6" r="0.8"/></svg><span>Washing machine</span></div>
+      <div class="item"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="10" rx="6" ry="7"/><path d="M12 17 V20.5 M9 20.5 H15"/><circle cx="12" cy="1.3" r="0.8"/><circle cx="18.5" cy="4.5" r="0.8"/><circle cx="5.5" cy="4.5" r="0.8"/><circle cx="18.5" cy="14" r="0.8"/><circle cx="5.5" cy="14" r="0.8"/></svg><span>Illuminated mirror</span></div>
+      <div class="item"><svg viewBox="0 0 24 24"><rect x="8" y="9" width="8" height="11.5" rx="1.5"/><path d="M10 9 V6.5 H14 V9 M10.5 6.5 V4.5 H13.5"/></svg><span>Shower gel / Shampoo</span></div>
+      <div class="item"><svg viewBox="0 0 24 24"><rect x="8" y="9" width="8" height="11.5" rx="1.5"/><path d="M10 9 V6.5 H14 V9 M10.5 6.5 V4.5 H13.5"/></svg><span>Hand soap</span></div>
+      <div class="item"><svg viewBox="0 0 24 24"><path d="M4 8 H20 M6 8 V19 M18 8 V19 M4 13 H20 M9 8 V11.5 M12 8 V12.5 M15 8 V11"/></svg><span>Clothes drying rack</span></div>
+      <div class="item"><svg viewBox="0 0 24 24"><path d="M6 4 V20 M18 4 V20 M6 7 H18 M6 11 H18 M6 15 H18 M9.5 17.5 Q10.5 18.7 9.5 20 M14.5 17.5 Q15.5 18.7 14.5 20"/></svg><span>Heated towel rail</span></div>
+    </div>
+  </div>
+
+  <div class="balconies">
+    <div class="balcony">
+      <h2 class="card-title">East Balcony · Meadow View</h2>
+      <div class="photo-carousel">
+        <div class="photo-track">
+          <img src="assets/house-balcony-east-1.jpg" alt="East balcony with meadow view at The Olive Tree House">
+          <img src="assets/house-balcony-east-2.jpg" alt="Meadow view from the east balcony">
+          <img src="assets/house-balcony-east-3.jpg" alt="Dawn from the east balcony">
+        </div>
+        <div class="carousel-dots"></div>
+      </div>
+      <p>The east balcony looks across the meadow and the green hills beyond.</p>
+      <p>It is the place for early coffee, first light and slow mornings.</p>
+    </div>
+    <div class="balcony">
+      <h2 class="card-title">West Balcony · Park View</h2>
+      <div class="photo-carousel">
+        <div class="photo-track">
+          <img class="crop-top" src="assets/house-balcony-west-1.jpg" alt="West balcony with park view at The Olive Tree House">
+        </div>
+        <div class="carousel-dots"></div>
+      </div>
+      <p>The west balcony faces the mature trees and village park beside the house.</p>
+      <p>In the late afternoon, the sunset filters through the trees and the balcony becomes a natural place to enjoy the last light of the day.</p>
+    </div>
+  </div>
+
+  <div class="also">
+    <h2 class="card-title">Also included</h2>
+    <div class="also-chips">
+      <div class="item"><svg viewBox="0 0 24 24"><path d="M4 10 Q12 3 20 10 M7 13.5 Q12 9.5 17 13.5 M10 17 Q12 15.2 14 17"/><circle cx="12" cy="19.5" r="0.8"/></svg><span>Wi-Fi</span></div>
+      <div class="item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7 V12 L15.5 14"/></svg><span>24h self check-in (lockbox)</span></div>
+      <div class="item"><svg viewBox="0 0 24 24"><circle cx="12" cy="9" r="3.4"/><path d="M12 2.5 V4.2 M17 4.5 L15.8 5.7 M21 9 H19.2 M7 4.5 L8.2 5.7 M3 9 H4.8 M3 16.5 Q7 13.5 12 16.5 Q17 19.5 21 16.5 M3 20.5 Q7 17.5 12 20.5"/></svg><span>Beach essentials</span></div>
+      <div class="item"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9.5 16.5 V7.5 H13 A2.6 2.6 0 0 1 13 12.7 H9.5"/></svg><span>Free on-street parking</span></div>
+      <div class="item"><svg viewBox="0 0 24 24"><path d="M4.5 16 Q4.5 9 11 9 H19.5 V16 Z M8 12.5 H16"/></svg><span>Iron and ironing board</span></div>
+      <div class="item"><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="14" rx="1.5"/><circle cx="14.5" cy="12" r="3"/><path d="M7 9 V15"/></svg><span>Safe</span></div>
+    </div>
+    <a class="btn-outline" href="amenities.html">See all amenities →</a>
+    <p style="margin-top:14px;"><a href="faq.html">Have a question about the house? See our FAQ →</a></p>
+  </div>
+
+  <a class="book-bar" href="availability.html">
+    <svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="16" rx="2"/><path d="M4 10 H20 M8 3 V7 M16 3 V7"/></svg>
+    Check availability
+  </a>
+
+  <footer>
+  <div class="branch-img" role="img" aria-label="Olive branch ornament"></div>
+    <p>© 2026 The Olive Tree House</p>
+  </footer>
+</main>
+
+<script>
+(function () {
+  function initCarousel(carousel) {
+    const track = carousel.querySelector('.photo-track');
+    const dotsWrap = carousel.querySelector('.carousel-dots');
+    const original = Array.from(track.children);
+    const count = original.length;
+    if (count < 2) return; // just one photo so far — loop activates once more are added
+
+    // Clone the full set before and after for seamless wraparound in either direction.
+    original.forEach(slide => track.appendChild(slide.cloneNode(true)));
+    original.slice().reverse().forEach(slide => track.insertBefore(slide.cloneNode(true), track.firstChild));
+
+    let currentIndex = 0;
+
+    function goTo(i) {
+      const wrapped = ((i % count) + count) % count;
+      currentIndex = wrapped;
+      const setW = setWidth();
+      const base = track.children[count + wrapped];
+      const baseTarget = base.offsetLeft - (track.offsetWidth - base.offsetWidth) / 2;
+      const current = track.scrollLeft;
+      // Scroll to whichever copy of this card (previous set, this set, or next
+      // set) is physically closest to where we already are, so the animation
+      // always travels a short distance in the natural direction — never a
+      // big jump back across the whole row.
+      let best = baseTarget;
+      [baseTarget - setW, baseTarget, baseTarget + setW].forEach(c => {
+        if (Math.abs(c - current) < Math.abs(best - current)) best = c;
+      });
+      track.scrollTo({ left: best, behavior: 'smooth' });
+    }
+
+    for (let i = 0; i < count; i++) {
+      const dot = document.createElement('div');
+      dot.className = 'dot' + (i === 0 ? ' active' : '');
+      dot.addEventListener('click', () => goTo(i));
+      dotsWrap.appendChild(dot);
+    }
+    const dots = Array.from(dotsWrap.children);
+
+    const prevBtn = document.createElement('button');
+    prevBtn.className = 'carousel-arrow prev';
+    prevBtn.type = 'button';
+    prevBtn.setAttribute('aria-label', 'Previous photo');
+    prevBtn.innerHTML = '<span>&#8249;</span>';
+    prevBtn.addEventListener('click', () => goTo(currentIndex - 1));
+    const nextBtn = document.createElement('button');
+    nextBtn.className = 'carousel-arrow next';
+    nextBtn.type = 'button';
+    nextBtn.setAttribute('aria-label', 'Next photo');
+    nextBtn.innerHTML = '<span>&#8250;</span>';
+    nextBtn.addEventListener('click', () => goTo(currentIndex + 1));
+    carousel.appendChild(prevBtn);
+    carousel.appendChild(nextBtn);
+
+    function setWidth() {
+      const first = track.children[0];
+      const afterSet = track.children[count];
+      return afterSet.offsetLeft - first.offsetLeft;
+    }
+
+    requestAnimationFrame(() => {
+      const mid = track.children[count];
+      track.scrollLeft = mid.offsetLeft - (track.offsetWidth - mid.offsetWidth) / 2;
+    });
+
+    let ticking = false;
+    track.addEventListener('scroll', () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        const setW = setWidth();
+        if (track.scrollLeft < setW * 0.5) {
+          track.scrollLeft += setW;
+        } else if (track.scrollLeft > setW * 1.5) {
+          track.scrollLeft -= setW;
+        }
+        const centre = track.scrollLeft + track.offsetWidth / 2;
+        let closest = 0, closestDist = Infinity;
+        original.forEach((_, i) => {
+          const card = track.children[count + i];
+          const cardCentre = card.offsetLeft + card.offsetWidth / 2;
+          const dist = Math.abs(cardCentre - centre);
+          if (dist < closestDist) { closestDist = dist; closest = i; }
+        });
+        currentIndex = closest;
+        dots.forEach((d, i) => d.classList.toggle('active', i === closest));
+        ticking = false;
+      });
+    }, { passive: true });
+  }
+
+  document.querySelectorAll('.photo-carousel').forEach(initCarousel);
+})();
+</script>
+
+</body>
+</html>
