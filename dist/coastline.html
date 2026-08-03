@@ -103,6 +103,16 @@
     padding: 13px 22px; font-size: 13.5px; font-weight: 500;
     color: var(--warm-white); background: var(--olive);
   }
+  .earth-link-card .earth-fallback {
+    display: none; min-height: 200px; align-items: center; justify-content: center;
+    flex-direction: column; gap: 10px; padding: 20px; text-align: center;
+  }
+  .earth-link-card .earth-fallback svg {
+    width: 40px; height: 40px; stroke: var(--deep-olive); fill: none; stroke-width: 1.3;
+  }
+  .earth-link-card .earth-fallback span {
+    font-size: 13px; color: var(--deep-olive); line-height: 1.4;
+  }
 
   .closing { text-align: center; margin-top: 44px; }
   .btn-primary {
@@ -139,7 +149,7 @@
   <p>The coast around Liapades folds into small bays, hidden coves, sea caves and steep green cliffs.</p>
   <p>Some beaches are reached on foot. Others reveal themselves from the water.</p>
   <p>Rovinia has its own cave accessible from land, while other caves are found along the coast and by the sea.</p>
-  <p>The beaches are remarkably different from one another. One may be pebbly with deep turquoise water, another sandy with a pale blue sea. Some are edged by large rocks, some surrounded by dense greenery, while others sit beneath sheer rock faces that look almost vertically.</p>
+  <p>The beaches are remarkably different from one another. One may be pebbly with deep turquoise water, another sandy with a pale blue sea. Some are edged by large rocks, some surrounded by dense greenery, while others sit beneath sheer rock faces that look almost vertical.</p>
   <p>The coastline changes character from one beach to the next.</p>
 
   <h2 class="section">Our Beaches</h2>
@@ -177,7 +187,11 @@
 <div class="earth-card">
     <p class="desc">Take a tilted, rotatable 3D flyover of the Liapades coastline in Google Earth.</p>
     <a class="earth-link-card" href="https://earth.google.com/web/search/%CE%9B%CE%B9%CE%B1%CF%80%CE%AC%CE%B4%CE%B5%CF%82,+Greece/@39.66110533,19.72175209,-0.41907731a,2966.49630654d,35y,77.97679624h,41.48230685t,0r/data=CiwiJgokCRcrQi9r10NAEXRflU4t0UNAGSZ7c5u2vzNAIflX6juytTNAQgIIAToDCgEwQgIIAEoNCP___________wEQAA" target="_blank" rel="noopener" aria-label="Open the interactive 3D coastline view in Google Earth">
-      <img class="earth-photo" src="assets/coastline-earth-view.jpg" alt="A tilted 3D aerial view of the Liapades coastline in Google Earth, looking east toward Kamari Beach">
+      <img class="earth-photo" src="assets/coastline-earth-view.jpg" alt="A tilted 3D aerial view of the Liapades coastline in Google Earth, looking east toward Kamari Beach" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+      <div class="earth-fallback">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12 H21 M12 3 Q17 12 12 21 Q7 12 12 3"/></svg>
+        <span>Preview unavailable — tap below to open the interactive 3D view</span>
+      </div>
       <div class="caption">Open in Google Earth →</div>
     </a>
   </div>
