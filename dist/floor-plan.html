@@ -40,14 +40,6 @@
   .subtitle { font-size: 15px; color: var(--charcoal); margin-bottom: 20px; }
   .plan-wrap { position: relative; }
   .plan-img { display: block; width: 100%; height: auto; border-radius: 4px; border: 1px solid var(--soft-stone); }
-  .compass {
-    position: absolute; top: 12px; right: 12px;
-    background: rgba(250,248,243,0.9); border: 1px solid var(--soft-stone);
-    border-radius: 50%; padding: 6px; display: flex; align-items: center; justify-content: center;
-  }
-  .compass svg { display: block; }
-  .compass .c-dark { fill: var(--charcoal); }
-  .compass .c-light { fill: var(--olive); }
   footer { margin-top: 40px; padding-top: 8px; text-align: center; }
   footer p { font-size: 12px; color: var(--deep-olive); }
   .branch-img{
@@ -69,29 +61,7 @@
   <h1>Floor Plan</h1>
   <p class="subtitle">The Olive Tree House, Liapades, Corfu.</p>
   <div class="plan-wrap">
-    <img class="plan-img" src="assets/floor-plan.png" alt="Floor plan of The Olive Tree House">
-    <div class="compass" aria-hidden="true">
-      <svg viewBox="-14 -14 148 148" width="72" height="72">
-        <circle cx="60" cy="60" r="37" fill="none" stroke="var(--charcoal)" stroke-width="4"/>
-        <path class="c-dark" d="M60,60 L65.5,57.7 L114.0,60.0 Z"/>
-        <path class="c-light" d="M60,60 L114.0,60.0 L65.5,62.3 Z"/>
-        <path class="c-dark" d="M60,60 L65.5,62.3 L77.0,77.0 Z"/>
-        <path class="c-light" d="M60,60 L77.0,77.0 L62.3,65.5 Z"/>
-        <path class="c-dark" d="M60,60 L62.3,65.5 L60.0,114.0 Z"/>
-        <path class="c-light" d="M60,60 L60.0,114.0 L57.7,65.5 Z"/>
-        <path class="c-dark" d="M60,60 L57.7,65.5 L43.0,77.0 Z"/>
-        <path class="c-light" d="M60,60 L43.0,77.0 L54.5,62.3 Z"/>
-        <path class="c-dark" d="M60,60 L54.5,62.3 L6.0,60.0 Z"/>
-        <path class="c-light" d="M60,60 L6.0,60.0 L54.5,57.7 Z"/>
-        <path class="c-dark" d="M60,60 L54.5,57.7 L43.0,43.0 Z"/>
-        <path class="c-light" d="M60,60 L43.0,43.0 L57.7,54.5 Z"/>
-        <path class="c-dark" d="M60,60 L57.7,54.5 L60.0,6.0 Z"/>
-        <path class="c-light" d="M60,60 L60.0,6.0 L62.3,54.5 Z"/>
-        <path class="c-dark" d="M60,60 L62.3,54.5 L77.0,43.0 Z"/>
-        <path class="c-light" d="M60,60 L77.0,43.0 L65.5,57.7 Z"/>
-        <text x="130" y="66" font-family="'Cormorant Garamond', serif" font-size="24" font-weight="600" fill="var(--charcoal)">N</text>
-      </svg>
-    </div>
+    <img class="plan-img" src="assets/floor-plan.png" alt="Floor plan of The Olive Tree House, with north indicated to the right">
   </div>
 </main>
 
