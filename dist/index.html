@@ -281,19 +281,19 @@
       <div class="day-item">
         <div class="day-circle"><img class="crop-morning" src="assets/aday-morning.jpg" alt="Morning coffee overlooking the meadow at The Olive Tree House"></div>
         <h3>Slow mornings</h3>
-        <p>Birdsong filling the moment.</p>
+        <p>Birdsong filling the moment</p>
       </div>
       <div class="day-connector"></div>
       <div class="day-item">
         <div class="day-circle"><img class="crop-afternoon" src="assets/coastline-gefyra.jpg" alt="Gefyra Beach in the afternoon sun"></div>
         <h3>Afternoons</h3>
-        <p>The endless Mediterranean sunshine.</p>
+        <p>The endless Mediterranean sunshine</p>
       </div>
       <div class="day-connector"></div>
       <div class="day-item">
         <div class="day-circle"><img class="crop-evening" src="assets/village-dishes.jpg" alt="Shared plates and local wine at The Olive Tree House"></div>
         <h3>Evenings</h3>
-        <p>Shared plates, local wine.</p>
+        <p>Shared plates, local wine</p>
       </div>
     </div>
     <a class="discover-link" href="a-day-here.html">Experience A Day Here →</a>
@@ -397,7 +397,21 @@
     return afterSet.offsetLeft - first.offsetLeft;
   }
 
-  requestAnimationFrame(() => {
+  function whenReady(callback) {
+    const imgs = Array.from(track.querySelectorAll('img'));
+    let remaining = imgs.length;
+    if (remaining === 0) { callback(); return; }
+    function done() { remaining -= 1; if (remaining <= 0) callback(); }
+    imgs.forEach(img => {
+      if (img.complete) done();
+      else {
+        img.addEventListener('load', done, { once: true });
+        img.addEventListener('error', done, { once: true });
+      }
+    });
+  }
+
+  whenReady(() => {
     const mid = track.children[count];
     track.scrollLeft = mid.offsetLeft - (track.offsetWidth - mid.offsetWidth) / 2;
   });

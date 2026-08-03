@@ -252,8 +252,26 @@
     return afterSet.offsetLeft - first.offsetLeft;
   }
 
+  // Photo widths aren't known until each image has actually finished loading
+  // (these are width:auto images, sized by their natural aspect ratio) — so
+  // measuring offsetWidth/offsetLeft before that returns wrong numbers and
+  // breaks the loop math. Wait for every image (including the clones) first.
+  function whenReady(callback) {
+    const imgs = Array.from(track.querySelectorAll('img'));
+    let remaining = imgs.length;
+    if (remaining === 0) { callback(); return; }
+    function done() { remaining -= 1; if (remaining <= 0) callback(); }
+    imgs.forEach(img => {
+      if (img.complete) done();
+      else {
+        img.addEventListener('load', done, { once: true });
+        img.addEventListener('error', done, { once: true });
+      }
+    });
+  }
+
   // Start scrolled into the middle (real) set.
-  requestAnimationFrame(() => {
+  whenReady(() => {
     const mid = track.children[count];
     track.scrollLeft = mid.offsetLeft - (track.offsetWidth - mid.offsetWidth) / 2;
   });

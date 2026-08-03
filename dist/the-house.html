@@ -93,11 +93,6 @@
   .carousel-arrow.prev { left: 6px; }
   .carousel-arrow.next { right: 6px; }
 
-  .facts-row {
-    text-align: center; font-size: 13.5px; color: var(--deep-olive); font-weight: 500;
-    padding: 16px 0; border-top: 1px solid var(--soft-stone); border-bottom: 1px solid var(--soft-stone);
-    margin: 22px 0 18px;
-  }
   .floor-plan-link { display: block; text-align: center; font-size: 14px; color: var(--deep-olive); text-decoration: underline; margin-bottom: 40px; }
 
   .card { padding: 30px 0; border-top: 1px solid var(--soft-stone); }
@@ -172,7 +167,6 @@
   <p>The house has two bedrooms, one bathroom, an open-plan living, dining and kitchen area, and two balconies.</p>
   <p>It comfortably accommodates four guests. A fifth guest may occasionally be accommodated on request, although the house is best suited to four.</p>
 
-  <div class="facts-row">84 m² · 2 bedrooms · 1 bathroom · Open-plan living area · 2 balconies</div>
   <a class="floor-plan-link" href="floor-plan.html">View floor plan →</a>
 
   <div class="card">
@@ -389,7 +383,24 @@
       return afterSet.offsetLeft - first.offsetLeft;
     }
 
-    requestAnimationFrame(() => {
+    // Wait for every image (including clones) to finish loading before
+    // measuring anything — these are width:auto images, so their real width
+    // isn't known until they load, and measuring too early breaks the loop.
+    function whenReady(callback) {
+      const imgs = Array.from(track.querySelectorAll('img'));
+      let remaining = imgs.length;
+      if (remaining === 0) { callback(); return; }
+      function done() { remaining -= 1; if (remaining <= 0) callback(); }
+      imgs.forEach(img => {
+        if (img.complete) done();
+        else {
+          img.addEventListener('load', done, { once: true });
+          img.addEventListener('error', done, { once: true });
+        }
+      });
+    }
+
+    whenReady(() => {
       const mid = track.children[count];
       track.scrollLeft = mid.offsetLeft - (track.offsetWidth - mid.offsetWidth) / 2;
     });
