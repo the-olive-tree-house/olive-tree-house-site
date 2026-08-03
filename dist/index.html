@@ -40,7 +40,7 @@
 
   /* Hero */
   .hero {
-    position: relative; min-height: 320px; margin: 0 0 30px; overflow: hidden;
+    position: relative; min-height: 280px; margin: 0 0 30px; overflow: hidden;
     display: flex; flex-direction: column; justify-content: flex-end;
     color: var(--warm-white);
   }
@@ -53,7 +53,7 @@
   }
   .hero-photo {
     position: absolute; inset: 0; width: 100%; height: 100%;
-    object-fit: cover; object-position: 50% 28%;
+    object-fit: cover; object-position: 50% 30%;
   }
   .hero-overlay {
     position: absolute; inset: 0;
@@ -96,12 +96,34 @@
   .photo-slot span { font-size: 10.5px; letter-spacing: 0.03em; text-transform: uppercase; color: var(--deep-olive); }
 
   /* Beaches gallery */
-  .beach-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
-  .beach-grid .photo-slot { min-height: 100px; padding: 8px; border-radius: 6px; }
-  .beach-grid .photo-slot span { font-size: 9px; }
-  .beach-grid img { display: block; width: 100%; height: 100px; object-fit: cover; border-radius: 6px; }
-  .beach-grid .name { font-size: 12px; font-weight: 500; margin-top: 8px; }
-  .beach-grid .time { font-size: 11px; color: var(--deep-olive); margin-top: 2px; }
+  .beach-carousel { position: relative; overflow: hidden; margin-bottom: 18px; }
+  .beach-track {
+    display: flex; gap: 10px; overflow-x: auto; scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none; padding-bottom: 2px;
+  }
+  .beach-track::-webkit-scrollbar { display: none; }
+  .beach-card { flex: 0 0 auto; scroll-snap-align: center; }
+  .beach-card img { display: block; width: auto; height: 100px; border-radius: 6px; margin: 0; }
+  .carousel-dots { display: flex; justify-content: center; gap: 7px; margin-top: 10px; }
+  .carousel-dots .dot {
+    width: 6px; height: 6px; border-radius: 50%; background: var(--soft-stone);
+    transition: background 0.2s, transform 0.2s;
+  }
+  .carousel-dots .dot.active { background: var(--olive); transform: scale(1.25); }
+  .carousel-arrow {
+    position: absolute; top: 0; height: 100px; width: 30px;
+    display: flex; align-items: center; justify-content: center;
+    border: none; background: none; padding: 0; margin: 0; cursor: pointer; z-index: 2;
+  }
+  .carousel-arrow span {
+    width: 26px; height: 26px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(41, 42, 39, 0.55); color: var(--warm-white);
+    font-size: 15px; line-height: 1; transition: background 0.15s;
+  }
+  .carousel-arrow:hover span { background: rgba(41, 42, 39, 0.8); }
+  .carousel-arrow.prev { left: 6px; }
+  .carousel-arrow.next { right: 6px; }
 
   /* House card (single photo) */
   .house-card .photo-slot { min-height: 210px; margin-bottom: 18px; }
@@ -115,21 +137,23 @@
   }
 
   /* A day here */
-  .day-track { display: flex; gap: 6px; align-items: flex-start; overflow-x: auto; padding-bottom: 4px; scrollbar-width: none; }
+  .day-carousel { position: relative; overflow: hidden; margin-bottom: 18px; }
+  .day-track {
+    display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch; padding-bottom: 4px; scrollbar-width: none;
+  }
   .day-track::-webkit-scrollbar { display: none; }
-  .day-item { flex: 0 0 auto; width: 82px; text-align: center; position: relative; }
-  .day-item .badge {
-    width: 62px; height: 62px; border-radius: 50%; margin: 0 auto 8px;
-    background: var(--pale-olive); border: 1px solid var(--olive);
-    display: flex; align-items: center; justify-content: center; overflow: hidden;
+  .day-card { flex: 0 0 150px; scroll-snap-align: start; }
+  .day-card img, .day-card .photo-slot {
+    display: block; width: 100%; height: 130px; border-radius: 8px; margin-bottom: 10px;
   }
-  .day-item .badge span { font-size: 8px; color: var(--deep-olive); text-transform: uppercase; }
-  .day-item .time-label {
-    font-size: 11px; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 3px; margin-bottom: 4px;
-  }
-  .day-item .time-label svg { width: 11px; height: 11px; stroke: var(--deep-olive); fill: none; stroke-width: 1.6; }
-  .day-item p { font-size: 11px; color: var(--charcoal); line-height: 1.35; }
-  .day-connector { flex: 0 0 14px; height: 1px; background: var(--soft-stone); margin-top: 31px; }
+  .day-card img { object-fit: cover; }
+  .day-card img.crop-morning { object-position: 50% 40%; }
+  .day-card img.crop-afternoon { object-position: 50% 45%; }
+  .day-card img.crop-evening { object-position: 50% 50%; }
+  .day-card h3 { font-size: 17px; font-weight: 600; margin-bottom: 3px; }
+  .day-card p { font-size: 12px; color: var(--charcoal); line-height: 1.4; }
+  .day-carousel .carousel-arrow { height: 130px; }
 
   /* Village card */
   .village-card {
@@ -141,6 +165,7 @@
     position: absolute; top: 0; right: 0; bottom: 0; width: 72%;
     background: var(--pale-olive); display: flex; align-items: center; justify-content: center;
   }
+  .village-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 60% 50%; }
   .village-photo span {
     font-size: 10px; letter-spacing: 0.03em; text-transform: uppercase; color: var(--deep-olive);
     text-align: center; max-width: 90px;
@@ -235,16 +260,13 @@
   <section class="block">
     <h2>Our Beaches</h2>
     <p class="sub">Crystal-clear waters and quiet coastal escapes.</p>
-    <div class="beach-grid">
-      <div>
-        <img src="assets/coastline-rovinia.jpg" alt="Rovinia Beach">
+    <div class="beach-carousel">
+      <div class="beach-track" id="homeBeachTrack">
+        <div class="beach-card"><img src="assets/coastline-rovinia.jpg" alt="Rovinia Beach"></div>
+        <div class="beach-card"><img src="assets/coastline-sea-cave.jpg" alt="The sea cave along the Liapades coastline"></div>
+        <div class="beach-card"><img src="assets/coastline-chomi.jpg" alt="Chomi Beach"></div>
       </div>
-      <div>
-        <img src="assets/coastline-sea-cave.jpg" alt="The sea cave along the Liapades coastline">
-      </div>
-      <div>
-        <img src="assets/coastline-chomi.jpg" alt="Chomi Beach">
-      </div>
+      <div class="carousel-dots" id="homeBeachDots"></div>
     </div>
     <a class="discover-link" href="coastline.html">Explore Our Coastline →</a>
   </section>
@@ -259,35 +281,23 @@
   <section class="block">
     <h2>A Day Here</h2>
     <p class="sub">Slow down and savour the simple moments.</p>
-    <div class="day-track">
-      <div class="day-item">
-        <div class="badge"><span>Photo</span></div>
-        <div class="time-label"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.5"/><path d="M12 2 V4.5 M12 19.5 V22 M4.2 4.2 L6 6 M18 18 L19.8 19.8 M2 12 H4.5 M19.5 12 H22 M4.2 19.8 L6 18 M18 6 L19.8 4.2"/></svg>Sunrise</div>
-        <p>Coffee overlooking the meadow, birdsong filling the moment.</p>
-      </div>
-      <div class="day-connector"></div>
-      <div class="day-item">
-        <div class="badge"><span>Photo</span></div>
-        <div class="time-label"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.5"/><path d="M12 2 V4.5 M12 19.5 V22 M4.2 4.2 L6 6 M18 18 L19.8 19.8 M2 12 H4.5 M19.5 12 H22 M4.2 19.8 L6 18 M18 6 L19.8 4.2"/></svg>Slow mornings</div>
-        <p>Clear water, golden sand and endless sunshine.</p>
-      </div>
-      <div class="day-connector"></div>
-      <div class="day-item">
-        <div class="badge"><span>Photo</span></div>
-        <div class="time-label"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.5"/><path d="M12 2 V4.5 M12 19.5 V22 M4.2 4.2 L6 6 M18 18 L19.8 19.8 M2 12 H4.5 M19.5 12 H22 M4.2 19.8 L6 18 M18 6 L19.8 4.2"/></svg>Afternoons</div>
-        <p>Best left unplanned, to the sound of cicadas.</p>
-      </div>
-      <div class="day-connector"></div>
-      <div class="day-item">
-        <div class="badge"><span>Photo</span></div>
-        <div class="time-label"><svg viewBox="0 0 24 24"><path d="M20 14.2 A8.5 8.5 0 1 1 9.8 4 A6.8 6.8 0 0 0 20 14.2 Z"/></svg>Evenings</div>
-        <p>Sunset through the trees from the west balcony.</p>
-      </div>
-      <div class="day-connector"></div>
-      <div class="day-item">
-        <div class="badge"><span>Photo</span></div>
-        <div class="time-label"><svg viewBox="0 0 24 24"><path d="M20 14.2 A8.5 8.5 0 1 1 9.8 4 A6.8 6.8 0 0 0 20 14.2 Z"/></svg>Nights</div>
-        <p>Late dinners with shared plates, local wine and the sound of crickets.</p>
+    <div class="day-carousel">
+      <div class="day-track" id="dayTrack">
+        <div class="day-card">
+          <img class="crop-morning" src="assets/aday-morning.jpg" alt="Morning coffee overlooking the meadow at The Olive Tree House">
+          <h3>Slow mornings</h3>
+          <p>Birdsong filling the moment.</p>
+        </div>
+        <div class="day-card">
+          <img class="crop-afternoon" src="assets/coastline-gefyra.jpg" alt="Gefyra Beach in the afternoon sun">
+          <h3>Afternoons</h3>
+          <p>The endless Mediterranean sunshine.</p>
+        </div>
+        <div class="day-card">
+          <img class="crop-evening" src="assets/village-dishes.jpg" alt="Shared plates and local wine at The Olive Tree House">
+          <h3>Evenings</h3>
+          <p>Shared plates, local wine.</p>
+        </div>
       </div>
     </div>
     <a class="discover-link" href="a-day-here.html">Experience A Day Here →</a>
@@ -295,7 +305,7 @@
 
   <section class="block">
     <div class="village-card">
-      <div class="village-photo"><span>Photography — village</span></div>
+      <div class="village-photo"><img src="assets/home-village.jpg" alt="A stone lane in Liapades village"></div>
       <div class="village-fade"></div>
       <div class="inner">
         <h2>Our Village</h2>
@@ -332,6 +342,126 @@
   </footer>
 
 </main>
+
+<script>
+(function () {
+  const track = document.getElementById('homeBeachTrack');
+  const dotsWrap = document.getElementById('homeBeachDots');
+  const original = Array.from(track.children);
+  const count = original.length;
+  if (count < 2) return;
+
+  // Clone the full set before and after, so scrolling in either
+  // direction always has more cards to reveal — the "infinite" loop.
+  original.forEach(card => track.appendChild(card.cloneNode(true)));
+  original.slice().reverse().forEach(card => track.insertBefore(card.cloneNode(true), track.firstChild));
+
+  let currentIndex = 0;
+
+  function goTo(i) {
+    const wrapped = ((i % count) + count) % count;
+    currentIndex = wrapped;
+    const setW = setWidth();
+    const base = track.children[count + wrapped];
+    const baseTarget = base.offsetLeft - (track.offsetWidth - base.offsetWidth) / 2;
+    const current = track.scrollLeft;
+    let best = baseTarget;
+    [baseTarget - setW, baseTarget, baseTarget + setW].forEach(c => {
+      if (Math.abs(c - current) < Math.abs(best - current)) best = c;
+    });
+    track.scrollTo({ left: best, behavior: 'smooth' });
+  }
+
+  for (let i = 0; i < count; i++) {
+    const dot = document.createElement('div');
+    dot.className = 'dot' + (i === 0 ? ' active' : '');
+    dot.addEventListener('click', () => goTo(i));
+    dotsWrap.appendChild(dot);
+  }
+  const dots = Array.from(dotsWrap.children);
+
+  const prevBtn = document.createElement('button');
+  prevBtn.className = 'carousel-arrow prev';
+  prevBtn.type = 'button';
+  prevBtn.setAttribute('aria-label', 'Previous beach');
+  prevBtn.innerHTML = '<span>&#8249;</span>';
+  prevBtn.addEventListener('click', () => goTo(currentIndex - 1));
+  const nextBtn = document.createElement('button');
+  nextBtn.className = 'carousel-arrow next';
+  nextBtn.type = 'button';
+  nextBtn.setAttribute('aria-label', 'Next beach');
+  nextBtn.innerHTML = '<span>&#8250;</span>';
+  nextBtn.addEventListener('click', () => goTo(currentIndex + 1));
+  track.parentElement.appendChild(prevBtn);
+  track.parentElement.appendChild(nextBtn);
+
+  function setWidth() {
+    const first = track.children[0];
+    const afterSet = track.children[count];
+    return afterSet.offsetLeft - first.offsetLeft;
+  }
+
+  requestAnimationFrame(() => {
+    const mid = track.children[count];
+    track.scrollLeft = mid.offsetLeft - (track.offsetWidth - mid.offsetWidth) / 2;
+  });
+
+  let ticking = false;
+  track.addEventListener('scroll', () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      const setW = setWidth();
+      if (track.scrollLeft < setW * 0.5) {
+        track.scrollLeft += setW;
+      } else if (track.scrollLeft > setW * 1.5) {
+        track.scrollLeft -= setW;
+      }
+      const centre = track.scrollLeft + track.offsetWidth / 2;
+      let closest = 0, closestDist = Infinity;
+      original.forEach((_, i) => {
+        const card = track.children[count + i];
+        const cardCentre = card.offsetLeft + card.offsetWidth / 2;
+        const dist = Math.abs(cardCentre - centre);
+        if (dist < closestDist) { closestDist = dist; closest = i; }
+      });
+      currentIndex = closest;
+      dots.forEach((d, i) => d.classList.toggle('active', i === closest));
+      ticking = false;
+    });
+  }, { passive: true });
+})();
+
+// A Day Here — snap-scrolling cards with click arrows. No infinite loop:
+// this is a morning-to-evening flow, not an interchangeable photo set.
+(function () {
+  const track = document.getElementById('dayTrack');
+  const cards = Array.from(track.children);
+  if (cards.length < 2) return;
+
+  function step() {
+    const gap = parseFloat(getComputedStyle(track).gap) || 0;
+    return cards[0].getBoundingClientRect().width + gap;
+  }
+
+  const prevBtn = document.createElement('button');
+  prevBtn.className = 'carousel-arrow prev';
+  prevBtn.type = 'button';
+  prevBtn.setAttribute('aria-label', 'Previous');
+  prevBtn.innerHTML = '<span>&#8249;</span>';
+  prevBtn.addEventListener('click', () => track.scrollBy({ left: -step(), behavior: 'smooth' }));
+
+  const nextBtn = document.createElement('button');
+  nextBtn.className = 'carousel-arrow next';
+  nextBtn.type = 'button';
+  nextBtn.setAttribute('aria-label', 'Next');
+  nextBtn.innerHTML = '<span>&#8250;</span>';
+  nextBtn.addEventListener('click', () => track.scrollBy({ left: step(), behavior: 'smooth' }));
+
+  track.parentElement.appendChild(prevBtn);
+  track.parentElement.appendChild(nextBtn);
+})();
+</script>
 
 </body>
 </html>
