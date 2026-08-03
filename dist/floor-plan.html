@@ -38,7 +38,14 @@
     font-size: 36px; font-weight: 500; margin: 12px 0 6px;
   }
   .subtitle { font-size: 15px; color: var(--charcoal); margin-bottom: 20px; }
+  .plan-wrap { position: relative; }
   .plan-img { display: block; width: 100%; height: auto; border-radius: 4px; border: 1px solid var(--soft-stone); }
+  .compass {
+    position: absolute; top: 12px; right: 12px;
+    background: rgba(250,248,243,0.9); border: 1px solid var(--soft-stone);
+    border-radius: 6px; padding: 6px 8px; display: flex; align-items: center;
+  }
+  .compass svg { width: 46px; height: 26px; display: block; }
   footer { margin-top: 40px; padding-top: 8px; text-align: center; }
   footer p { font-size: 12px; color: var(--deep-olive); }
   .branch-img{
@@ -59,7 +66,16 @@
 <main>
   <h1>Floor Plan</h1>
   <p class="subtitle">The Olive Tree House, Liapades, Corfu.</p>
-  <img class="plan-img" src="assets/floor-plan.png" alt="Floor plan of The Olive Tree House">
+  <div class="plan-wrap">
+    <img class="plan-img" src="assets/floor-plan.png" alt="Floor plan of The Olive Tree House">
+    <div class="compass" aria-hidden="true">
+      <svg viewBox="0 0 70 40">
+        <line x1="4" y1="20" x2="50" y2="20" stroke="var(--deep-olive)" stroke-width="2"/>
+        <path d="M50 20 L40 13 L40 27 Z" fill="var(--deep-olive)"/>
+        <text x="54" y="25" font-family="Inter, sans-serif" font-size="15" font-weight="600" fill="var(--deep-olive)">N</text>
+      </svg>
+    </div>
+  </div>
 </main>
 
 <footer>

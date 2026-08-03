@@ -136,24 +136,20 @@
     color: var(--deep-olive); text-decoration: none; border-bottom: 1px solid var(--olive);
   }
 
-  /* A day here */
-  .day-carousel { position: relative; overflow: hidden; margin-bottom: 18px; }
-  .day-track {
-    display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch; padding-bottom: 4px; scrollbar-width: none;
+  /* A day here — circular timeline */
+  .day-timeline { display: flex; align-items: flex-start; margin-bottom: 18px; }
+  .day-item { flex: 0 0 92px; text-align: center; }
+  .day-circle {
+    width: 92px; height: 92px; border-radius: 50%; overflow: hidden;
+    margin: 0 auto 10px; border: 1px solid var(--soft-stone);
   }
-  .day-track::-webkit-scrollbar { display: none; }
-  .day-card { flex: 0 0 150px; scroll-snap-align: start; }
-  .day-card img, .day-card .photo-slot {
-    display: block; width: 100%; height: 130px; border-radius: 8px; margin-bottom: 10px;
-  }
-  .day-card img { object-fit: cover; }
-  .day-card img.crop-morning { object-position: 50% 40%; }
-  .day-card img.crop-afternoon { object-position: 50% 45%; }
-  .day-card img.crop-evening { object-position: 50% 50%; }
-  .day-card h3 { font-size: 17px; font-weight: 600; margin-bottom: 3px; }
-  .day-card p { font-size: 12px; color: var(--charcoal); line-height: 1.4; }
-  .day-carousel .carousel-arrow { height: 130px; }
+  .day-circle img { display: block; width: 100%; height: 100%; object-fit: cover; }
+  .day-circle img.crop-morning { object-position: 50% 40%; }
+  .day-circle img.crop-afternoon { object-position: 50% 45%; }
+  .day-circle img.crop-evening { object-position: 50% 50%; }
+  .day-item h3 { font-size: 14px; font-weight: 600; margin-bottom: 3px; }
+  .day-item p { font-size: 11px; color: var(--charcoal); line-height: 1.35; padding: 0 2px; }
+  .day-connector { flex: 1 1 auto; height: 0; margin-top: 46px; border-top: 2px dotted var(--olive); }
 
   /* Village card */
   .village-card {
@@ -281,23 +277,23 @@
   <section class="block">
     <h2>A Day Here</h2>
     <p class="sub">Slow down and savour the simple moments.</p>
-    <div class="day-carousel">
-      <div class="day-track" id="dayTrack">
-        <div class="day-card">
-          <img class="crop-morning" src="assets/aday-morning.jpg" alt="Morning coffee overlooking the meadow at The Olive Tree House">
-          <h3>Slow mornings</h3>
-          <p>Birdsong filling the moment.</p>
-        </div>
-        <div class="day-card">
-          <img class="crop-afternoon" src="assets/coastline-gefyra.jpg" alt="Gefyra Beach in the afternoon sun">
-          <h3>Afternoons</h3>
-          <p>The endless Mediterranean sunshine.</p>
-        </div>
-        <div class="day-card">
-          <img class="crop-evening" src="assets/village-dishes.jpg" alt="Shared plates and local wine at The Olive Tree House">
-          <h3>Evenings</h3>
-          <p>Shared plates, local wine.</p>
-        </div>
+    <div class="day-timeline">
+      <div class="day-item">
+        <div class="day-circle"><img class="crop-morning" src="assets/aday-morning.jpg" alt="Morning coffee overlooking the meadow at The Olive Tree House"></div>
+        <h3>Slow mornings</h3>
+        <p>Birdsong filling the moment.</p>
+      </div>
+      <div class="day-connector"></div>
+      <div class="day-item">
+        <div class="day-circle"><img class="crop-afternoon" src="assets/coastline-gefyra.jpg" alt="Gefyra Beach in the afternoon sun"></div>
+        <h3>Afternoons</h3>
+        <p>The endless Mediterranean sunshine.</p>
+      </div>
+      <div class="day-connector"></div>
+      <div class="day-item">
+        <div class="day-circle"><img class="crop-evening" src="assets/village-dishes.jpg" alt="Shared plates and local wine at The Olive Tree House"></div>
+        <h3>Evenings</h3>
+        <p>Shared plates, local wine.</p>
       </div>
     </div>
     <a class="discover-link" href="a-day-here.html">Experience A Day Here →</a>
@@ -321,12 +317,12 @@
       <h2>Our Story, Your Stories</h2>
       <p class="sub" style="margin-bottom:10px;">A house with memories to make</p>
       <p style="font-size:14px;">The Olive Tree House has been part of our family for years. Its story continues through the guests who spend time here, return to familiar places and create memories of their own.</p>
-      <a class="discover-link" href="our-story.html">Read Our Story →</a>
+      <a class="discover-link" href="our-story.html">Read More →</a>
     </div>
     <div class="quote-card">
       <div class="quote-mark">&ldquo;</div>
       <blockquote>We felt instantly at ease. The views, the peace, the little details, everything was perfect.</blockquote>
-      <p class="attrib">— Anna W., UK, 2026 (Couple)</p>
+      <p class="attrib">— Arabella W., UK, 2026 (Couple)</p>
       <p class="stars">★★★★★</p>
     </div>
   </section>
@@ -430,36 +426,6 @@
       ticking = false;
     });
   }, { passive: true });
-})();
-
-// A Day Here — snap-scrolling cards with click arrows. No infinite loop:
-// this is a morning-to-evening flow, not an interchangeable photo set.
-(function () {
-  const track = document.getElementById('dayTrack');
-  const cards = Array.from(track.children);
-  if (cards.length < 2) return;
-
-  function step() {
-    const gap = parseFloat(getComputedStyle(track).gap) || 0;
-    return cards[0].getBoundingClientRect().width + gap;
-  }
-
-  const prevBtn = document.createElement('button');
-  prevBtn.className = 'carousel-arrow prev';
-  prevBtn.type = 'button';
-  prevBtn.setAttribute('aria-label', 'Previous');
-  prevBtn.innerHTML = '<span>&#8249;</span>';
-  prevBtn.addEventListener('click', () => track.scrollBy({ left: -step(), behavior: 'smooth' }));
-
-  const nextBtn = document.createElement('button');
-  nextBtn.className = 'carousel-arrow next';
-  nextBtn.type = 'button';
-  nextBtn.setAttribute('aria-label', 'Next');
-  nextBtn.innerHTML = '<span>&#8250;</span>';
-  nextBtn.addEventListener('click', () => track.scrollBy({ left: step(), behavior: 'smooth' }));
-
-  track.parentElement.appendChild(prevBtn);
-  track.parentElement.appendChild(nextBtn);
 })();
 </script>
 
