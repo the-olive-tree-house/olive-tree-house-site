@@ -95,35 +95,15 @@
   }
   .photo-slot span { font-size: 10.5px; letter-spacing: 0.03em; text-transform: uppercase; color: var(--deep-olive); }
 
-  /* Beaches gallery */
-  .beach-carousel { position: relative; overflow: hidden; margin-bottom: 18px; }
-  .beach-track {
-    display: flex; gap: 10px; overflow-x: auto; scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch; scrollbar-width: none; padding-bottom: 2px;
-  }
-  .beach-track::-webkit-scrollbar { display: none; }
-  .beach-card { flex: 0 0 auto; scroll-snap-align: center; }
+  /* Beaches gallery — static row, no carousel */
+  .beach-row { display: flex; gap: 10px; margin-bottom: 18px; }
+  .beach-card { flex: 0 0 auto; }
   .beach-card img { display: block; width: auto; height: 100px; border-radius: 6px; margin: 0; }
-  .carousel-dots { display: flex; justify-content: center; gap: 7px; margin-top: 10px; }
-  .carousel-dots .dot {
-    width: 6px; height: 6px; border-radius: 50%; background: var(--soft-stone);
-    transition: background 0.2s, transform 0.2s;
+
+  /* Fine divider used after Beaches and House sections */
+  section.block.divider-after {
+    padding-bottom: 30px; border-bottom: 1px solid var(--soft-stone);
   }
-  .carousel-dots .dot.active { background: var(--olive); transform: scale(1.25); }
-  .carousel-arrow {
-    position: absolute; top: 0; height: 100px; width: 30px;
-    display: flex; align-items: center; justify-content: center;
-    border: none; background: none; padding: 0; margin: 0; cursor: pointer; z-index: 2;
-  }
-  .carousel-arrow span {
-    width: 26px; height: 26px; border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    background: rgba(41, 42, 39, 0.55); color: var(--warm-white);
-    font-size: 15px; line-height: 1; transition: background 0.15s;
-  }
-  .carousel-arrow:hover span { background: rgba(41, 42, 39, 0.8); }
-  .carousel-arrow.prev { left: 6px; }
-  .carousel-arrow.next { right: 6px; }
 
   /* House card (single photo) */
   .house-card .photo-slot { min-height: 210px; margin-bottom: 18px; }
@@ -149,7 +129,11 @@
   .day-circle img.crop-evening { object-position: 50% 50%; }
   .day-item h3 { font-size: 14px; font-weight: 600; margin-bottom: 3px; }
   .day-item p { font-size: 11px; color: var(--charcoal); line-height: 1.35; padding: 0 2px; }
-  .day-connector { flex: 1 1 auto; height: 0; margin-top: 46px; border-top: 2px dotted var(--olive); }
+  .day-connector {
+    flex: 1 1 auto; height: 6px; margin-top: 43px;
+    background-image: radial-gradient(circle, var(--olive) 2.5px, transparent 2.6px);
+    background-size: 22px 6px; background-position: center; background-repeat: repeat-x;
+  }
 
   /* Village card */
   .village-card {
@@ -181,6 +165,8 @@
 
   /* Our story */
   .story-block { padding: 0 22px; margin-bottom: 40px; }
+  .story-text h2 { font-size: 26px; margin-bottom: 4px; }
+  .story-text .sub { font-size: 13.5px; color: var(--deep-olive); margin-bottom: 18px; }
   .story-text a {
     display: inline-block; margin-top: 8px; font-size: 13.5px; font-weight: 500;
     color: var(--deep-olive); text-decoration: none; border-bottom: 1px solid var(--olive); padding-bottom: 2px;
@@ -203,7 +189,7 @@
     font-size: 12.5px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; padding: 13px 26px; border-radius: 3px;
   }
 
-  footer { padding: 30px 22px 44px; text-align: center; border-top: 1px solid var(--soft-stone); }
+  footer { padding: 30px 22px 44px; text-align: center; }
   footer svg { width: 130px; height: auto; color: var(--olive); margin: 0 auto 10px; display: block; }
   footer p { font-size: 12px; color: var(--deep-olive); }
 
@@ -230,7 +216,7 @@
     <div class="hero-content">
       <p class="hero-eyebrow">Your Holiday Home in Corfu</p>
       <h1>The Olive Tree House</h1>
-      <p class="tagline">A countryside home above a green meadow, close to Corfu's most beautiful stretch of coastline, with the old village on its doorstep.</p>
+      <p class="tagline">A countryside home above a green meadow, close to Corfu's most beautiful stretch of coastline, with the old village on its doorstep</p>
       <a class="btn-primary" href="availability.html">Check Availability</a>
     </div>
   </section>
@@ -253,21 +239,18 @@
     </div>
   </div>
 
-  <section class="block">
+  <section class="block divider-after">
     <h2>Our Beaches</h2>
-    <p class="sub">Crystal-clear waters and quiet coastal escapes.</p>
-    <div class="beach-carousel">
-      <div class="beach-track" id="homeBeachTrack">
-        <div class="beach-card"><img src="assets/coastline-rovinia.jpg" alt="Rovinia Beach"></div>
-        <div class="beach-card"><img src="assets/coastline-sea-cave.jpg" alt="The sea cave along the Liapades coastline"></div>
-        <div class="beach-card"><img src="assets/coastline-chomi.jpg" alt="Chomi Beach"></div>
-      </div>
-      <div class="carousel-dots" id="homeBeachDots"></div>
+    <p class="sub">Crystal-clear waters and quiet coastal escapes</p>
+    <div class="beach-row">
+      <div class="beach-card"><img src="assets/coastline-rovinia.jpg" alt="Rovinia Beach"></div>
+      <div class="beach-card"><img src="assets/coastline-sea-cave.jpg" alt="The sea cave along the Liapades coastline"></div>
+      <div class="beach-card"><img src="assets/coastline-chomi.jpg" alt="Chomi Beach"></div>
     </div>
     <a class="discover-link" href="coastline.html">Explore Our Coastline →</a>
   </section>
 
-  <section class="block house-card">
+  <section class="block house-card divider-after">
     <h2>The House</h2>
     <p class="sub">Immerse yourself in countryside living.</p>
     <img class="house-photo" src="assets/home-exterior.jpg" alt="The exterior of The Olive Tree House, Liapades, Corfu">
@@ -305,9 +288,9 @@
       <div class="village-fade"></div>
       <div class="inner">
         <h2>Our Village</h2>
-        <p class="sub">Liapades, a place to belong.</p>
+        <p class="sub">A place to belong</p>
         <p>Liapades is one of Corfu's oldest villages, with cobbled lanes, traditional houses and a strong sense of local life.</p>
-        <a class="village-link" href="the-village.html">Explore Liapades →</a>
+        <a class="village-link" href="the-village.html">Life in Liapades →</a>
       </div>
     </div>
   </section>
@@ -315,7 +298,7 @@
   <section class="story-block">
     <div class="story-text">
       <h2>Our Story, Your Stories</h2>
-      <p class="sub" style="margin-bottom:10px;">A house with memories to make</p>
+      <p class="sub">A house with memories to make</p>
       <p style="font-size:14px;">The Olive Tree House has been part of our family for years. Its story continues through the guests who spend time here, return to familiar places and create memories of their own.</p>
       <a class="discover-link" href="our-story.html">Read More →</a>
     </div>
@@ -328,7 +311,7 @@
   </section>
 
   <section class="final-cta">
-    <p>Your Home in Corfu.</p>
+    <p>Your Home in Corfu</p>
     <a class="btn" href="availability.html">Check Availability</a>
   </section>
 
@@ -344,110 +327,6 @@
   </footer>
 
 </main>
-
-<script>
-(function () {
-  const track = document.getElementById('homeBeachTrack');
-  const dotsWrap = document.getElementById('homeBeachDots');
-  const original = Array.from(track.children);
-  const count = original.length;
-  if (count < 2) return;
-
-  // Clone the full set before and after, so scrolling in either
-  // direction always has more cards to reveal — the "infinite" loop.
-  original.forEach(card => track.appendChild(card.cloneNode(true)));
-  original.slice().reverse().forEach(card => track.insertBefore(card.cloneNode(true), track.firstChild));
-
-  let currentIndex = 0;
-
-  function goTo(i) {
-    const wrapped = ((i % count) + count) % count;
-    currentIndex = wrapped;
-    const setW = setWidth();
-    const base = track.children[count + wrapped];
-    const baseTarget = base.offsetLeft - (track.offsetWidth - base.offsetWidth) / 2;
-    const current = track.scrollLeft;
-    let best = baseTarget;
-    [baseTarget - setW, baseTarget, baseTarget + setW].forEach(c => {
-      if (Math.abs(c - current) < Math.abs(best - current)) best = c;
-    });
-    track.scrollTo({ left: best, behavior: 'smooth' });
-  }
-
-  for (let i = 0; i < count; i++) {
-    const dot = document.createElement('div');
-    dot.className = 'dot' + (i === 0 ? ' active' : '');
-    dot.addEventListener('click', () => goTo(i));
-    dotsWrap.appendChild(dot);
-  }
-  const dots = Array.from(dotsWrap.children);
-
-  const prevBtn = document.createElement('button');
-  prevBtn.className = 'carousel-arrow prev';
-  prevBtn.type = 'button';
-  prevBtn.setAttribute('aria-label', 'Previous beach');
-  prevBtn.innerHTML = '<span>&#8249;</span>';
-  prevBtn.addEventListener('click', () => goTo(currentIndex - 1));
-  const nextBtn = document.createElement('button');
-  nextBtn.className = 'carousel-arrow next';
-  nextBtn.type = 'button';
-  nextBtn.setAttribute('aria-label', 'Next beach');
-  nextBtn.innerHTML = '<span>&#8250;</span>';
-  nextBtn.addEventListener('click', () => goTo(currentIndex + 1));
-  track.parentElement.appendChild(prevBtn);
-  track.parentElement.appendChild(nextBtn);
-
-  function setWidth() {
-    const first = track.children[0];
-    const afterSet = track.children[count];
-    return afterSet.offsetLeft - first.offsetLeft;
-  }
-
-  function whenReady(callback) {
-    const imgs = Array.from(track.querySelectorAll('img'));
-    let remaining = imgs.length;
-    if (remaining === 0) { callback(); return; }
-    function done() { remaining -= 1; if (remaining <= 0) callback(); }
-    imgs.forEach(img => {
-      if (img.complete) done();
-      else {
-        img.addEventListener('load', done, { once: true });
-        img.addEventListener('error', done, { once: true });
-      }
-    });
-  }
-
-  whenReady(() => {
-    const mid = track.children[count];
-    track.scrollLeft = mid.offsetLeft - (track.offsetWidth - mid.offsetWidth) / 2;
-  });
-
-  let ticking = false;
-  track.addEventListener('scroll', () => {
-    if (ticking) return;
-    ticking = true;
-    requestAnimationFrame(() => {
-      const setW = setWidth();
-      if (track.scrollLeft < setW * 0.5) {
-        track.scrollLeft += setW;
-      } else if (track.scrollLeft > setW * 1.5) {
-        track.scrollLeft -= setW;
-      }
-      const centre = track.scrollLeft + track.offsetWidth / 2;
-      let closest = 0, closestDist = Infinity;
-      original.forEach((_, i) => {
-        const card = track.children[count + i];
-        const cardCentre = card.offsetLeft + card.offsetWidth / 2;
-        const dist = Math.abs(cardCentre - centre);
-        if (dist < closestDist) { closestDist = dist; closest = i; }
-      });
-      currentIndex = closest;
-      dots.forEach((d, i) => d.classList.toggle('active', i === closest));
-      ticking = false;
-    });
-  }, { passive: true });
-})();
-</script>
 
 </body>
 </html>
