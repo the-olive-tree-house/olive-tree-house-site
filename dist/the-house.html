@@ -52,46 +52,33 @@
   }
   .photo-slot span { font-size: 11.5px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--deep-olive); }
 
-  .photo-carousel { position: relative; overflow: hidden; margin: 0 0 22px; }
-  .photo-carousel .photo-track {
-    display: flex; gap: 10px; overflow-x: auto; scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+  .room-grid { display: grid; gap: 8px; margin: 0 0 22px; }
+  .room-grid[data-cols="1"] { grid-template-columns: 1fr; }
+  .room-grid[data-cols="2"] { grid-template-columns: repeat(2, 1fr); }
+  .room-grid[data-cols="3"] { grid-template-columns: repeat(3, 1fr); }
+  .room-tile { border: none; background: none; padding: 0; margin: 0; cursor: pointer; display: block; }
+  .room-tile img { display: block; width: 100%; height: 130px; object-fit: cover; border-radius: 10px; }
+  .room-grid[data-cols="1"] .room-tile img { height: 220px; }
+  .room-tile img.crop-top { object-position: 50% 20%; }
+
+  .lightbox {
+    position: fixed; inset: 0; background: rgba(20,19,17,0.94); z-index: 100;
+    display: flex; align-items: center; justify-content: center; padding: 24px;
+    opacity: 0; visibility: hidden; transition: opacity 0.2s ease;
   }
-  .photo-carousel .photo-track::-webkit-scrollbar { display: none; }
-  .photo-carousel .photo-track .photo-slot { flex: 0 0 100%; scroll-snap-align: center; }
-  .photo-carousel .photo-track img {
-    flex: 0 0 auto; scroll-snap-align: center;
-    display: block; width: auto; height: 190px;
-    border-radius: 12px; margin: 0;
+  .lightbox.open { opacity: 1; visibility: visible; }
+  .lightbox-content { max-width: 100%; max-height: 100%; text-align: center; }
+  .lightbox-content img { display: block; max-width: 100%; max-height: 78vh; border-radius: 10px; margin: 0 auto 14px; }
+  .lightbox-caption { color: var(--warm-white); font-size: 14px; }
+  .lightbox-close, .lightbox-arrow {
+    position: absolute; border: none; border-radius: 50%; cursor: pointer;
+    background: rgba(255,255,255,0.15); color: var(--warm-white);
+    display: flex; align-items: center; justify-content: center; z-index: 2;
   }
-  /* A room with only one photo (e.g. West Balcony) has nothing to scroll to,
-     so let that photo fill the row width instead of sitting narrow with
-     empty space beside it — matches the 190px height of every other card. */
-  .photo-carousel .photo-track img:only-child {
-    flex: 0 0 100%; width: 100%; height: 190px; object-fit: cover;
-  }
-  .photo-carousel .photo-track img.crop-top { object-position: 50% 20%; }
-  .photo-carousel .carousel-dots { display: flex; justify-content: center; gap: 7px; margin-top: 10px; }
-  .photo-carousel .carousel-dots:empty { margin-top: 0; }
-  .photo-carousel .carousel-dots .dot {
-    width: 6px; height: 6px; border-radius: 50%; background: var(--soft-stone);
-    transition: background 0.2s, transform 0.2s;
-  }
-  .photo-carousel .carousel-dots .dot.active { background: var(--olive); transform: scale(1.25); }
-  .carousel-arrow {
-    position: absolute; top: 0; height: 190px; width: 34px;
-    display: flex; align-items: center; justify-content: center;
-    border: none; background: none; padding: 0; margin: 0; cursor: pointer; z-index: 2;
-  }
-  .carousel-arrow span {
-    width: 30px; height: 30px; border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    background: rgba(41, 42, 39, 0.55); color: var(--warm-white);
-    font-size: 17px; line-height: 1; transition: background 0.15s;
-  }
-  .carousel-arrow:hover span { background: rgba(41, 42, 39, 0.8); }
-  .carousel-arrow.prev { left: 6px; }
-  .carousel-arrow.next { right: 6px; }
+  .lightbox-close { top: 16px; right: 16px; width: 38px; height: 38px; font-size: 20px; line-height: 1; }
+  .lightbox-arrow { top: 50%; transform: translateY(-50%); width: 44px; height: 44px; font-size: 22px; }
+  .lightbox-arrow.prev { left: 12px; }
+  .lightbox-arrow.next { right: 12px; }
 
   .floor-plan-link { display: block; text-align: center; font-size: 14px; color: var(--deep-olive); text-decoration: underline; margin-bottom: 40px; }
 
@@ -154,7 +141,7 @@
 <header>
   <img class="logo-small" src="assets/logo.png" alt="The Olive Tree House — Liapades, Corfu">
   <div class="header-right">
-    <a class="book-btn" href="availability.html">Availability</a>
+    <a class="book-btn" href="availability.html">Book your dates</a>
     <a class="close-x" href="index.html" aria-label="Close">×</a>
   </div>
 </header>
@@ -171,13 +158,10 @@
 
   <div class="card">
     <h2 class="card-title">Bedroom 1</h2>
-    <div class="photo-carousel">
-      <div class="photo-track">
-      <img src="assets/house-bedroom1-1.jpg" alt="Bedroom 1 at The Olive Tree House">
-        <img src="assets/house-bedroom1-2.jpg" alt="Bedroom 1 at The Olive Tree House">
-        <img src="assets/house-bedroom1-3.jpg" alt="Bedroom 1 at The Olive Tree House">
-      </div>
-      <div class="carousel-dots"></div>
+    <div class="room-grid" data-cols="3">
+      <button class="room-tile" type="button"><img src="assets/house-bedroom1-1.jpg" alt="Bedroom 1 at The Olive Tree House"></button>
+      <button class="room-tile" type="button"><img src="assets/house-bedroom1-2.jpg" alt="Bedroom 1 at The Olive Tree House"></button>
+      <button class="room-tile" type="button"><img src="assets/house-bedroom1-3.jpg" alt="Bedroom 1 at The Olive Tree House"></button>
     </div>
     <p>A calm double bedroom with a king-size bed, a wooden ceiling and generous storage.</p>
     <p>French doors open towards the meadow to the east, while a west-facing window brings in light from the opposite side of the house.</p>
@@ -196,12 +180,9 @@
 
   <div class="card">
     <h2 class="card-title">Bedroom 2</h2>
-    <div class="photo-carousel">
-      <div class="photo-track">
-        <img src="assets/house-bedroom2-1.jpg" alt="Bedroom 2 at The Olive Tree House">
-        <img src="assets/house-bedroom2-2.jpg" alt="Bedroom 2 at The Olive Tree House">
-      </div>
-      <div class="carousel-dots"></div>
+    <div class="room-grid" data-cols="2">
+      <button class="room-tile" type="button"><img src="assets/house-bedroom2-1.jpg" alt="Bedroom 2 at The Olive Tree House"></button>
+      <button class="room-tile" type="button"><img src="assets/house-bedroom2-2.jpg" alt="Bedroom 2 at The Olive Tree House"></button>
     </div>
     <p>A flexible second bedroom that may be arranged with one double bed or two single beds.</p>
     <p>The room looks towards the meadow and is designed to work equally well for adults or children.</p>
@@ -220,14 +201,11 @@
 
   <div class="card">
     <h2 class="card-title">Living, dining and kitchen</h2>
-    <div class="photo-carousel">
-      <div class="photo-track">
-       <img src="assets/house-living-1.jpg" alt="Living, dining and kitchen area at The Olive Tree House">
-        <img src="assets/house-living-2.jpg" alt="Living, dining and kitchen area at The Olive Tree House">
-        <img src="assets/house-living-3.jpg" alt="Living, dining and kitchen area at The Olive Tree House">
-        <img src="assets/house-living-4.jpg" alt="The living room sofa opened as a double bed for a 5th guest">
-      </div>
-      <div class="carousel-dots"></div>
+    <div class="room-grid" data-cols="2">
+      <button class="room-tile" type="button"><img src="assets/house-living-1.jpg" alt="Living, dining and kitchen area at The Olive Tree House"></button>
+      <button class="room-tile" type="button"><img src="assets/house-living-2.jpg" alt="Living, dining and kitchen area at The Olive Tree House"></button>
+      <button class="room-tile" type="button"><img src="assets/house-living-3.jpg" alt="Living, dining and kitchen area at The Olive Tree House"></button>
+      <button class="room-tile" type="button"><img src="assets/house-living-4.jpg" alt="The living room sofa opened as a double bed for a 5th guest"></button>
     </div>
     <p>The kitchen, dining area and sitting room share one continuous open-plan space.</p>
     <p>The kitchen is fully equipped for everyday cooking, while the living area connects naturally with both balconies.</p>
@@ -250,12 +228,9 @@
 
   <div class="card">
     <h2 class="card-title">Bathroom</h2>
-    <div class="photo-carousel">
-      <div class="photo-track">
-        <img src="assets/house-bathroom-1.jpg" alt="Bathroom at The Olive Tree House">
-        <img src="assets/house-bathroom-2.jpg" alt="Bathroom at The Olive Tree House">
-      </div>
-      <div class="carousel-dots"></div>
+    <div class="room-grid" data-cols="2">
+      <button class="room-tile" type="button"><img src="assets/house-bathroom-1.jpg" alt="Bathroom at The Olive Tree House"></button>
+      <button class="room-tile" type="button"><img src="assets/house-bathroom-2.jpg" alt="Bathroom at The Olive Tree House"></button>
     </div>
     <p>A bright, practical bathroom with a bathtub and shower, washing machine and illuminated mirror.</p>
     <p>Bathroom essentials, including body soap, shampoo and shower gel, are provided for guests.</p>
@@ -267,30 +242,25 @@
       <div class="item"><svg viewBox="0 0 24 24"><rect x="8" y="9" width="8" height="11.5" rx="1.5"/><path d="M10 9 V6.5 H14 V9 M10.5 6.5 V4.5 H13.5"/></svg><span>Hand soap</span></div>
       <div class="item"><svg viewBox="0 0 24 24"><path d="M4 8 H20 M6 8 V19 M18 8 V19 M4 13 H20 M9 8 V11.5 M12 8 V12.5 M15 8 V11"/></svg><span>Clothes drying rack</span></div>
       <div class="item"><svg viewBox="0 0 24 24"><path d="M6 4 V20 M18 4 V20 M6 7 H18 M6 11 H18 M6 15 H18 M9.5 17.5 Q10.5 18.7 9.5 20 M14.5 17.5 Q15.5 18.7 14.5 20"/></svg><span>Heated towel rail</span></div>
+      <div class="item"><svg viewBox="0 0 24 24"><rect x="4" y="7" width="16" height="13" rx="2"/><path d="M9.5 7 V5 H14.5 V7 M12 11 V16 M9.5 13.5 H14.5"/></svg><span>First aid kit</span></div>
     </div>
   </div>
 
   <div class="balconies">
     <div class="balcony">
       <h2 class="card-title">East Balcony · Meadow View</h2>
-      <div class="photo-carousel">
-        <div class="photo-track">
-          <img src="assets/house-balcony-east-1.jpg" alt="East balcony with meadow view at The Olive Tree House">
-          <img src="assets/house-balcony-east-2.jpg" alt="Meadow view from the east balcony">
-          <img src="assets/house-balcony-east-3.jpg" alt="Dawn from the east balcony">
-        </div>
-        <div class="carousel-dots"></div>
+      <div class="room-grid" data-cols="3">
+        <button class="room-tile" type="button"><img src="assets/house-balcony-east-1.jpg" alt="East balcony with meadow view at The Olive Tree House"></button>
+        <button class="room-tile" type="button"><img src="assets/house-balcony-east-2.jpg" alt="Meadow view from the east balcony"></button>
+        <button class="room-tile" type="button"><img src="assets/house-balcony-east-3.jpg" alt="Dawn from the east balcony"></button>
       </div>
       <p>The east balcony looks across the meadow and the green hills beyond.</p>
       <p>It is the place for early coffee, first light and slow mornings.</p>
     </div>
     <div class="balcony">
       <h2 class="card-title">West Balcony · Park View</h2>
-      <div class="photo-carousel">
-        <div class="photo-track">
-          <img class="crop-top" src="assets/house-balcony-west-1.jpg" alt="West balcony with park view at The Olive Tree House">
-        </div>
-        <div class="carousel-dots"></div>
+      <div class="room-grid" data-cols="1">
+        <button class="room-tile" type="button"><img class="crop-top" src="assets/house-balcony-west-1.jpg" alt="West balcony with park view at The Olive Tree House"></button>
       </div>
       <p>The west balcony faces the mature trees and village park beside the house.</p>
       <p>In the late afternoon, the sunset filters through the trees and the balcony becomes a natural place to enjoy the last light of the day.</p>
@@ -311,9 +281,19 @@
     <p style="margin-top:14px;"><a href="faq.html">Have a question about the house? See our FAQ →</a></p>
   </div>
 
+  <div class="lightbox" id="roomLightbox" role="dialog" aria-modal="true" aria-hidden="true">
+    <button class="lightbox-close" id="lightboxClose" type="button" aria-label="Close">×</button>
+    <button class="lightbox-arrow prev" id="lightboxPrev" type="button" aria-label="Previous photo"><span>&#8249;</span></button>
+    <button class="lightbox-arrow next" id="lightboxNext" type="button" aria-label="Next photo"><span>&#8250;</span></button>
+    <div class="lightbox-content">
+      <img id="lightboxImg" src="" alt="">
+      <p class="lightbox-caption" id="lightboxCaption"></p>
+    </div>
+  </div>
+
   <a class="book-bar" href="availability.html">
     <svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="16" rx="2"/><path d="M4 10 H20 M8 3 V7 M16 3 V7"/></svg>
-    Check availability
+    Book your dates
   </a>
 
   <footer>
@@ -330,115 +310,68 @@
 
 <script>
 (function () {
-  function initCarousel(carousel) {
-    const track = carousel.querySelector('.photo-track');
-    const dotsWrap = carousel.querySelector('.carousel-dots');
-    const original = Array.from(track.children);
-    const count = original.length;
-    if (count < 2) return; // just one photo so far — loop activates once more are added
+  const grids = Array.from(document.querySelectorAll('.room-grid'));
+  const lightbox = document.getElementById('roomLightbox');
+  const lbImg = document.getElementById('lightboxImg');
+  const lbCaption = document.getElementById('lightboxCaption');
+  const prevBtn = document.getElementById('lightboxPrev');
+  const nextBtn = document.getElementById('lightboxNext');
+  let activePhotos = [];
+  let current = 0;
 
-    // Clone the full set before and after for seamless wraparound in either direction.
-    original.forEach(slide => track.appendChild(slide.cloneNode(true)));
-    original.slice().reverse().forEach(slide => track.insertBefore(slide.cloneNode(true), track.firstChild));
-
-    let currentIndex = 0;
-
-    function goTo(i) {
-      const wrapped = ((i % count) + count) % count;
-      currentIndex = wrapped;
-      const setW = setWidth();
-      const base = track.children[count + wrapped];
-      const baseTarget = base.offsetLeft - (track.offsetWidth - base.offsetWidth) / 2;
-      const current = track.scrollLeft;
-      // Scroll to whichever copy of this card (previous set, this set, or next
-      // set) is physically closest to where we already are, so the animation
-      // always travels a short distance in the natural direction — never a
-      // big jump back across the whole row.
-      let best = baseTarget;
-      [baseTarget - setW, baseTarget, baseTarget + setW].forEach(c => {
-        if (Math.abs(c - current) < Math.abs(best - current)) best = c;
-      });
-      track.scrollTo({ left: best, behavior: 'smooth' });
-    }
-
-    for (let i = 0; i < count; i++) {
-      const dot = document.createElement('div');
-      dot.className = 'dot' + (i === 0 ? ' active' : '');
-      dot.addEventListener('click', () => goTo(i));
-      dotsWrap.appendChild(dot);
-    }
-    const dots = Array.from(dotsWrap.children);
-
-    const prevBtn = document.createElement('button');
-    prevBtn.className = 'carousel-arrow prev';
-    prevBtn.type = 'button';
-    prevBtn.setAttribute('aria-label', 'Previous photo');
-    prevBtn.innerHTML = '<span>&#8249;</span>';
-    prevBtn.addEventListener('click', () => goTo(currentIndex - 1));
-    const nextBtn = document.createElement('button');
-    nextBtn.className = 'carousel-arrow next';
-    nextBtn.type = 'button';
-    nextBtn.setAttribute('aria-label', 'Next photo');
-    nextBtn.innerHTML = '<span>&#8250;</span>';
-    nextBtn.addEventListener('click', () => goTo(currentIndex + 1));
-    carousel.appendChild(prevBtn);
-    carousel.appendChild(nextBtn);
-
-    function setWidth() {
-      const first = track.children[0];
-      const afterSet = track.children[count];
-      return afterSet.offsetLeft - first.offsetLeft;
-    }
-
-    // Wait for every image (including clones) to finish loading before
-    // measuring anything — these are width:auto images, so their real width
-    // isn't known until they load, and measuring too early breaks the loop.
-    function whenReady(callback) {
-      const imgs = Array.from(track.querySelectorAll('img'));
-      let remaining = imgs.length;
-      if (remaining === 0) { callback(); return; }
-      function done() { remaining -= 1; if (remaining <= 0) callback(); }
-      imgs.forEach(img => {
-        if (img.complete) done();
-        else {
-          img.addEventListener('load', done, { once: true });
-          img.addEventListener('error', done, { once: true });
-        }
-      });
-    }
-
-    whenReady(() => {
-      const mid = track.children[count];
-      track.scrollLeft = mid.offsetLeft - (track.offsetWidth - mid.offsetWidth) / 2;
-    });
-
-    let ticking = false;
-    track.addEventListener('scroll', () => {
-      if (ticking) return;
-      ticking = true;
-      requestAnimationFrame(() => {
-        const setW = setWidth();
-        if (track.scrollLeft < setW * 0.5) {
-          track.scrollLeft += setW;
-        } else if (track.scrollLeft > setW * 1.5) {
-          track.scrollLeft -= setW;
-        }
-        const centre = track.scrollLeft + track.offsetWidth / 2;
-        let closest = 0, closestDist = Infinity;
-        original.forEach((_, i) => {
-          const card = track.children[count + i];
-          const cardCentre = card.offsetLeft + card.offsetWidth / 2;
-          const dist = Math.abs(cardCentre - centre);
-          if (dist < closestDist) { closestDist = dist; closest = i; }
-        });
-        currentIndex = closest;
-        dots.forEach((d, i) => d.classList.toggle('active', i === closest));
-        ticking = false;
-      });
-    }, { passive: true });
+  function show(i) {
+    current = ((i % activePhotos.length) + activePhotos.length) % activePhotos.length;
+    const p = activePhotos[current];
+    lbImg.src = p.src;
+    lbImg.alt = p.alt;
+    lbCaption.textContent = p.alt;
   }
 
-  document.querySelectorAll('.photo-carousel').forEach(initCarousel);
+  function open(photos, index) {
+    activePhotos = photos;
+    show(index);
+    const multi = photos.length > 1;
+    prevBtn.style.display = multi ? '' : 'none';
+    nextBtn.style.display = multi ? '' : 'none';
+    lightbox.classList.add('open');
+    lightbox.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function close() {
+    lightbox.classList.remove('open');
+    lightbox.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  grids.forEach(grid => {
+    const tiles = Array.from(grid.querySelectorAll('.room-tile'));
+    const photos = tiles.map(t => {
+      const img = t.querySelector('img');
+      return { src: img.src, alt: img.alt };
+    });
+    tiles.forEach((tile, i) => tile.addEventListener('click', () => open(photos, i)));
+  });
+
+  prevBtn.addEventListener('click', () => show(current - 1));
+  nextBtn.addEventListener('click', () => show(current + 1));
+  document.getElementById('lightboxClose').addEventListener('click', close);
+  lightbox.addEventListener('click', (e) => { if (e.target === lightbox) close(); });
+  document.addEventListener('keydown', (e) => {
+    if (!lightbox.classList.contains('open')) return;
+    if (e.key === 'Escape') close();
+    if (e.key === 'ArrowLeft') show(current - 1);
+    if (e.key === 'ArrowRight') show(current + 1);
+  });
+
+  let touchStartX = null;
+  lightbox.addEventListener('touchstart', (e) => { touchStartX = e.touches[0].clientX; }, { passive: true });
+  lightbox.addEventListener('touchend', (e) => {
+    if (touchStartX === null) return;
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    if (Math.abs(dx) > 40) { dx > 0 ? show(current - 1) : show(current + 1); }
+    touchStartX = null;
+  }, { passive: true });
 })();
 </script>
 

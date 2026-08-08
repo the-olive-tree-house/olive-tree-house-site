@@ -51,36 +51,34 @@
   }
   .photo-slot span { font-size: 11.5px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--deep-olive); }
    .hero-photo { display: block; width: 100%; height: auto; border-radius: 12px; margin: 4px 0 22px; }
-  .beach-carousel { position: relative; overflow: hidden; margin-top: 18px; }
-  .carousel-arrow {
-    position: absolute; top: 0; height: 170px; width: 34px;
-    display: flex; align-items: center; justify-content: center;
-    border: none; background: none; padding: 0; margin: 0; cursor: pointer; z-index: 2;
+  .beach-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 18px;
   }
-  .carousel-arrow span {
-    width: 30px; height: 30px; border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    background: rgba(41, 42, 39, 0.55); color: var(--warm-white);
-    font-size: 17px; line-height: 1; transition: background 0.15s;
+  .beach-tile {
+    border: none; background: none; padding: 0; margin: 0; cursor: pointer;
+    text-align: center; font-family: inherit; color: inherit;
   }
-  .carousel-arrow:hover span { background: rgba(41, 42, 39, 0.8); }
-  .carousel-arrow.prev { left: 6px; }
-  .carousel-arrow.next { right: 6px; }
-  .beach-track {
-    display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch; scrollbar-width: none; padding-bottom: 2px;
+  .beach-tile img { display: block; width: 100%; height: 100px; object-fit: cover; border-radius: 10px; margin: 0 0 8px; }
+  .beach-tile .name { font-size: 12.5px; font-weight: 500; }
+
+  .lightbox {
+    position: fixed; inset: 0; background: rgba(20,19,17,0.94); z-index: 100;
+    display: flex; align-items: center; justify-content: center; padding: 24px;
+    opacity: 0; visibility: hidden; transition: opacity 0.2s ease;
   }
-  .beach-track::-webkit-scrollbar { display: none; }
-  .beach-card { flex: 0 0 auto; scroll-snap-align: center; }
-  .beach-card .photo-slot { min-height: 170px; }
-  .beach-card img { display: block; width: auto; height: 170px; border-radius: 12px; margin: 0; }
-  .beach-card .name { font-size: 13.5px; font-weight: 500; margin-top: 10px; text-align: center; }
-  .carousel-dots { display: flex; justify-content: center; gap: 7px; margin-top: 14px; }
-  .carousel-dots .dot {
-    width: 6px; height: 6px; border-radius: 50%; background: var(--soft-stone);
-    transition: background 0.2s, transform 0.2s;
+  .lightbox.open { opacity: 1; visibility: visible; }
+  .lightbox-content { max-width: 100%; max-height: 100%; text-align: center; }
+  .lightbox-content img { display: block; max-width: 100%; max-height: 78vh; border-radius: 10px; margin: 0 auto 14px; }
+  .lightbox-caption { color: var(--warm-white); font-size: 14px; }
+  .lightbox-close, .lightbox-arrow {
+    position: absolute; border: none; border-radius: 50%; cursor: pointer;
+    background: rgba(255,255,255,0.15); color: var(--warm-white);
+    display: flex; align-items: center; justify-content: center; z-index: 2;
   }
-  .carousel-dots .dot.active { background: var(--olive); transform: scale(1.25); }
+  .lightbox-close { top: 16px; right: 16px; width: 38px; height: 38px; font-size: 20px; line-height: 1; }
+  .lightbox-arrow { top: 50%; transform: translateY(-50%); width: 44px; height: 44px; font-size: 22px; }
+  .lightbox-arrow.prev { left: 12px; }
+  .lightbox-arrow.next { right: 12px; }
 
   .map-slot { min-height: 240px; margin-top: 18px; }
   .map-note { font-size: 13px; color: var(--deep-olive); margin-top: 10px; text-align: center; }
@@ -153,34 +151,41 @@
   <p>The coastline changes character from one beach to the next.</p>
 
   <h2 class="section">Our Beaches</h2>
- <div class="beach-carousel">
-    <div class="beach-track" id="beachTrack">
-    <div class="beach-card">
+  <div class="beach-grid" id="beachGrid">
+    <button class="beach-tile" type="button">
       <img src="assets/coastline-rovinia.jpg" alt="Rovinia Beach">
-        <p class="name">Rovinia Beach</p>
-      </div>
-      <div class="beach-card">
-        <img src="assets/coastline-gefyra.jpg" alt="Gefyra Beach">
-        <p class="name">Gefyra Beach</p>
-      </div>
-      <div class="beach-card">
-        <img src="assets/coastline-chomi.jpg" alt="Chomi Beach">
-        <p class="name">Chomi Beach</p>
-      </div>
-      <div class="beach-card">
-        <img src="assets/coastline-limni.jpg" alt="Limni Beach">
-        <p class="name">Limni Beach</p>
-      </div>
-      <div class="beach-card">
-        <img src="assets/coastline-sea-cave.jpg" alt="The sea cave along the Liapades coastline">
-        <p class="name">Sea Cave</p>
-      </div>
-      <div class="beach-card">
-        <img src="assets/coastline-fish-cave.jpg" alt="Blue Eye Cave, where fish gather year-round">
-        <p class="name">Blue Eye Cave</p>
-      </div>
+      <span class="name">Rovinia Beach</span>
+    </button>
+    <button class="beach-tile" type="button">
+      <img src="assets/coastline-fish-cave.jpg" alt="Blue Eye Cave, where fish gather year-round">
+      <span class="name">Blue Eye Cave</span>
+    </button>
+    <button class="beach-tile" type="button">
+      <img src="assets/coastline-gefyra.jpg" alt="Gefyra Beach">
+      <span class="name">Gefyra Beach</span>
+    </button>
+    <button class="beach-tile" type="button">
+      <img src="assets/coastline-sea-cave.jpg" alt="The sea cave along the Liapades coastline">
+      <span class="name">Sea Cave</span>
+    </button>
+    <button class="beach-tile" type="button">
+      <img src="assets/coastline-chomi.jpg" alt="Chomi Beach">
+      <span class="name">Chomi Beach</span>
+    </button>
+    <button class="beach-tile" type="button">
+      <img src="assets/coastline-limni.jpg" alt="Limni Beach">
+      <span class="name">Limni Beach</span>
+    </button>
+  </div>
+
+  <div class="lightbox" id="beachLightbox" role="dialog" aria-modal="true" aria-hidden="true">
+    <button class="lightbox-close" id="lightboxClose" type="button" aria-label="Close">×</button>
+    <button class="lightbox-arrow prev" id="lightboxPrev" type="button" aria-label="Previous photo"><span>&#8249;</span></button>
+    <button class="lightbox-arrow next" id="lightboxNext" type="button" aria-label="Next photo"><span>&#8250;</span></button>
+    <div class="lightbox-content">
+      <img id="lightboxImg" src="" alt="">
+      <p class="lightbox-caption" id="lightboxCaption"></p>
     </div>
-    <div class="carousel-dots" id="beachDots"></div>
   </div>
 
   <h2 class="section">Explore the coastline</h2>
@@ -197,7 +202,7 @@
   </div>
 
   <div class="closing">
-    <a class="btn-primary" href="availability.html">Check availability</a>
+    <a class="btn-primary" href="availability.html">Book your dates</a>
   </div>
 
   <footer>
@@ -214,113 +219,60 @@
 
 <script>
 (function () {
-  const track = document.getElementById('beachTrack');
-  const dotsWrap = document.getElementById('beachDots');
-  const original = Array.from(track.children);
-  const count = original.length;
-  if (count < 2) return;
+  const grid = document.getElementById('beachGrid');
+  const tiles = Array.from(grid.querySelectorAll('.beach-tile'));
+  const photos = tiles.map(t => ({
+    src: t.querySelector('img').src,
+    alt: t.querySelector('img').alt,
+    name: t.querySelector('.name').textContent
+  }));
 
-  // Clone the full set before and after, so scrolling in either
-  // direction always has more cards to reveal — the "infinite" loop.
-  original.forEach(card => track.appendChild(card.cloneNode(true)));
-  original.slice().reverse().forEach(card => track.insertBefore(card.cloneNode(true), track.firstChild));
+  const lightbox = document.getElementById('beachLightbox');
+  const lbImg = document.getElementById('lightboxImg');
+  const lbCaption = document.getElementById('lightboxCaption');
+  let current = 0;
 
-  let currentIndex = 0;
-
-  function goTo(i) {
-    const wrapped = ((i % count) + count) % count;
-    currentIndex = wrapped;
-    const setW = setWidth();
-    const base = track.children[count + wrapped];
-    const baseTarget = base.offsetLeft - (track.offsetWidth - base.offsetWidth) / 2;
-    const current = track.scrollLeft;
-    let best = baseTarget;
-    [baseTarget - setW, baseTarget, baseTarget + setW].forEach(c => {
-      if (Math.abs(c - current) < Math.abs(best - current)) best = c;
-    });
-    track.scrollTo({ left: best, behavior: 'smooth' });
+  function show(i) {
+    current = ((i % photos.length) + photos.length) % photos.length;
+    const p = photos[current];
+    lbImg.src = p.src;
+    lbImg.alt = p.alt;
+    lbCaption.textContent = p.name;
   }
 
-  // Build one dot per real card (not per clone).
-  for (let i = 0; i < count; i++) {
-    const dot = document.createElement('div');
-    dot.className = 'dot' + (i === 0 ? ' active' : '');
-    dot.addEventListener('click', () => goTo(i));
-    dotsWrap.appendChild(dot);
-  }
-  const dots = Array.from(dotsWrap.children);
-
-  const prevBtn = document.createElement('button');
-  prevBtn.className = 'carousel-arrow prev';
-  prevBtn.type = 'button';
-  prevBtn.setAttribute('aria-label', 'Previous beach');
-  prevBtn.innerHTML = '<span>&#8249;</span>';
-  prevBtn.addEventListener('click', () => goTo(currentIndex - 1));
-  const nextBtn = document.createElement('button');
-  nextBtn.className = 'carousel-arrow next';
-  nextBtn.type = 'button';
-  nextBtn.setAttribute('aria-label', 'Next beach');
-  nextBtn.innerHTML = '<span>&#8250;</span>';
-  nextBtn.addEventListener('click', () => goTo(currentIndex + 1));
-  track.parentElement.appendChild(prevBtn);
-  track.parentElement.appendChild(nextBtn);
-
-  function setWidth() {
-    // Width of one full set (original count of cards, incl. gaps).
-    const first = track.children[0];
-    const afterSet = track.children[count];
-    return afterSet.offsetLeft - first.offsetLeft;
+  function open(i) {
+    show(i);
+    lightbox.classList.add('open');
+    lightbox.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
   }
 
-  // Photo widths aren't known until each image has actually finished loading
-  // (these are width:auto images, sized by their natural aspect ratio) — so
-  // measuring offsetWidth/offsetLeft before that returns wrong numbers and
-  // breaks the loop math. Wait for every image (including the clones) first.
-  function whenReady(callback) {
-    const imgs = Array.from(track.querySelectorAll('img'));
-    let remaining = imgs.length;
-    if (remaining === 0) { callback(); return; }
-    function done() { remaining -= 1; if (remaining <= 0) callback(); }
-    imgs.forEach(img => {
-      if (img.complete) done();
-      else {
-        img.addEventListener('load', done, { once: true });
-        img.addEventListener('error', done, { once: true });
-      }
-    });
+  function close() {
+    lightbox.classList.remove('open');
+    lightbox.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
   }
 
-  // Start scrolled into the middle (real) set.
-  whenReady(() => {
-    const mid = track.children[count];
-    track.scrollLeft = mid.offsetLeft - (track.offsetWidth - mid.offsetWidth) / 2;
+  tiles.forEach((tile, i) => tile.addEventListener('click', () => open(i)));
+  document.getElementById('lightboxClose').addEventListener('click', close);
+  document.getElementById('lightboxPrev').addEventListener('click', () => show(current - 1));
+  document.getElementById('lightboxNext').addEventListener('click', () => show(current + 1));
+  lightbox.addEventListener('click', (e) => { if (e.target === lightbox) close(); });
+  document.addEventListener('keydown', (e) => {
+    if (!lightbox.classList.contains('open')) return;
+    if (e.key === 'Escape') close();
+    if (e.key === 'ArrowLeft') show(current - 1);
+    if (e.key === 'ArrowRight') show(current + 1);
   });
 
-  let ticking = false;
-  track.addEventListener('scroll', () => {
-    if (ticking) return;
-    ticking = true;
-    requestAnimationFrame(() => {
-      const setW = setWidth();
-      // Silently wrap when scrolled into a cloned set, so it feels endless.
-      if (track.scrollLeft < setW * 0.5) {
-        track.scrollLeft += setW;
-      } else if (track.scrollLeft > setW * 1.5) {
-        track.scrollLeft -= setW;
-      }
-      // Work out which real card is centred, to light up its dot.
-      const centre = track.scrollLeft + track.offsetWidth / 2;
-      let closest = 0, closestDist = Infinity;
-      original.forEach((_, i) => {
-        const card = track.children[count + i];
-        const cardCentre = card.offsetLeft + card.offsetWidth / 2;
-        const dist = Math.abs(cardCentre - centre);
-        if (dist < closestDist) { closestDist = dist; closest = i; }
-      });
-      currentIndex = closest;
-      dots.forEach((d, i) => d.classList.toggle('active', i === closest));
-      ticking = false;
-    });
+  // Simple swipe support while the lightbox is open.
+  let touchStartX = null;
+  lightbox.addEventListener('touchstart', (e) => { touchStartX = e.touches[0].clientX; }, { passive: true });
+  lightbox.addEventListener('touchend', (e) => {
+    if (touchStartX === null) return;
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    if (Math.abs(dx) > 40) { dx > 0 ? show(current - 1) : show(current + 1); }
+    touchStartX = null;
   }, { passive: true });
 })();
 </script>
