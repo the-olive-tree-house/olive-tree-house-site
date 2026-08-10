@@ -29,8 +29,10 @@
     color:var(--off-black);
     font-family:'Inter', sans-serif;
     -webkit-font-smoothing:antialiased;
+    line-height: 1.65;
   }
   h1,h2,h3{
+    line-height: 1.15;
     font-family:'Cormorant Garamond', serif;
     font-weight:500;
     color:var(--off-black);
@@ -54,6 +56,7 @@
   }
 
   main{ max-width:520px; margin:0 auto; padding:28px 22px 10px; }
+  .desktop-nav { display: none; }
 
   h1{ font-size:38px; margin-bottom:18px; }
 
@@ -114,6 +117,7 @@
   .dest-card .dest-body{ padding:16px 18px 18px; }
   .dest-card h3{ font-size:21px; font-weight:500; margin-bottom:8px; }
   .dest-card p{ margin-bottom:0; font-size:14px; }
+  .see-more { display: none; }
 
   .dist-table{ margin-bottom:26px; }
   .dist-table h3{
@@ -135,6 +139,55 @@
     .section{ animation:fadeIn 0.6s ease both; }
     @keyframes fadeIn{ from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:none;} }
   }
+
+  @media (min-width: 980px) {
+    header {
+      padding: 20px 48px; background: var(--warm-white);
+      backdrop-filter: none;
+    }
+    header .close-x { display: none; }
+    .desktop-nav { display: flex; align-items: center; gap: 26px; }
+    .desktop-nav a {
+      font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 500;
+      letter-spacing: 0.02em; color: var(--off-black); text-decoration: none;
+    }
+    .desktop-nav a:hover { color: var(--deep-olive); }
+    .desktop-nav .btn-primary { margin-left: 8px; }
+
+    main { max-width: 1100px; padding: 50px 48px 20px; }
+    h1 { font-size: 52px; }
+    .intro p, .section p { font-size: 15.5px; }
+    .section-head h2 { font-size: 30px; }
+
+    /* A little further — three destination cards side by side */
+    #further { display: flex; flex-wrap: wrap; gap: 30px; }
+    #further .section-head { flex-basis: 100%; }
+    #further .dest-card { flex: 1 1 0; min-width: 0; margin-bottom: 0; }
+    .dest-card img { height: 200px; object-fit: cover; }
+    .dest-card p {
+      display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 5;
+      line-clamp: 5; overflow: hidden;
+    }
+    .dest-card p.expanded { -webkit-line-clamp: unset; line-clamp: unset; overflow: visible; }
+    .see-more {
+      display: inline-block; margin-top: 10px; padding: 0; border: none; background: none;
+      color: var(--deep-olive); font-family: 'Inter', sans-serif; font-size: 13px;
+      font-weight: 600; text-decoration: underline; cursor: pointer;
+    }
+
+    /* Distances — three tables side by side */
+    #distances { display: flex; flex-wrap: wrap; gap: 0 50px; }
+    #distances .section-head { flex-basis: 100%; }
+    #distances .dist-table { flex: 1 1 0; min-width: 0; }
+    #distances .dist-note { flex-basis: 100%; margin-top: 10px; }
+
+    footer { margin-top: 60px; }
+    .footer-bottom {
+      display: flex; flex-wrap: wrap; justify-content: center; align-items: baseline;
+      column-gap: 24px; row-gap: 10px;
+    }
+    .footer-links { margin: 0; }
+  }
 </style>
 </head>
 <body>
@@ -142,6 +195,17 @@
 <header>
   <img class="logo-small" src="assets/logo.png" alt="The Olive Tree House — Liapades, Corfu">
   <a class="close-x" href="index.html" aria-label="Close">×</a>
+  <nav class="desktop-nav" aria-label="Primary">
+    <a href="index.html">Home</a>
+    <a href="the-house.html">The House</a>
+    <a href="a-day-here.html">A Day Here</a>
+    <a href="the-village.html">The Village</a>
+    <a href="coastline.html">The Coastline</a>
+    <a href="our-story.html">Stories</a>
+    <a href="faq.html">FAQ</a>
+    <a href="contact.html">Contact</a>
+    <a class="btn-primary" href="availability.html">Book Your Dates</a>
+  </nav>
 </header>
 
 <main>
@@ -164,9 +228,7 @@
       <h2>At the table</h2>
     </div>
     <p>Corfu has its own flavours and its own pace of eating.</p>
-    <p>You may find rooster pastitsada, sofrito, cod bianco or bourdetto, alongside moussaka and pastitsio.</p>
-    <p>Local fish such as gavros, marida, gopa, barbouni and sardines are often best eaten simply and shared.</p>
-    <p>Noumboulo, kumquat in many forms, Kakotrygis wine and Corfiot beers all belong to the island's table.</p>
+    <p>You may find rooster pastitsada, sofrito, cod bianco or bourdetto, alongside moussaka and pastitsio. Local fish such as gavros, marida, gopa, barbouni and sardines are often best eaten simply and shared. Noumboulo, kumquat in many forms, Kakotrygis wine and Corfiot beers all belong to the island's table.</p>
     <p>Dinner is late. Plates are shared. Nobody seems particularly worried about the time.</p>
     <img src="assets/village-dishes.jpg" alt="A spread of Corfiot dishes and local wine">
   </div>
@@ -196,6 +258,7 @@
       <div class="dest-body">
         <h3>Corfu Town</h3>
         <p>Corfu Town is a place to wander slowly. Venetian façades, narrow lanes and shaded arcades lead towards the Liston and the broad Spianada, while the Old and New Fortresses frame the town's long relationship with the sea. Small churches, hidden squares, flower-filled balconies and cafés spilling onto the pavements give the historic centre a lived-in character. It is equally rewarding in the morning, when the streets are quiet, and in the evening, when the arcades fill and the town settles into the gentle rhythm of dinner and a late walk.</p>
+        <button class="see-more" type="button">See more</button>
       </div>
     </div>
 
@@ -204,6 +267,7 @@
       <div class="dest-body">
         <h3>Paleokastritsa</h3>
         <p>Paleokastritsa is known for its monastery, steep green hills and a coastline shaped by small bays, rocky coves and clear water. It is a beautiful place to combine a swim with a walk, a boat trip or a quiet visit to the monastery above the sea.</p>
+        <button class="see-more" type="button">See more</button>
       </div>
     </div>
 
@@ -212,6 +276,7 @@
       <div class="dest-body">
         <h3>Angelokastro</h3>
         <p>Angelokastro, meaning "the Castle of the Angels", is a Byzantine fortress set high above Corfu's north-west coast. The climb is rewarded with wide views over the sea, the surrounding hills and the villages below, making it one of the most memorable historic sites in the area.</p>
+        <button class="see-more" type="button">See more</button>
       </div>
     </div>
   </div>
@@ -261,6 +326,7 @@
 
   <footer>
     <div class="branch-img" role="img" aria-label="Olive branch ornament"></div>
+    <div class="footer-bottom">
     <nav class="footer-links" aria-label="Policies">
       <a href="privacy-policy.html">Privacy Policy</a>
       <a href="house-rules.html">House Rules</a>
@@ -268,8 +334,19 @@
       <a href="contact.html">Contact</a>
     </nav>
     <p>© 2026 The Olive Tree House</p>
+    </div>
   </footer>
 </main>
+
+<script>
+  document.querySelectorAll('.see-more').forEach(function (btn) {
+    var p = btn.previousElementSibling;
+    btn.addEventListener('click', function () {
+      var expanded = p.classList.toggle('expanded');
+      btn.textContent = expanded ? 'See less' : 'See more';
+    });
+  });
+</script>
 
 </body>
 </html>

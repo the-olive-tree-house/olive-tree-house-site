@@ -38,6 +38,7 @@
   .close-x{ font-size:24px; line-height:1; color:var(--off-black); text-decoration:none; padding:4px 8px; }
 
   main{ max-width:520px; margin:0 auto; padding:28px 22px 10px; }
+  .desktop-nav { display: none; }
   h1{ font-size:38px; margin-bottom:8px; }
   .subtitle{ font-size:15.5px; color:var(--charcoal); margin-bottom:26px; }
 
@@ -83,6 +84,37 @@
     .section{ animation:fadeIn 0.6s ease both; }
     @keyframes fadeIn{ from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:none;} }
   }
+
+  @media (min-width: 980px) {
+    header {
+      padding: 20px 48px; background: var(--warm-white);
+      backdrop-filter: none;
+    }
+    header .close-x { display: none; }
+    .desktop-nav { display: flex; align-items: center; gap: 26px; }
+    .desktop-nav a {
+      font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 500;
+      letter-spacing: 0.02em; color: var(--off-black); text-decoration: none;
+    }
+    .desktop-nav a:hover { color: var(--deep-olive); }
+    .desktop-nav .btn-primary { margin-left: 8px; }
+
+    main { max-width: 1100px; padding: 50px 48px 20px; }
+    h1 { font-size: 50px; }
+    .subtitle { font-size: 16.5px; }
+
+    .rules-grid {
+      column-count: 2; column-gap: 70px;
+    }
+    .section { break-inside: avoid; margin-bottom: 30px; }
+
+    footer { margin-top: 60px; }
+    .footer-bottom {
+      display: flex; flex-wrap: wrap; justify-content: center; align-items: baseline;
+      column-gap: 24px; row-gap: 10px;
+    }
+    .footer-links { margin: 0; }
+  }
 </style>
 </head>
 <body>
@@ -90,12 +122,24 @@
 <header>
   <img class="logo-small" src="assets/logo.png" alt="The Olive Tree House — Liapades, Corfu">
   <a class="close-x" href="index.html" aria-label="Close">×</a>
+  <nav class="desktop-nav" aria-label="Primary">
+    <a href="index.html">Home</a>
+    <a href="the-house.html">The House</a>
+    <a href="a-day-here.html">A Day Here</a>
+    <a href="the-village.html">The Village</a>
+    <a href="coastline.html">The Coastline</a>
+    <a href="our-story.html">Stories</a>
+    <a href="faq.html">FAQ</a>
+    <a href="contact.html">Contact</a>
+    <a class="btn-primary" href="availability.html">Book Your Dates</a>
+  </nav>
 </header>
 
 <main>
   <h1>House Rules</h1>
   <p class="subtitle">To help ensure a safe and comfortable stay for everyone, please observe the following house rules.</p>
 
+  <div class="rules-grid">
   <div class="section" id="checkinout">
     <div class="section-head">
       <div class="badge"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7 V12 L15.5 14"/></svg></div>
@@ -237,6 +281,8 @@
     </ul>
   </div>
 
+  </div>
+
   <div class="closing-note">
     <p>Failure to comply with these rules may result in additional charges or the termination of the stay without a refund.</p>
     <p>Thank you for your understanding.</p>
@@ -244,6 +290,7 @@
 
   <footer>
     <div class="branch-img" role="img" aria-label="Olive branch ornament"></div>
+    <div class="footer-bottom">
     <nav class="footer-links" aria-label="Policies">
       <a href="privacy-policy.html">Privacy Policy</a>
       <a href="house-rules.html">House Rules</a>
@@ -251,6 +298,7 @@
       <a href="contact.html">Contact</a>
     </nav>
     <p>© 2026 The Olive Tree House</p>
+    </div>
   </footer>
 </main>
 

@@ -37,6 +37,7 @@
   }
   .burger span { width: 24px; height: 1.5px; background: var(--charcoal); display: block; }
   .logo-mark { width: 132px; height: auto; display: block; }
+  .desktop-nav { display: none; }
 
   /* Hero */
   .hero {
@@ -199,6 +200,113 @@
     background-size:contain; background-repeat:no-repeat; background-position:center;
     margin:0 auto 10px;
   }
+
+  /* ============================================
+     Desktop (≥980px) — mobile styles above are
+     untouched and still apply below this width
+     ============================================ */
+  @media (min-width: 980px) {
+
+    main { max-width: 1100px; }
+
+    /* Header: burger becomes a horizontal nav bar, and stays fixed
+       at the top of the viewport while scrolling (desktop only) */
+    header {
+      flex-direction: row; align-items: center; justify-content: space-between;
+      padding: 20px 48px;
+      position: sticky; top: 0; z-index: 100;
+      background: var(--warm-white); border-bottom: 1px solid var(--soft-stone);
+    }
+    .burger { display: none; }
+    .desktop-nav { display: flex; align-items: center; gap: 26px; }
+    .desktop-nav a {
+      font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 500;
+      letter-spacing: 0.02em; color: var(--charcoal); text-decoration: none;
+    }
+    .desktop-nav a:hover { color: var(--deep-olive); }
+    .desktop-nav .btn-primary { margin-left: 8px; }
+
+    /* Hero */
+    .hero { min-height: 480px; margin-bottom: 60px; }
+    .hero-content { padding: 60px 64px; max-width: 620px; }
+    .hero-eyebrow { font-size: 13px; margin-bottom: 14px; }
+    .hero h1 { font-size: 54px; margin-bottom: 16px; }
+    .hero p.tagline { font-size: 17px; max-width: 440px; margin-bottom: 26px; }
+
+    /* Facts row — kept compact and centred, not stretched full-width */
+    .facts-row { max-width: 680px; margin: 0 auto 60px; padding: 30px 16px; }
+    .facts-row .fact strong { font-size: 13px; }
+    .facts-row .fact span { font-size: 12.5px; }
+
+    /* Generic section spacing */
+    /* Beaches / A Day Here / Village / Our Story span the full width of
+       main, edge to edge, matching the hero photo and the footer.
+       Their headings/links keep a 48px text inset so copy doesn't sit
+       flush against the edge (same pattern the hero itself uses). */
+    section.block, .story-block { padding: 0; margin-bottom: 60px; }
+    section.block h2, .story-text h2 { font-size: 36px; }
+    section.block .sub, .story-text .sub { font-size: 14.5px; margin-bottom: 22px; }
+    section.block:has(.beach-row) h2, section.block:has(.beach-row) .sub,
+    section.block:has(.day-timeline) h2, section.block:has(.day-timeline) .sub {
+      padding-left: 48px; padding-right: 48px;
+    }
+    section.block:has(.beach-row) .discover-link,
+    section.block:has(.day-timeline) .discover-link {
+      margin-left: 48px;
+    }
+    .story-text { padding-left: 48px; }
+
+    /* Beaches */
+    .beach-row { gap: 24px; }
+    .beach-card img { height: 260px; border-radius: 10px; }
+
+    /* House card keeps its own inset — not part of the full-width change above.
+       Photo becomes an absolute cover panel on the right, text flows
+       naturally on the left (same technique as the Village card below,
+       which avoids the row-height-inflation bug that plain CSS grid
+       causes when one item spans multiple auto-sized text rows) */
+    section.block.house-card {
+      position: relative; min-height: 400px; padding: 0 48px;
+      display: flex; flex-direction: column; justify-content: flex-start;
+    }
+    .house-card .house-photo {
+      position: absolute; top: 0; right: 0; bottom: 0;
+      width: 56%; height: 100%; margin: 0; border-radius: 8px;
+    }
+    .house-card h2, .house-card .sub {
+      position: relative; max-width: 380px;
+    }
+    .house-card .discover-link {
+      position: relative; align-self: flex-start;
+    }
+
+    /* A Day Here */
+    .day-timeline { margin: 0 48px 18px; }
+    .day-item { flex: 0 0 170px; }
+    .day-circle { width: 160px; height: 160px; }
+    .day-item h3 { font-size: 17px; }
+    .day-item p { font-size: 13px; }
+    .day-connector { margin-top: 77px; }
+
+    /* Village card */
+    .village-card { min-height: 420px; padding: 46px 56px; }
+    .village-card .inner { max-width: 400px; }
+    .village-card h2 { font-size: 36px; }
+    .village-card .sub, .village-card p { font-size: 14.5px; }
+
+    /* Our Story — text and quote side by side (DOM order unchanged) */
+    .story-block { display: flex; align-items: center; gap: 70px; }
+    .story-text { flex: 1 1 0; }
+    .story-text p { font-size: 15px; }
+    .quote-card { flex: 0 0 380px; margin-top: 0; padding: 0; }
+    .quote-card blockquote { font-size: 20px; }
+
+    /* Final CTA */
+    .final-cta { padding: 60px 22px; }
+    .final-cta p { font-size: 28px; margin-bottom: 22px; }
+
+    footer { padding: 40px 48px 56px; }
+  }
 </style>
 </head>
 <body>
@@ -206,6 +314,17 @@
 <header>
   <a class="burger" href="menu.html" aria-label="Menu"><span></span><span></span><span></span></a>
   <img class="logo-mark" src="assets/logo-hero.png" alt="The Olive Tree House — Liapades, Corfu">
+  <nav class="desktop-nav" aria-label="Primary">
+    <a href="index.html">Home</a>
+    <a href="the-house.html">The House</a>
+    <a href="a-day-here.html">A Day Here</a>
+    <a href="the-village.html">The Village</a>
+    <a href="coastline.html">The Coastline</a>
+    <a href="our-story.html">Stories</a>
+    <a href="faq.html">FAQ</a>
+    <a href="contact.html">Contact</a>
+    <a class="btn-primary" href="availability.html">Book Your Dates</a>
+  </nav>
 </header>
 
 <main>
