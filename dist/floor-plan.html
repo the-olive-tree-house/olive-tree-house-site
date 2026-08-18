@@ -48,6 +48,31 @@
     background-size:contain; background-repeat:no-repeat; background-position:center;
     margin:0 auto 10px;
   }
+  .desktop-nav { display: none; }
+
+  @media (min-width: 980px) {
+    header {
+      padding: 20px 48px; background: var(--warm-white);
+      backdrop-filter: none;
+    }
+    header .close-x { display: none; }
+    header img.logo-small { height: 34px; }
+    .desktop-nav { display: flex; align-items: center; gap: 26px; }
+    .desktop-nav a {
+      font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 500;
+      letter-spacing: 0.02em; color: var(--charcoal); text-decoration: none;
+    }
+    .desktop-nav a:hover { color: var(--deep-olive); }
+    .desktop-nav .btn-primary { margin-left: 8px; }
+
+    main { max-width: 1100px; padding: 50px 48px 20px; text-align: center; }
+    h1 { font-size: 50px; }
+    .subtitle { font-size: 16.5px; margin-bottom: 30px; }
+
+    .plan-wrap { max-width: 880px; margin: 0 auto; }
+
+    footer { margin-top: 56px; }
+  }
 </style>
 </head>
 <body>
@@ -55,6 +80,17 @@
 <header>
   <img class="logo-small" src="assets/logo.png" alt="The Olive Tree House — Liapades, Corfu">
   <a class="close-x" href="the-house.html" aria-label="Close">×</a>
+  <nav class="desktop-nav" aria-label="Primary">
+    <a href="index.html">Home</a>
+    <a href="the-house.html">The House</a>
+    <a href="a-day-here.html">A Day Here</a>
+    <a href="the-village.html">The Village</a>
+    <a href="coastline.html">The Coastline</a>
+    <a href="our-story.html">Stories</a>
+    <a href="faq.html">FAQ</a>
+    <a href="contact.html">Contact</a>
+    <a class="btn-primary" href="availability.html">Book Your Dates</a>
+  </nav>
 </header>
 
 <main>
