@@ -52,6 +52,11 @@
    img.photo-slot { display: block; width: 100%; height: auto; min-height: 0; object-fit: contain; padding: 0; border: none; margin: 6px 0 26px; }
   .photo-slot span { font-size: 11.5px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--deep-olive); }
 
+  hr.divider {
+    border: none; border-top: 1px solid var(--soft-stone);
+    margin: 34px 0;
+  }
+
   footer { margin-top: 30px; padding-top: 8px; text-align: center; }
   footer .ornament { width: 190px; height: auto; display: block; margin: 0 auto 10px; }
   footer p { font-size: 12px; color: var(--deep-olive); margin-bottom: 0; }
@@ -62,6 +67,58 @@
     background-size:contain; background-repeat:no-repeat; background-position:center;
     margin:0 auto 10px;
   }
+
+  .desktop-nav { display: none; }
+
+  @media (min-width: 980px) {
+    header {
+      padding: 20px 48px; background: var(--warm-white);
+      backdrop-filter: none;
+    }
+    header .close-x { display: none; }
+    .desktop-nav { display: flex; align-items: center; gap: 26px; }
+    .desktop-nav a {
+      font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 500;
+      letter-spacing: 0.02em; color: var(--charcoal); text-decoration: none;
+    }
+    .desktop-nav a:hover { color: var(--deep-olive); }
+    .desktop-nav .btn-primary { margin-left: 8px; }
+
+    main { max-width: 1100px; padding: 50px 48px 60px; }
+    h1 { font-size: 50px; }
+
+    /* Each section: plain flexbox, two equal columns, top-aligned.
+       Switched away from CSS Grid entirely — grid's implicit row sizing
+       and align-items behavior has caused three separate bugs on this
+       page now (spread text, missing photos, and this misalignment).
+       Flexbox + order is a much more predictable way to do "swap which
+       side the photo is on" than grid's column reassignment was. */
+    .day-section {
+      display: flex; gap: 48px; align-items: flex-start; margin: 54px 0;
+    }
+    .day-section .day-text { flex: 1; order: 2; }
+    .day-section .day-photo-wrap { flex: 1; order: 1; }
+    .day-section-2 .day-text { order: 1; }
+    .day-section-2 .day-photo-wrap { order: 2; }
+
+    .day-section .day-text p.lead { font-size: 26px; }
+    .day-section img.day-photo {
+      display: block; width: 100%; height: 320px; object-fit: cover;
+      border-radius: 8px; margin: 0;
+    }
+    /* Section 3's sunset photo is portrait-oriented — forcing it into the
+       same fixed landscape-ish height as the others cropped off too much.
+       Let it keep its natural proportions instead; the text column will
+       simply finish first, leaving space below it, which is fine. */
+    .day-section-3 img.day-photo { height: auto; }
+
+    footer { margin-top: 20px; }
+    .footer-bottom {
+      display: flex; flex-wrap: wrap; justify-content: center; align-items: baseline;
+      column-gap: 24px; row-gap: 10px;
+    }
+    .footer-links { margin: 0; }
+  }
 </style>
 </head>
 <body>
@@ -69,34 +126,57 @@
 <header>
   <img class="logo-small" src="assets/logo.png" alt="The Olive Tree House — Liapades, Corfu">
   <a class="close-x" href="index.html" aria-label="Close">×</a>
+  <nav class="desktop-nav" aria-label="Primary">
+    <a href="index.html">Home</a>
+    <a href="the-house.html">The House</a>
+    <a href="a-day-here.html">A Day Here</a>
+    <a href="the-village.html">The Village</a>
+    <a href="coastline.html">The Coastline</a>
+    <a href="our-story.html">Stories</a>
+    <a href="faq.html">FAQ</a>
+    <a href="contact.html">Contact</a>
+    <a class="btn-primary" href="availability.html">Book Your Dates</a>
+  </nav>
 </header>
 
 <main>
   <h1>A Day Here</h1>
 
-  <p class="lead">Morning begins quietly.</p>
-  <p>The French doors open towards the meadow and the first coffee of the day belongs to a slow start.</p>
+  <section class="day-section day-section-1">
+    <div class="day-text">
+      <p class="lead">Morning begins quietly.</p>
+      <p>The French doors open towards the meadow and the first coffee of the day belongs to a slow start.</p>
+    </div>
+    <div class="day-photo-wrap"><img class="photo-slot day-photo" src="assets/aday-morning.jpg" alt="Morning coffee on the balcony, meadow beyond the French doors"></div>
+  </section>
 
-  <img class="photo-slot" src="assets/aday-morning.jpg" alt="Morning coffee on the balcony, meadow beyond the French doors">
+  <hr class="divider">
 
-  <p>There is no particular need to make plans.</p>
-  <p>A walk towards the sea, time in the village, a swim, or simply an afternoon with nowhere in particular to be. Afternoons are best left unplanned.</p>
+  <section class="day-section day-section-2">
+    <div class="day-text">
+      <p class="lead">There is no particular need to make plans.</p>
+      <p>A walk towards the sea, time in the village, a swim, or simply an afternoon with nowhere in particular to be. Afternoons are best left unplanned.</p>
+      <p>After the beach or a walk, the house offers an easy place to return to, with the doors open while the heat of the day slowly passes.</p>
+    </div>
+    <div class="day-photo-wrap"><img class="photo-slot day-photo" src="assets/aday-pathway.jpg" alt="A footpath in Liapades"></div>
+  </section>
 
-<img class="photo-slot" src="assets/aday-pathway.jpg" alt="A footpath in Liapades">
+  <hr class="divider">
 
-  <p>After the beach or a walk, the house offers an easy place to return to, with the doors open while the heat of the day slowly passes.</p>
-  <p class="lead">Later, the west balcony catches the sunset through the trees.</p>
-   <img class="photo-slot" src="assets/aday-sunset.jpg" alt="Sunset from the west balcony">
-  <p>From there, it is a short walk to Liapades square for dinner.</p>
-  <p>Local fish, shared plates, Corfiot dishes and local wine belong to late, casual evenings.</p>
-
- 
-
-  <p>The walk back follows the village streets, with open windows and the sound of crickets carrying through the night.</p>
-  <p>The next morning may begin just as slowly, or take a completely different direction.</p>
+  <section class="day-section day-section-3">
+    <div class="day-text">
+      <p class="lead">Later, the west balcony catches the sunset through the trees.</p>
+      <p>From there, it is a short walk to Liapades square for dinner.</p>
+      <p>Local fish, shared plates, Corfiot dishes and local wine belong to late, casual evenings.</p>
+      <p>The walk back follows the village streets, with open windows and the sound of crickets carrying through the night.</p>
+      <p>The next morning may begin just as slowly, or take a completely different direction.</p>
+    </div>
+    <div class="day-photo-wrap"><img class="photo-slot day-photo" src="assets/aday-sunset.jpg" alt="Sunset from the west balcony"></div>
+  </section>
 
   <footer>
     <div class="branch-img" role="img" aria-label="Olive branch ornament"></div>
+    <div class="footer-bottom">
     <nav class="footer-links" aria-label="Policies">
       <a href="privacy-policy.html">Privacy Policy</a>
       <a href="house-rules.html">House Rules</a>
@@ -104,6 +184,7 @@
       <a href="contact.html">Contact</a>
     </nav>
     <p>© 2026 The Olive Tree House</p>
+    </div>
   </footer>
 </main>
 
