@@ -40,7 +40,7 @@
   }
   h2.section-title {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 27px; font-weight: 500; margin: 46px 0 22px;
+    font-size: 36px; font-weight: 500; margin: 46px 0 22px;
   }
   h3.chapter-title {
     font-family: 'Cormorant Garamond', serif;
@@ -86,6 +86,47 @@
     background-size:contain; background-repeat:no-repeat; background-position:center;
     margin:0 auto 10px;
   }
+
+  .desktop-nav { display: none; }
+
+  @media (min-width: 980px) {
+    header {
+      padding: 20px 48px; background: var(--warm-white);
+      backdrop-filter: none;
+    }
+    header .close-x { display: none; }
+    .desktop-nav { display: flex; align-items: center; gap: 26px; }
+    .desktop-nav a {
+      font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 500;
+      letter-spacing: 0.02em; color: var(--charcoal); text-decoration: none;
+    }
+    .desktop-nav a:hover { color: var(--deep-olive); }
+    .desktop-nav .btn-primary { margin-left: 8px; }
+
+    main { max-width: 1100px; padding: 50px 48px 20px; }
+    h1 { font-size: 50px; }
+    h2.section-title { font-size: 50px; }
+
+    /* 1925 landscape photo — floated right within its paragraph, roughly
+       half the page width, text wraps around it */
+    img.photo-slot.photo-1925 {
+      float: right; width: 50%; height: auto;
+      margin: 4px 0 14px 32px; border-radius: 8px;
+    }
+    .story-photo-wrap::after { content: ""; display: table; clear: both; }
+    h3.chapter-title { clear: both; }
+
+    /* Reviews — uneven lengths, so multi-column flow rather than a grid */
+    .reviews-grid { column-count: 2; column-gap: 60px; }
+    .review { break-inside: avoid; }
+
+    footer { margin-top: 60px; }
+    .footer-bottom {
+      display: flex; flex-wrap: wrap; justify-content: center; align-items: baseline;
+      column-gap: 24px; row-gap: 10px;
+    }
+    .footer-links { margin: 0; }
+  }
 </style>
 </head>
 <body>
@@ -93,38 +134,40 @@
 <header>
   <img class="logo-small" src="assets/logo.png" alt="The Olive Tree House — Liapades, Corfu">
   <a class="close-x" href="index.html" aria-label="Close">×</a>
+  <nav class="desktop-nav" aria-label="Primary">
+    <a href="index.html">Home</a>
+    <a href="the-house.html">The House</a>
+    <a href="a-day-here.html">A Day Here</a>
+    <a href="the-village.html">The Village</a>
+    <a href="coastline.html">The Coastline</a>
+    <a href="our-story.html">Stories</a>
+    <a href="faq.html">FAQ</a>
+    <a href="contact.html">Contact</a>
+    <a class="btn-primary" href="availability.html">Book Your Dates</a>
+  </nav>
 </header>
 
 <main>
-  <h1>Our story</h1>
+  <h1>Our Story</h1>
 
   <img class="photo-slot" src="assets/our-story-family-1954.jpg" alt="Family photograph, approximately 1954">
 
-  <p>The Olive Tree House was built by Lamprini's father, Dimitris, on land he inherited from his own father, Theodoros.</p>
-  <p>Theodoros served on the Albanian front during the Greco-Italian War of 1940–41. After returning to Liapades, he raised his family near the Church of Agia Thekli. He purchased the land from the church when it was still a steep, rocky outcrop rising above a deep ravine.</p>
-  <p>His eldest son, Dimitris, had loved this place since childhood. Even then, he recognised it as one of the most beautiful settings in the village.</p>
-  <p>In the mornings, he would sit on the rock and watch the sun rise over the meadow. Beyond it stood the green mountains, while olive, fig and mulberry trees, cypresses and prickly pears filled the surrounding landscape.</p>
-  <p>As Dimitris remembers, the meadow would fill with water in winter, transforming his father's land into a natural balcony overlooking an immense silver lake.</p>
-  <p>Each side of the land opened onto a different part of village life.</p>
-  <p>To the south stands the village primary school, an early twentieth-century neoclassical building and one of Liapades' most distinctive landmarks.</p>
-  <p>To the west lies the traditional village park, where generations of children have played, run and gathered. Within it stands the Orthodox Church of Agia Thekli, a characteristic example of local village architecture: simple, modest and deeply rooted in the life of the community.</p>
-  <p>Beyond Liapades, the roads lead towards Corfu Town and the traditional villages of the surrounding area.</p>
+  <p>The Olive Tree House was built by Lamprini's father, Dimitris, on land he inherited from his own father, Theodoros. Theodoros served on the Albanian front during the Greco-Italian War of 1940–41. After returning to Liapades, he raised his family near the Church of Agia Thekli. He purchased the land from the church when it was still a steep, rocky outcrop rising above a deep ravine.</p>
 
-  <img class="photo-slot" src="assets/our-story-landscape-1925.jpg" alt="The village primary school and surrounding landscape, 1925, before the house was built">
+  <p class="story-photo-wrap"><picture>
+    <source media="(min-width: 980px)" srcset="assets/our-story-landscape-1925-crop.jpg">
+    <img class="photo-slot photo-1925" src="assets/our-story-landscape-1925.jpg" alt="The village primary school and surrounding landscape, 1925, before the house was built">
+  </picture>His eldest son, Dimitris, had loved this place since childhood. Even then, he recognised it as one of the most beautiful settings in the village. In the mornings, he would sit on the rock and watch the sun rise over the meadow. Beyond it stood the green mountains, while olive, fig and mulberry trees, cypresses and prickly pears filled the surrounding landscape. As Dimitris remembers, the meadow would fill with water in winter, transforming his father's land into a natural balcony overlooking an immense silver lake. Each side of the land opened onto a different part of village life. To the south stands the village primary school, an early twentieth-century neoclassical building and one of Liapades' most distinctive landmarks. To the west lies the traditional village park, where generations of children have played, run and gathered. Within it stands the Orthodox Church of Agia Thekli, a characteristic example of local village architecture: simple, modest and deeply rooted in the life of the community. Beyond Liapades, the roads lead towards Corfu Town and the traditional villages of the surrounding area.</p>
 
-  <p>Today, The Olive Tree House stands on that same rock. It looks east across the meadow towards the first light of day, the open landscape and the sense of freedom that accompanied Dimitris throughout his childhood.</p>
-  <p>The land beneath the house is more than a plot. It is a place of observation, memory and return: a place that was loved long before the house was built, that continues to hold our family's history and that now becomes part of the memories of those who stay here.</p>
+  <p>Today, The Olive Tree House stands on that same rock. It looks east across the meadow towards the first light of day, the open landscape and the sense of freedom that accompanied Dimitris throughout his childhood. The land beneath the house is more than a plot. It is a place of observation, memory and return: a place that was loved long before the house was built, that continues to hold our family's history and that now becomes part of the memories of those who stay here.</p>
 
   <h3 class="chapter-title">The house through the years</h3>
 
-  <p>For many years, the house belonged to the family's own summers.</p>
-  <p>As a young adult, Lamprini spent every summer here, first during her university holidays and later during breaks from work. She filled the house with friends from across Greece and further afield, all drawn to Corfu.</p>
-  <p>In those years, it was primarily a place to rest between adventures: long days spent swimming and enjoying watersports, followed by late nights in Corfu Town, where summer evenings have a rhythm of their own.</p>
-  <p>Later, it became somewhere to slow down and unwind. Later still, it became a place in which to cook, gather friends around the table and enjoy the simple pleasure of being together.</p>
-  <p>The house has held all these different summers. It has always seemed to understand the people staying within it and what they need from their time here - which is perhaps the best thing a house can learn before opening its doors to guests.</p>
+  <p>For many years, the house belonged to the family's own summers. As a young adult, Lamprini spent every summer here, first during her university holidays and later during breaks from work. She filled the house with friends from across Greece and further afield, all drawn to Corfu. In those years, it was primarily a place to rest between adventures: long days spent swimming and enjoying watersports, followed by late nights in Corfu Town, where summer evenings have a rhythm of their own. Later, it became somewhere to slow down and unwind. Later still, it became a place in which to cook, gather friends around the table and enjoy the simple pleasure of being together. The house has held all these different summers. It has always seemed to understand the people staying within it and what they need from their time here - which is perhaps the best thing a house can learn before opening its doors to guests.</p>
 
-  <h2 class="section-title">Your stories</h2>
+  <h2 class="section-title">Your Stories</h2>
 
+  <div class="reviews-grid">
   <div class="review">
     <p>"We woke each morning to the sound of birds, and coffee overlooking the meadow became our little ritual. The house sits in a wonderfully quiet spot, yet the village square is just a short walk away. We very much loved the authentic atmosphere of Liapades, the local fish (definitely try the marinated gavros) and Corfiot dishes, and the local wine. One afternoon the owners' parents, who live nearby, brought us fresh figs from a friend's land and loukoumades still warm from the pan (the kind of welcome you can't book). We had peaceful mornings and warm evenings; exactly what we were hoping for."</p>
     <p class="attr">— Laurent T., France, 2025 · (Couple)</p>
@@ -149,6 +192,7 @@
     <p>"I stayed for a longer stretch over winter, working remotely, and the house was genuinely comfortable for it. The Wi-Fi is fast, the heating works well, and the kitchen and washing machine made everyday life easy. The winter landscape is something else. I especially loved the wet meadow after the thunderstorms. Great location."</p>
     <p class="attr">— Daniel M., USA, 2014 · (Solo traveller)</p>
   </div>
+  </div>
 
   <div class="closing">
     <p>Your Corfu story starts here.</p>
@@ -157,6 +201,7 @@
 
   <footer>
     <div class="branch-img" role="img" aria-label="Olive branch ornament"></div>
+    <div class="footer-bottom">
     <nav class="footer-links" aria-label="Policies">
       <a href="privacy-policy.html">Privacy Policy</a>
       <a href="house-rules.html">House Rules</a>
@@ -164,6 +209,7 @@
       <a href="contact.html">Contact</a>
     </nav>
     <p class="copyright">© 2026 The Olive Tree House</p>
+    </div>
   </footer>
 </main>
 
